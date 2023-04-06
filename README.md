@@ -1,1 +1,3 @@
-# jobflow
+# flow
+
+Functional workflow
