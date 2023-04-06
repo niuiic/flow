@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # editor
-.nvim/session/
+.nvim/
