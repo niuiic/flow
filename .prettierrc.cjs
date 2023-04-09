@@ -18,5 +18,6 @@ module.exports = {
   htmlWhitespaceSensitivity: 'css',
   vueIndentScriptAndStyle: false,
   endOfLine: 'lf',
-  embeddedLanguageFormatting: 'auto'
+  embeddedLanguageFormatting: 'auto',
+  plugins: [require.resolve('prettier-plugin-organize-imports')]
 }
