@@ -1,3 +1,3 @@
-export * from './basic'
-export * from './function'
-export * from './immutable'
+export * from './basic.js'
+export * from './function.js'
+export * from './immutable.js'

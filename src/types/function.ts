@@ -1,5 +1,5 @@
-import { Expand } from './basic'
-import { Immutable } from './immutable'
+import { Expand } from './basic.js'
+import { Immutable } from './immutable.js'
 
 export type AsyncFunction = (...args: any[]) => Promise<any>
 

@@ -1,4 +1,4 @@
-import { IsTuple, Primitive } from './basic'
+import { IsTuple, Primitive } from './basic.js'
 
 type ImmutableArray<T> = ReadonlyArray<Immutable<T>>
 type ImmutableMap<K, V> = ReadonlyMap<Immutable<K>, Immutable<V>>
