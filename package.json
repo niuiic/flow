@@ -1,25 +1,30 @@
 {
-  "name": "ts",
-  "version": "1.0.0",
-  "description": "",
+  "name": "flow",
+  "version": "0.0.1",
+  "description": "functional workflow",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "pnpm tsc-esm",
+    "build": "pnpm tsc",
     "start": "pnpm esrun ./src/index.ts",
     "dev": "pnpm esrun --watch ./src/*.ts",
-    "debug": "pnpm build && node --inspect-brk ./dist/index.js"
+    "debug": "pnpm build && node --inspect-brk ./dist/src/index.js",
+    "test": "pnpm jest",
+    "test:coverage": "pnpm jest --coverage"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "niuiic",
+  "license": "MIT",
   "devDependencies": {
     "@digitak/esrun": "^3.2.24",
+    "@types/jest": "^29.5.1",
     "@types/node": "^18.16.2",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "eslint": "^8.39.0",
+    "jest": "^29.5.0",
     "prettier-plugin-organize-imports": "^3.2.2",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   }
 }
