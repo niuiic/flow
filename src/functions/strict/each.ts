@@ -25,7 +25,7 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  * each(console.log, [1, 2, 3]); // log 1, 2, 3
  * ```
  *
- * {@link https://github.com/niuiic/flow/tests/functions/strict/each.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/functions/strict/each.spec.ts | More examples}
  */
 export function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
 export function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: AsyncIterable<A>): Promise<void>
