@@ -103,5 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-# editor
+# editor config
 .nvim/
+
+# documents
+docs/
