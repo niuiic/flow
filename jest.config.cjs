@@ -2,7 +2,7 @@
 module.exports = {
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
-  testMatch: [require('path').join(__dirname, 'tests/**/*.ts')],
+  testMatch: [require('path').join(__dirname, 'tests/**/*.spec.ts')],
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
     '^src/(.+)\\.js$': '<rootDir>/src/$1',
