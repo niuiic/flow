@@ -12,6 +12,7 @@
     "debug": "pnpm build && node --inspect-brk ./dist/src/index.js",
     "test": "pnpm jest",
     "test:coverage": "pnpm jest --coverage",
+    "lint": "pnpm eslint -f unix --ext .ts .",
     "doc": "pnpm typedoc ./src/**/*.ts --plugin typedoc-plugin-missing-exports"
   },
   "keywords": [],
