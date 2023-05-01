@@ -5,7 +5,7 @@ export type IterableItem<T extends Iterable<unknown> | AsyncIterable<unknown>> =
   : never
 
 export type IterableReturnValue<
-  T extends Iterable<unknown> | AsyncIterable<unknown>,
+  T extends UniversalIterable<unknown>,
   R = IterableItem<T>
 > = T extends AsyncIterable<unknown> ? Promise<Awaited<R>> : T extends Iterable<unknown> ? Awaited<R> : never
 
