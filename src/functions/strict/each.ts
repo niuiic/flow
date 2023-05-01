@@ -27,13 +27,13 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  *
  * {@link https://github.com/niuiic/flow/blob/main/tests/functions/strict/each.spec.ts | More examples}
  */
-export function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
-export function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: AsyncIterable<A>): Promise<void>
-export function each<A extends UniversalIterable, R = unknown>(
+function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
+function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: AsyncIterable<A>): Promise<void>
+function each<A extends UniversalIterable, R = unknown>(
   fn: (args: Immutable<IterableItem<A>>) => R
 ): (iterable: A) => IterableReturnValue<A, void>
 
-export function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
+function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   fn: (args: Immutable<IterableItem<A>>) => B,
   iterable?: A
 ): void | Promise<void> | ((iterable: A) => IterableReturnValue<A, void>) {
@@ -51,3 +51,5 @@ export function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")
 }
+
+export { each }
