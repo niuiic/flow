@@ -23,3 +23,15 @@ export type Expand<T> = T extends T
       }
     : T
   : never
+
+export type Length<T extends unknown[]> = T['length']
+
+export type Item<T extends unknown[]> = T[number]
+
+export type Tail<T extends unknown[]> = T extends [...unknown[], infer Last] ? Last : never
+
+export type Head<T extends unknown[]> = T extends [infer First, ...unknown[]] ? First : never
+
+export type Append<T extends unknown[], U> = [...T, U]
+
+export type Prepend<T extends unknown[], U> = [U, ...T]
