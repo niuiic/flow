@@ -1,7 +1,6 @@
-import { call, isIterable } from 'src/functions/utils.js'
+import { call, isAsyncIterable, isIterable } from 'src/functions/utils.js'
 import { Immutable } from 'src/types/immutable.js'
 import { IterableReturnValue, UniversalIterable } from 'src/types/iterable.js'
-import { isAsyncIterable } from '../utils.js'
 
 function sync<A, R>(fn: (prevRes: R, args: A) => R, initialRes: R, iterable: Iterable<A>): R {
   let res = initialRes
