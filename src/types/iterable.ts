@@ -5,11 +5,11 @@ export type IterableItem<T extends Iterable<unknown> | AsyncIterable<unknown>> =
   ? U
   : never
 
-/** T is async ? Promise<Awaited<R>> : Awaited<R> */
+/** T is async ? Promise<Awaited<R>> : R */
 export type IterableReturnValue<
   T extends UniversalIterable<unknown>,
   R = IterableItem<T>
-> = T extends AsyncIterable<unknown> ? Promise<Awaited<R>> : T extends Iterable<unknown> ? Awaited<R> : never
+> = T extends AsyncIterable<unknown> ? Promise<Awaited<R>> : T extends Iterable<unknown> ? R : never
 
 /** Iterator or AsyncIterator */
 export type UniversalIterator<T = unknown> = Iterator<T> | AsyncIterator<T>
