@@ -30,7 +30,7 @@ async function async<A, R>(
  * console.log(reduce((a, b) => a + b, [1, 2, 3, 4])) // 10
  * ```
  *
- * {@link https://github.com/niuiic/flow/blob/main/tests/functions/strict/reduce.spec.ts | More examples}
+ * {@link #Repo/tests/functions/strict/reduce.spec.ts | More examples}
  */
 
 // same type for args and return value
