@@ -27,7 +27,7 @@ function async<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIter
 }
 
 /**
- * return IterableIterator/AsyncIterableIterator that take 'length' values from iterable
+ * Returns IterableIterator/AsyncIterableIterator that take 'length' values from iterable
  *
  * @example
  * ```ts
