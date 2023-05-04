@@ -17,6 +17,10 @@ module.exports = {
       {
         pattern: '>',
         replace: '&gt;'
+      },
+      {
+        pattern: '&lt;a(.*)&gt;(.*)&lt;\\/a&gt;',
+        replace: '<a$1>$2</a>'
       }
     ]
   },
