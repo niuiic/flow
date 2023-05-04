@@ -1,4 +1,4 @@
-import { pipe, reduce, toAsync } from 'src/index.js'
+import { pipe, reduce, take, toAsync } from 'src/index.js'
 
 describe('pipe', () => {
   describe('sync', () => {
@@ -19,6 +19,17 @@ describe('pipe', () => {
         reduce((a: number, b: number) => a + b)
       ).then((res) => {
         expect(res).toEqual(10)
+      })
+    })
+
+    it('should be able to compose more functions', () => {
+      pipe(
+        [1, 2, 3, Promise.resolve(4)],
+        toAsync,
+        take(3),
+        reduce((a: number, b: number) => a + b)
+      ).then((res) => {
+        expect(res).toEqual(6)
       })
     })
   })
