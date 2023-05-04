@@ -19,6 +19,14 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-misused-promises': 'off',
-    '@typescript-eslint/no-unsafe-return': 'off'
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_'
+      }
+    ]
   }
 }
