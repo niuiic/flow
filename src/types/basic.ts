@@ -35,3 +35,5 @@ export type Head<T extends unknown[]> = T extends [infer First, ...unknown[]] ? 
 export type Append<T extends unknown[], U> = [...T, U]
 
 export type Prepend<T extends unknown[], U> = [U, ...T]
+
+export type MaybePromise<T> = T | Promise<T>

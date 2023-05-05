@@ -1,3 +1,4 @@
+import { AnyFunction } from 'src/types/function.js'
 import { Iter } from 'src/types/iterable.js'
 
 export function isPromise<A>(args: Promise<A> | A): args is Promise<A> {
@@ -34,4 +35,16 @@ export function call<A, F extends (args: A extends Promise<any> ? Awaited<A> : A
   ? Promise<ReturnType<F>>
   : ReturnType<F> {
   return isPromise(args) ? args.then(fn as any) : fn(args as any)
+}
+
+export function isFunction(args: unknown): args is AnyFunction {
+  return typeof args === 'function'
+}
+
+export function isNumber(args: unknown): args is number {
+  return typeof args === 'number'
+}
+
+export function isString(args: unknown): args is string {
+  return typeof args === 'string'
 }
