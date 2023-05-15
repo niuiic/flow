@@ -1,5 +1,5 @@
 /**
- * Retures IterableIterator of numbers progressing from start to end(not include).
+ * Retures IterableIterator of numbers progressing from start to end(not included).
  *
  * @example
  * ```ts

@@ -7,11 +7,10 @@ function sync(iterable: Iterable<number>) {
     if (Number.isNaN(v)) {
       return v
     }
-    if (v > max || Number.isNaN(max)) {
+    if (v > max) {
       max = v
     }
   }
-
   return max
 }
 
@@ -21,11 +20,10 @@ async function async(iterable: AsyncIterable<number>) {
     if (Number.isNaN(v)) {
       return v
     }
-    if (v > max || Number.isNaN(max)) {
+    if (v > max) {
       max = v
     }
   }
-
   return max
 }
 
@@ -49,7 +47,7 @@ function max(iterable: Iterable<number> | AsyncIterable<number>) {
     return async(iterable)
   }
 
-  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")
+  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
 }
 
 export { max }

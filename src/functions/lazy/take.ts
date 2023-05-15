@@ -20,7 +20,9 @@ function async<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIter
       return this
     },
     async next(concurrent) {
-      if (length-- < 1) return { done: true, value: undefined }
+      if (length-- < 1) {
+        return { done: true, value: undefined }
+      }
       return iterator.next(concurrent)
     }
   }
@@ -52,6 +54,10 @@ function take<A extends UniversalIterable>(
   | IterableIterator<IterableItem<A>>
   | AsyncIterableIterator<IterableItem<A>>
   | ((iterable: A) => IteratorReturnValue<A>) {
+  if (length <= 0) {
+    throw new TypeError('"length" must be greater than 0')
+  }
+
   if (iterable === undefined) {
     return (iterable: A) => take(length, iterable as any) as IteratorReturnValue<A>
   }
@@ -64,7 +70,7 @@ function take<A extends UniversalIterable>(
     return async(length, iterable)
   }
 
-  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")
+  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
 }
 
 export { take }

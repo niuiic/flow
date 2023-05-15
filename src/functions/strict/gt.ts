@@ -19,9 +19,6 @@ function gt(a: any, b?: any): ((b: any) => boolean) | boolean {
   if (b === undefined) {
     return (b2: any) => gt(a, b2)
   }
-  if (a.constructor !== b.constructor) {
-    throw new TypeError('The values passed to compare must be of the same type')
-  }
 
   return a > b
 }

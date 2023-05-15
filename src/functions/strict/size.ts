@@ -33,7 +33,7 @@ function size<A extends UniversalIterable>(iterable: A): IterableReturnValue<A, 
     return async(iterable) as any
   }
 
-  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")
+  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
 }
 
 export { size }

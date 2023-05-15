@@ -18,7 +18,7 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
 }
 
 /**
- * Iterates over Iterable/AsyncIterable, applying each in turn to `fn`.
+ * Iterates over Iterable/AsyncIterable, applying each in turn to 'fn'.
  *
  * @example
  * ```ts
@@ -49,7 +49,7 @@ function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
     return async(fn, iterable as any)
   }
 
-  throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")
+  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
 }
 
 export { each }

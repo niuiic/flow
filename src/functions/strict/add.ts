@@ -17,7 +17,7 @@ function sync(a: number | string, b: number | string): string | number {
     return a + b
   }
 
-  throw new TypeError("'a' or 'b' must be type of number or string")
+  throw new TypeError('"a" or "b" must be type of number or string')
 }
 
 async function async(a: Promise<number | string>, b: Promise<number | string>) {
