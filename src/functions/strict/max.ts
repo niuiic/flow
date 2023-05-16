@@ -7,7 +7,7 @@ function sync(iterable: Iterable<number>) {
     if (Number.isNaN(v)) {
       return v
     }
-    if (v > max) {
+    if (v > max || Number.isNaN(max)) {
       max = v
     }
   }
@@ -20,7 +20,7 @@ async function async(iterable: AsyncIterable<number>) {
     if (Number.isNaN(v)) {
       return v
     }
-    if (v > max) {
+    if (v > max || Number.isNaN(max)) {
       max = v
     }
   }
