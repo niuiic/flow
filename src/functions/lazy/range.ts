@@ -16,19 +16,22 @@ function range(start: number, end: number): IterableIterator<number>
 
 function range(start: number, end: number, step: number): IterableIterator<number>
 
-function* range(startOrLength: number, end?: number, step = 1): IterableIterator<number> {
+function* range(start: number, end?: number, step = 1): IterableIterator<number> {
   if (end === undefined) {
-    return yield* range(0, startOrLength)
+    return yield* range(0, start, start >= 0 ? step : -1)
+  }
+  if (step === 0) {
+    throw new Error('"end" can not be reached')
   }
   if (step < 0) {
-    while (startOrLength > end) {
-      yield startOrLength
-      startOrLength += step
+    while (start > end) {
+      yield start
+      start += step
     }
   } else {
-    while (startOrLength < end) {
-      yield startOrLength
-      startOrLength += step
+    while (start < end) {
+      yield start
+      start += step
     }
   }
 }
