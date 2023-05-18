@@ -16,7 +16,7 @@ describe('pipe', () => {
       pipe(
         [1, 2, 3, Promise.resolve(4)],
         toAsync,
-        reduce((a: number, b: number) => a + b)
+        reduce(async (a: number, b: number) => a + b)
       ).then((res) => {
         expect(res).toEqual(10)
       })
@@ -27,7 +27,7 @@ describe('pipe', () => {
         [1, 2, 3, Promise.resolve(4)],
         toAsync,
         take(3),
-        reduce((a: number, b: number) => a + b)
+        reduce(async (a: number, b: number) => a + b)
       ).then((res) => {
         expect(res).toEqual(6)
       })
