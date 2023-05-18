@@ -1,4 +1,5 @@
 import { call, isAsyncIterable, isIterable } from 'src/functions/utils.js'
+import { MaybePromise } from 'src/types/basic.js'
 import { Immutable } from 'src/types/immutable.js'
 import { IterableReturnValue, UniversalIterable } from 'src/types/iterable.js'
 
@@ -17,13 +18,13 @@ async function async<A, R>(
 ): Promise<R> {
   let res = initialRes
   for await (const v of iterable) {
-    res = await call(res, (res) => fn(res as R, v))
+    res = await call(res, (prevRes) => fn(prevRes as R, v))
   }
   return res
 }
 
 /**
- * "reduce" boils down a list of values into a single value.
+ * 'reduce' boils down a list of values into a single value.
  *
  * @example
  * ```ts
@@ -35,34 +36,42 @@ async function async<A, R>(
 
 // same type for args and return value
 function reduce<A>(fn: (prevRes: Immutable<A>, args: Immutable<A>) => A, iterable: Iterable<A>): A
+function reduce<A>(fn: (prevRes: Immutable<A>, args: Immutable<A>) => A): (iterable: Iterable<A>) => A
 function reduce<A>(
-  fn: (prevRes: Immutable<A>, args: Immutable<A>) => A | Promise<A>,
+  fn: (prevRes: Immutable<Awaited<A>>, args: Immutable<Awaited<A>>) => Promise<Awaited<A>>,
   iterable: AsyncIterable<A>
-): Promise<A>
+): Promise<Awaited<A>>
 function reduce<A>(
-  fn: (prevRes: Immutable<A>, args: Immutable<A>) => A | Promise<A>
-): (iterable: UniversalIterable<A>) => IterableReturnValue<UniversalIterable<A>>
+  fn: (prevRes: Immutable<Awaited<A>>, args: Immutable<Awaited<A>>) => Promise<Awaited<A>>
+): (iterable: AsyncIterable<A>) => Promise<Awaited<A>>
 
 // different type for args and return value
 function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R, iterable: Iterable<A>): R
+function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R): (iterable: Iterable<A>) => R
 function reduce<A, R>(
-  fn: (prevRes: Immutable<R>, args: Immutable<A>) => R | Promise<R>,
+  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>,
   iterable: AsyncIterable<A>
-): Promise<R>
+): Promise<Awaited<R>>
 function reduce<A, R>(
-  fn: (prevRes: Immutable<R>, args: Immutable<A>) => R | Promise<R>
-): (iterable: AsyncIterable<A>) => IterableReturnValue<UniversalIterable<A>, R>
+  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>
+): (iterable: AsyncIterable<A>) => Promise<Awaited<R>>
 
 // with initialRes
 function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R, initialRes: R, iterable: Iterable<A>): R
+function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R, initialRes: R): (iterable: Iterable<A>) => R
 function reduce<A, R>(
-  fn: (prevRes: Immutable<R>, args: Immutable<A>) => R | Promise<R>,
-  initialRes: R | Promise<R>,
+  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>,
+  initialRes: MaybePromise<R>,
   iterable: AsyncIterable<A>
-): Promise<R>
+): Promise<Awaited<R>>
+function reduce<A, R>(
+  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>,
+  initialRes: MaybePromise<R>
+): (iterable: AsyncIterable<A>) => Promise<Awaited<R>>
+
 function reduce<A, R>(
   fn: (prevRes: Immutable<R>, args: Immutable<A>) => R,
-  initialResOrIterable?: R | UniversalIterable<A>,
+  initialResOrIterable?: MaybePromise<R> | UniversalIterable<A>,
   iterable?: UniversalIterable<A>
 ):
   | R
@@ -120,7 +129,7 @@ function reduce<A, R>(
   }
 
   if (isAsyncIterable<A>(iterable)) {
-    return async(fn as FixedFn, Promise.resolve(initialResOrIterable as Promise<R>), iterable)
+    return async(fn as FixedFn, Promise.resolve(initialResOrIterable as MaybePromise<R>), iterable)
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")

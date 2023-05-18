@@ -37,7 +37,7 @@ describe('reduce', () => {
 
   describe('async', () => {
     it('should work for async iterable', () => {
-      reduce((prevRes, args) => {
+      reduce(async (prevRes, args) => {
         return prevRes + args
       }, toAsync([Promise.resolve(1), Promise.resolve(2), 3, 4])).then((res) => {
         expect(res).toEqual(10)
