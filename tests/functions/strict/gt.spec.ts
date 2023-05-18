@@ -3,6 +3,7 @@ import { gt } from 'src/index.js'
 describe('gt', () => {
   it('should be able to compare numbers', () => {
     expect(gt(1, 2)).toEqual(false)
+    expect(gt(2)(1)).toEqual(true)
   })
 
   it('should be able to compare strings', () => {
@@ -13,7 +14,7 @@ describe('gt', () => {
     expect(gt(new Date(), new Date())).toEqual(false)
   })
 
-  it('should return a function if only one parameter provided', () => {
-    expect(typeof gt(1)).toEqual('function')
+  it('should throw an error if "a" and "b" have different types', () => {
+    expect(() => gt(1 as any, new Date())).toThrow()
   })
 })

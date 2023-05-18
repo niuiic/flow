@@ -1,5 +1,5 @@
 /**
- * Is 'a' greater than 'b'
+ * Is `a` greater than `b`
  *
  * @example
  * ```ts
@@ -20,7 +20,15 @@ function gt(a: any, b?: any): ((b: any) => boolean) | boolean {
     return (b2: any) => gt(a, b2)
   }
 
-  return a > b
+  if (
+    (typeof a === 'number' && typeof b === 'number') ||
+    (typeof a === 'string' && typeof b === 'string') ||
+    (a instanceof Date && b instanceof Date)
+  ) {
+    return a > b
+  }
+
+  throw new TypeError('"a" and "b" should have the same type')
 }
 
 export { gt }
