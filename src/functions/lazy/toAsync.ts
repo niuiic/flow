@@ -14,7 +14,7 @@ import { isPromise } from 'src/functions/utils.js'
  *
  * {@link #Repo/tests/functions/lazy/toAsync.spec.ts | More examples}
  */
-export function toAsync<T>(args: Iterable<T | Promise<T>>): AsyncIterableIterator<T> {
+export function toAsync<T>(args: Iterable<T | Promise<T>>): AsyncIterableIterator<Awaited<T>> {
   const iterator = args[Symbol.iterator]()
   return {
     async next() {
