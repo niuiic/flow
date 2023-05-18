@@ -29,7 +29,7 @@ function async<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIter
 }
 
 /**
- * Returns IterableIterator/AsyncIterableIterator that take 'length' values from iterable
+ * Returns IterableIterator/AsyncIterableIterator that take `length` values from iterable
  *
  * @example
  * ```ts
@@ -43,7 +43,7 @@ function async<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIter
  */
 function take<A>(length: number, iterable: Iterable<A>): IterableIterator<A>
 
-function take<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
+function take<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIterator<Awaited<A>>
 
 function take<A extends UniversalIterable>(length: number): (iterable: A) => IteratorReturnValue<A>
 
@@ -55,7 +55,7 @@ function take<A extends UniversalIterable>(
   | AsyncIterableIterator<IterableItem<A>>
   | ((iterable: A) => IteratorReturnValue<A>) {
   if (length <= 0) {
-    throw new TypeError('"length" must be greater than 0')
+    throw new Error('"length" must be greater than 0')
   }
 
   if (iterable === undefined) {

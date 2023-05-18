@@ -16,4 +16,9 @@ describe('take', () => {
     }
     expect(res).toEqual(3)
   })
+
+  it('should throw an error if "length" is less than or equal to 0', () => {
+    expect(() => take(0, [1, 2, 3])).toThrow()
+    expect(() => take(-1, [1, 2, 3])).toThrow()
+  })
 })
