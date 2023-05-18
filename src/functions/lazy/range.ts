@@ -1,5 +1,5 @@
 /**
- * Retures IterableIterator of numbers progressing from start to end(not included).
+ * Retures IterableIterator of numbers progressing from `start` to `end`(not included).
  *
  * @example
  * ```ts
@@ -20,7 +20,7 @@ function* range(start: number, end?: number, step = 1): IterableIterator<number>
   if (end === undefined) {
     return yield* range(0, start, start >= 0 ? step : -1)
   }
-  if (step === 0) {
+  if (step === 0 && start !== end) {
     throw new Error('"end" can not be reached')
   }
   if (step < 0) {

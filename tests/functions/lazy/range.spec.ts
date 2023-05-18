@@ -14,10 +14,6 @@ describe('range', () => {
     expect(end).toEqual(-3)
   })
 
-  it('should throw an error when step is equal to 0', () => {
-    expect(() => range(1, 2, 0).next()).toThrow()
-  })
-
   it('should not iterate the end', () => {
     let end
     for (const v of range(1, 4)) {
@@ -37,5 +33,12 @@ describe('range', () => {
       count++
     }
     expect(count).toEqual(2)
+  })
+
+  it('should throw an error if an endless loop is to be caused', () => {
+    expect(() => range(1, 2, 0).next()).toThrow()
+    expect(() => range(1, 1, 0).next()).not.toThrow()
+    expect(() => range(10, 1, 1).next()).not.toThrow()
+    expect(() => range(1, 10, -1).next()).not.toThrow()
   })
 })
