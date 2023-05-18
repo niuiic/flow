@@ -20,7 +20,7 @@ export type UniversalIterable<T = unknown> = Iterable<T> | AsyncIterable<T>
 /** Iterator or AsyncIterator or Iterable or AsyncIterable */
 export type Iter<T> = UniversalIterator<T> | UniversalIterable<T>
 
-/** T is async ? AsyncIterableIterator<Awaited<R>> : IterableIterator<Awaited<R>> */
+/** T is async(AsyncIterable) ? AsyncIterableIterator<Awaited<R>> : IterableIterator<R> */
 export type IteratorReturnValue<T extends UniversalIterable, R = IterableItem<T>> = T extends Iterable<unknown>
   ? IterableIterator<R>
   : T extends AsyncIterable<unknown>

@@ -1,6 +1,6 @@
 import { isAsyncIterable, isIterable, isPromise } from 'src/functions/utils.js'
 import { Immutable } from 'src/types/immutable.js'
-import { IterableItem, IterableReturnValue, UniversalIterable } from 'src/types/iterable.js'
+import { IterableItem, IterableReturnValue } from 'src/types/iterable.js'
 
 function sync<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void {
   for (const v of iterable) {
@@ -18,7 +18,7 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
 }
 
 /**
- * Iterates over Iterable/AsyncIterable, applying each in turn to 'fn'.
+ * Iterates over Iterable/AsyncIterable, applying each in turn to `fn`.
  *
  * @example
  * ```ts
@@ -28,10 +28,9 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  * {@link #Repo/tests/functions/strict/each.spec.ts | More examples}
  */
 function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
-function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: AsyncIterable<A>): Promise<void>
-function each<A extends UniversalIterable, R = unknown>(
-  fn: (args: Immutable<IterableItem<A>>) => R
-): (iterable: A) => IterableReturnValue<A, void>
+function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R, iterable: AsyncIterable<A>): Promise<void>
+function each<A, R = unknown>(fn: (args: Immutable<A>) => R): (iterable: Iterable<A>) => void
+function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R): (iterable: AsyncIterable<A>) => Promise<void>
 
 function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
   fn: (args: Immutable<IterableItem<A>>) => B,
