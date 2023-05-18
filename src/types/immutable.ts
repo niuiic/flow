@@ -1,4 +1,4 @@
-import { IsTuple, Primitive } from './basic.js'
+import { AnyFunction, IsTuple, Primitive } from './basic.js'
 
 type ImmutableArray<T> = ReadonlyArray<Immutable<T>>
 type ImmutableMap<K, V> = ReadonlyMap<Immutable<K>, Immutable<V>>
@@ -11,7 +11,7 @@ type ImmutableTuple<T> = T extends [infer First, ...infer Rest]
   : never
 
 export type Immutable<T> = T extends T
-  ? T extends Primitive
+  ? T extends Primitive | AnyFunction
     ? T
     : T extends Array<infer U>
     ? IsTuple<T> extends true

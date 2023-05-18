@@ -1,4 +1,4 @@
-import { AnyFunction } from 'src/types/function.js'
+import { AnyFunction } from 'src/types/basic.js'
 import { Iter } from 'src/types/iterable.js'
 
 export function isPromise<A>(args: Promise<A> | A): args is Promise<A> {

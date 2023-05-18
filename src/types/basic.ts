@@ -2,6 +2,8 @@ export type Primitive = string | number | boolean | undefined | null
 
 export type AnyObject = Record<string | number | symbol, any>
 
+export type AnyFunction = (...args: any[]) => any
+
 export type EmptyObject = Record<string | number | symbol, never>
 
 export type IsAny<T> = 1 extends T & 2 ? true : false
