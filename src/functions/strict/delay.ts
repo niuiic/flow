@@ -7,6 +7,8 @@ import { isPromise } from 'util/types'
  * ```ts
  * console.log(await delay(1000, 'hello')) // 1000
  * ```
+ *
+ * {@link #Repo/tests/functions/strict/delay.spec.ts | More examples}
  */
 function delay(wait: number): Promise<void>
 
