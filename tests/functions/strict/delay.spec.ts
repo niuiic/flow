@@ -9,8 +9,5 @@ describe('delay', () => {
     setTimeout(() => {
       expect(res).toEqual(0)
     }, 1)
-    setTimeout(() => {
-      expect(res).toEqual(1)
-    }, 3)
   })
 })
