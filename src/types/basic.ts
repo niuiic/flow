@@ -41,5 +41,3 @@ export type Prepend<T extends unknown[], U> = [U, ...T]
 export type FixedPromise<T> = Promise<Awaited<T>>
 
 export type MaybePromise<T> = T | FixedPromise<T>
-
-export type FixedAsyncIterableIterator<T> = AsyncIterableIterator<Awaited<T>>
