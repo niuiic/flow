@@ -1,6 +1,6 @@
 import { isAsyncIterable, isIterable, isPromise } from 'src/functions/utils.js'
 import { Immutable } from 'src/types/immutable.js'
-import { IterableItem, IterableReturnValue } from 'src/types/iterable.js'
+import { UniversalIterableItem, IterableReturnValue } from 'src/types/iterable.js'
 
 function sync<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void {
   for (const v of iterable) {
@@ -33,18 +33,18 @@ function each<A, R = unknown>(fn: (args: Immutable<A>) => R): (iterable: Iterabl
 function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R): (iterable: AsyncIterable<A>) => Promise<void>
 
 function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
-  fn: (args: Immutable<IterableItem<A>>) => B,
+  fn: (args: Immutable<UniversalIterableItem<A>>) => B,
   iterable?: A
 ): void | Promise<void> | ((iterable: A) => IterableReturnValue<A, void>) {
   if (iterable === undefined) {
     return (iterable: A): IterableReturnValue<A, void> => each(fn, iterable as any) as IterableReturnValue<A, void>
   }
 
-  if (isIterable<IterableItem<A>>(iterable)) {
+  if (isIterable<UniversalIterableItem<A>>(iterable)) {
     return sync(fn, iterable as any)
   }
 
-  if (isAsyncIterable<IterableItem<A>>(iterable)) {
+  if (isAsyncIterable<UniversalIterableItem<A>>(iterable)) {
     return async(fn, iterable as any)
   }
 

@@ -1,5 +1,5 @@
 import { isAsyncIterable, isIterable } from 'src/functions/utils.js'
-import { IterableItem, IteratorReturnValue, UniversalIterable } from 'src/types/iterable.js'
+import { UniversalIterableItem, IteratorReturnValue, UniversalIterable } from 'src/types/iterable.js'
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]()
@@ -51,8 +51,8 @@ function take<A extends UniversalIterable>(
   length: number,
   iterable?: A
 ):
-  | IterableIterator<IterableItem<A>>
-  | AsyncIterableIterator<IterableItem<A>>
+  | IterableIterator<UniversalIterableItem<A>>
+  | AsyncIterableIterator<UniversalIterableItem<A>>
   | ((iterable: A) => IteratorReturnValue<A>) {
   if (length <= 0) {
     throw new Error('"length" must be greater than 0')
@@ -62,11 +62,11 @@ function take<A extends UniversalIterable>(
     return (iterable: A) => take(length, iterable as any) as IteratorReturnValue<A>
   }
 
-  if (isIterable<IterableItem<A>>(iterable)) {
+  if (isIterable<UniversalIterableItem<A>>(iterable)) {
     return sync(length, iterable)
   }
 
-  if (isAsyncIterable<IterableItem<A>>(iterable)) {
+  if (isAsyncIterable<UniversalIterableItem<A>>(iterable)) {
     return async(length, iterable)
   }
 

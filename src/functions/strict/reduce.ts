@@ -1,12 +1,17 @@
 import { call, isAsyncIterable, isIterable } from 'src/functions/utils.js'
-import { MaybePromise } from 'src/types/basic.js'
+import { AnyFunction, MaybePromise } from 'src/types/basic.js'
 import { Immutable } from 'src/types/immutable.js'
-import { IterableReturnValue, UniversalIterable } from 'src/types/iterable.js'
+import { IterableItem, IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
 
-function sync<A, R>(fn: (prevRes: R, args: A) => R, initialRes: R, iterable: Iterable<A>): R {
+// FIXME: 修复类型错误 (niuiic)
+function sync<A extends Iterable<unknown>, R>(
+  fn: (prevRes: R, args: IterableItem<A>) => R,
+  initialRes: R,
+  iterable: A
+): R {
   let res = initialRes
   for (const v of iterable) {
-    res = fn(res, v)
+    res = fn(res, v as any)
   }
   return res
 }
@@ -23,6 +28,11 @@ async function async<A, R>(
   return res
 }
 
+type FnReturenValue<A extends UniversalIterable, R = A> = A extends AsyncIterable<unknown> ? MaybePromise<R> : R
+type PrevRes<A extends UniversalIterable, R = UniversalIterableItem<A>> = A extends AsyncIterable<unknown>
+  ? Awaited<R>
+  : R
+
 /**
  * 'reduce' boils down a list of values into a single value.
  *
@@ -33,57 +43,50 @@ async function async<A, R>(
  *
  * {@link #Repo/tests/functions/strict/reduce.spec.ts | More examples}
  */
+// no item
+function reduce<A extends readonly []>(fn: AnyFunction, iterable: A): undefined
+function reduce<A extends readonly [], R>(fn: AnyFunction, initialRes: R, iterable: A): R
 
 // same type for args and return value
-function reduce<A>(fn: (prevRes: Immutable<A>, args: Immutable<A>) => A, iterable: Iterable<A>): A
-function reduce<A>(fn: (prevRes: Immutable<A>, args: Immutable<A>) => A): (iterable: Iterable<A>) => A
-function reduce<A>(
-  fn: (prevRes: Immutable<Awaited<A>>, args: Immutable<Awaited<A>>) => Promise<Awaited<A>>,
-  iterable: AsyncIterable<A>
-): Promise<Awaited<A>>
-function reduce<A>(
-  fn: (prevRes: Immutable<Awaited<A>>, args: Immutable<Awaited<A>>) => Promise<Awaited<A>>
-): (iterable: AsyncIterable<A>) => Promise<Awaited<A>>
+function reduce<A extends UniversalIterable>(
+  fn: (prevRes: Immutable<PrevRes<A>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A>,
+  iterable: A
+): IterableReturnValue<A>
+function reduce<A extends UniversalIterable>(
+  fn: (prevRes: Immutable<PrevRes<A>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A>
+): (iterable: A) => IterableReturnValue<A>
 
 // different type for args and return value
-function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R, iterable: Iterable<A>): R
-function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R): (iterable: Iterable<A>) => R
-function reduce<A, R>(
-  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>,
-  iterable: AsyncIterable<A>
-): Promise<Awaited<R>>
-function reduce<A, R>(
-  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>
-): (iterable: AsyncIterable<A>) => Promise<Awaited<R>>
+function reduce<A extends UniversalIterable, R>(
+  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>,
+  iterable: A
+): IterableReturnValue<A, R>
+function reduce<A extends UniversalIterable, R>(
+  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>
+): (iterable: A) => IterableReturnValue<A, R>
 
 // with initialRes
-function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R, initialRes: R, iterable: Iterable<A>): R
-function reduce<A, R>(fn: (prevRes: Immutable<R>, args: Immutable<A>) => R, initialRes: R): (iterable: Iterable<A>) => R
-function reduce<A, R>(
-  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>,
-  initialRes: MaybePromise<R>,
-  iterable: AsyncIterable<A>
-): Promise<Awaited<R>>
-function reduce<A, R>(
-  fn: (prevRes: Immutable<Awaited<R>>, args: Immutable<Awaited<A>>) => Promise<Awaited<R>>,
-  initialRes: MaybePromise<R>
-): (iterable: AsyncIterable<A>) => Promise<Awaited<R>>
+function reduce<A extends UniversalIterable, R>(
+  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>,
+  initialRes: R,
+  iterable: A
+): IterableReturnValue<A, R>
+function reduce<A extends UniversalIterable, R>(
+  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>,
+  initialRes: R
+): (iterable: A) => IterableReturnValue<A, R>
 
-function reduce<A, R>(
-  fn: (prevRes: Immutable<R>, args: Immutable<A>) => R,
-  initialResOrIterable?: MaybePromise<R> | UniversalIterable<A>,
-  iterable?: UniversalIterable<A>
-):
-  | R
-  | undefined
-  | Promise<R | undefined>
-  | ((iterable: UniversalIterable<A>) => IterableReturnValue<UniversalIterable<A>, R>) {
-  type FixedFn = (prevRes: R, args: A) => R
+function reduce<A extends UniversalIterable, R>(
+  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => R,
+  initialResOrIterable?: MaybePromise<R> | A,
+  iterable?: A
+): MaybePromise<R | undefined> | ((iterable: A) => IterableReturnValue<A, R>) {
+  // type FixedFn = (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => FnReturenValue<A, R>
+  type FixedFn = any
 
   if (iterable === undefined) {
     if (initialResOrIterable === undefined) {
-      return (iterable: UniversalIterable<A>) =>
-        reduce(fn, iterable as any) as IterableReturnValue<UniversalIterable<A>, R>
+      return (iterable: A) => reduce(fn, iterable) as IterableReturnValue<A, R>
     }
 
     if (isIterable(initialResOrIterable)) {
@@ -92,15 +95,11 @@ function reduce<A, R>(
       if (done) {
         return undefined
       }
-      return sync(
-        fn as FixedFn,
-        value as unknown as R,
-        {
-          [Symbol.iterator]() {
-            return iterator
-          }
-        } as Iterable<A>
-      )
+      return sync(fn as FixedFn, value as R, {
+        [Symbol.iterator]() {
+          return iterator
+        }
+      })
     }
 
     if (isAsyncIterable<A>(initialResOrIterable)) {
@@ -109,15 +108,11 @@ function reduce<A, R>(
         if (done) {
           return undefined
         }
-        return async(
-          fn as FixedFn,
-          value as unknown as Promise<R>,
-          {
-            [Symbol.asyncIterator]() {
-              return iterator
-            }
-          } as AsyncIterable<A>
-        )
+        return async(fn as FixedFn, value as unknown as Promise<R>, {
+          [Symbol.asyncIterator]() {
+            return iterator
+          }
+        })
       })
     }
 
