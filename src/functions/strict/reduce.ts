@@ -1,17 +1,17 @@
 import { call, isAsyncIterable, isIterable } from 'src/functions/utils.js'
 import { AnyFunction, MaybePromise } from 'src/types/basic.js'
 import { Immutable } from 'src/types/immutable.js'
-import { IterableItem, IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
+import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
 
-// FIXME: 修复类型错误 (niuiic)
-function sync<A extends Iterable<unknown>, R>(
-  fn: (prevRes: R, args: IterableItem<A>) => R,
-  initialRes: R,
-  iterable: A
-): R {
+type FnReturenValue<A extends UniversalIterable, R = A> = A extends AsyncIterable<unknown> ? MaybePromise<R> : R
+type PrevRes<A extends UniversalIterable, R = UniversalIterableItem<A>> = A extends AsyncIterable<unknown>
+  ? Awaited<R>
+  : R
+
+function sync<A, R>(fn: (prevRes: R, args: A) => R, initialRes: R, iterable: Iterable<A>): R {
   let res = initialRes
   for (const v of iterable) {
-    res = fn(res, v as any)
+    res = fn(res, v)
   }
   return res
 }
@@ -21,17 +21,12 @@ async function async<A, R>(
   initialRes: Promise<R>,
   iterable: AsyncIterable<A>
 ): Promise<R> {
-  let res = initialRes
+  let res: MaybePromise<R> = initialRes
   for await (const v of iterable) {
     res = await call(res, (prevRes) => fn(prevRes as R, v))
   }
   return res
 }
-
-type FnReturenValue<A extends UniversalIterable, R = A> = A extends AsyncIterable<unknown> ? MaybePromise<R> : R
-type PrevRes<A extends UniversalIterable, R = UniversalIterableItem<A>> = A extends AsyncIterable<unknown>
-  ? Awaited<R>
-  : R
 
 /**
  * 'reduce' boils down a list of values into a single value.
@@ -81,8 +76,7 @@ function reduce<A extends UniversalIterable, R>(
   initialResOrIterable?: MaybePromise<R> | A,
   iterable?: A
 ): MaybePromise<R | undefined> | ((iterable: A) => IterableReturnValue<A, R>) {
-  // type FixedFn = (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => FnReturenValue<A, R>
-  type FixedFn = any
+  type FixedFn = <T1, T2>(prevRes: T1, args: T2) => T1
 
   if (iterable === undefined) {
     if (initialResOrIterable === undefined) {

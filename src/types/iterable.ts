@@ -5,6 +5,7 @@ export type UniversalIterableItem<T extends Iterable<unknown> | AsyncIterable<un
   ? Awaited<U>
   : never
 
+/** Item of Iterable */
 export type IterableItem<T extends Iterable<unknown>> = T extends Iterable<infer U> ? U : never
 
 /** T is AsyncIterable ? Promise<Awaited<R>> : R */
