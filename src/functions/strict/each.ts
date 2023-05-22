@@ -1,6 +1,6 @@
 import { isAsyncIterable, isIterable, isPromise } from 'src/functions/utils.js'
 import { Immutable } from 'src/types/immutable.js'
-import { UniversalIterableItem, IterableReturnValue } from 'src/types/iterable.js'
+import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
 
 function sync<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void {
   for (const v of iterable) {
@@ -28,24 +28,27 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  * {@link #Repo/tests/functions/strict/each.spec.ts | More examples}
  */
 function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
-function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R, iterable: AsyncIterable<A>): Promise<void>
 function each<A, R = unknown>(fn: (args: Immutable<A>) => R): (iterable: Iterable<A>) => void
+
+function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R, iterable: AsyncIterable<A>): Promise<void>
 function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R): (iterable: AsyncIterable<A>) => Promise<void>
 
-function each<A extends Iterable<unknown> | AsyncIterable<unknown>, B>(
-  fn: (args: Immutable<UniversalIterableItem<A>>) => B,
+function each<A extends UniversalIterable, R>(
+  fn: (args: Immutable<UniversalIterableItem<A>>) => R,
   iterable?: A
 ): void | Promise<void> | ((iterable: A) => IterableReturnValue<A, void>) {
+  type FixedFn = <T1, T2>(args: T1) => T2
+
   if (iterable === undefined) {
     return (iterable: A): IterableReturnValue<A, void> => each(fn, iterable as any) as IterableReturnValue<A, void>
   }
 
   if (isIterable<UniversalIterableItem<A>>(iterable)) {
-    return sync(fn, iterable as any)
+    return sync(fn as FixedFn, iterable)
   }
 
   if (isAsyncIterable<UniversalIterableItem<A>>(iterable)) {
-    return async(fn, iterable as any)
+    return async(fn as FixedFn, iterable)
   }
 
   throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')

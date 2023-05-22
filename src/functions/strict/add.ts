@@ -1,11 +1,11 @@
 import { isNumber, isPromise, isString } from 'src/functions/utils.js'
-import { MaybePromise } from 'src/types/basic.js'
+import { FixedPromise, MaybePromise } from 'src/types/basic.js'
 
-/** A or B is async ? Promise<Awaited<T>> : Awaited<T> */
-type AddReturnValue<T, A extends T, B extends T> = [A] extends [Promise<Awaited<T>>]
-  ? Promise<Awaited<T>>
-  : [B] extends [Promise<Awaited<T>>]
-  ? Promise<Awaited<T>>
+/** A or B is async ? FixedPromise<T> : Awaited<T> */
+type AddReturnValue<T, A extends T, B extends T> = [A] extends [FixedPromise<T>]
+  ? FixedPromise<T>
+  : [B] extends [FixedPromise<T>]
+  ? FixedPromise<T>
   : Awaited<T>
 
 function sync(a: number | string, b: number | string): string | number {
@@ -17,7 +17,7 @@ function sync(a: number | string, b: number | string): string | number {
     return a + b
   }
 
-  throw new TypeError('"a" or "b" must be type of number or string')
+  throw new TypeError('"a" and "b" must be type of number or string')
 }
 
 async function async(a: Promise<number | string>, b: Promise<number | string>) {
@@ -38,14 +38,14 @@ function add<A extends MaybePromise<number>, B extends MaybePromise<number>>(
   a: A,
   b: B
 ): AddReturnValue<MaybePromise<number>, A, B>
+function add<A extends MaybePromise<number>, B extends MaybePromise<number>>(
+  a: A
+): (b: B) => AddReturnValue<MaybePromise<number>, A, B>
+
 function add<A extends MaybePromise<string>, B extends MaybePromise<string>>(
   a: A,
   b: B
 ): AddReturnValue<MaybePromise<string>, A, B>
-
-function add<A extends MaybePromise<number>, B extends MaybePromise<number>>(
-  a: A
-): (b: B) => AddReturnValue<MaybePromise<number>, A, B>
 function add<A extends MaybePromise<string>, B extends MaybePromise<string>>(
   a: A
 ): (b: B) => AddReturnValue<MaybePromise<string>, A, B>

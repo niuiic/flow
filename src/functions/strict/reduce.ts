@@ -1,5 +1,5 @@
 import { call, isAsyncIterable, isIterable } from 'src/functions/utils.js'
-import { AnyFunction, MaybePromise } from 'src/types/basic.js'
+import { AnyFunction, FixedPromise, MaybePromise } from 'src/types/basic.js'
 import { Immutable } from 'src/types/immutable.js'
 import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
 
@@ -18,14 +18,14 @@ function sync<A, R>(fn: (prevRes: R, args: A) => R, initialRes: R, iterable: Ite
 
 async function async<A, R>(
   fn: (prevRes: R, args: A) => R,
-  initialRes: Promise<R>,
+  initialRes: FixedPromise<R>,
   iterable: AsyncIterable<A>
-): Promise<R> {
+): FixedPromise<R> {
   let res: MaybePromise<R> = initialRes
   for await (const v of iterable) {
-    res = await call(res, (prevRes) => fn(prevRes as R, v))
+    res = await call(res, (prevRes: R) => fn(prevRes, v))
   }
-  return res
+  return res as Awaited<R>
 }
 
 /**
@@ -102,7 +102,7 @@ function reduce<A extends UniversalIterable, R>(
         if (done) {
           return undefined
         }
-        return async(fn as FixedFn, value as unknown as Promise<R>, {
+        return async(fn as FixedFn, value as unknown as FixedPromise<R>, {
           [Symbol.asyncIterator]() {
             return iterator
           }
@@ -118,7 +118,7 @@ function reduce<A extends UniversalIterable, R>(
   }
 
   if (isAsyncIterable<A>(iterable)) {
-    return async(fn as FixedFn, Promise.resolve(initialResOrIterable as MaybePromise<R>), iterable)
+    return async(fn as FixedFn, Promise.resolve(initialResOrIterable) as FixedPromise<R>, iterable)
   }
 
   throw new TypeError("'iterable' must be type of Iterable or AsyncIterable")

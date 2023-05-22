@@ -1,7 +1,10 @@
+import { FixedPromise } from 'src/types/basic.js'
 import { isPromise } from 'util/types'
 
 /**
  * Delay the `value` by `wait` time.
+ *
+ * `value` should not be a promise.
  *
  * @example
  * ```ts
@@ -12,7 +15,7 @@ import { isPromise } from 'util/types'
  */
 function delay(wait: number): Promise<void>
 
-function delay<A>(wait: number, value: A): Promise<A>
+function delay<A>(wait: number, value: A): A extends Promise<unknown> ? never : FixedPromise<A>
 
 function delay<A>(wait: number, value?: A): Promise<A | undefined> {
   return new Promise((resolve, reject) => {

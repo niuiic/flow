@@ -1,3 +1,5 @@
+import { FixedPromise } from './basic.js'
+
 /** Item of Iterable or AsyncIterable */
 export type UniversalIterableItem<T extends Iterable<unknown> | AsyncIterable<unknown>> = T extends Iterable<infer U>
   ? U
@@ -8,11 +10,11 @@ export type UniversalIterableItem<T extends Iterable<unknown> | AsyncIterable<un
 /** Item of Iterable */
 export type IterableItem<T extends Iterable<unknown>> = T extends Iterable<infer U> ? U : never
 
-/** T is AsyncIterable ? Promise<Awaited<R>> : R */
+/** T is AsyncIterable ? FixedPromise<R> : R */
 export type IterableReturnValue<
   T extends UniversalIterable<unknown>,
   R = UniversalIterableItem<T>
-> = T extends AsyncIterable<unknown> ? Promise<Awaited<R>> : T extends Iterable<unknown> ? R : never
+> = T extends AsyncIterable<unknown> ? FixedPromise<R> : T extends Iterable<unknown> ? R : never
 
 /** Iterator or AsyncIterator */
 export type UniversalIterator<T = unknown> = Iterator<T> | AsyncIterator<T>

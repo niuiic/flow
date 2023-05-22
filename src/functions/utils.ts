@@ -1,7 +1,7 @@
-import { AnyFunction } from 'src/types/basic.js'
+import { AnyFunction, FixedPromise } from 'src/types/basic.js'
 import { Iter } from 'src/types/iterable.js'
 
-export function isPromise<A>(args: Promise<A> | A): args is Promise<A> {
+export function isPromise<A>(args: Promise<A> | A): args is FixedPromise<A> {
   if (args instanceof Promise) {
     return true
   }
@@ -29,7 +29,7 @@ export function isAsyncIterable<T = unknown>(args: Iter<T> | unknown): args is A
 export function call<A, F extends (args: Awaited<A>) => any>(
   args: A,
   fn: F
-): A extends Promise<unknown> ? Promise<Awaited<ReturnType<F>>> : ReturnType<F> {
+): A extends Promise<unknown> ? FixedPromise<ReturnType<F>> : ReturnType<F> {
   return isPromise(args) ? args.then(fn as any) : fn(args as any)
 }
 
