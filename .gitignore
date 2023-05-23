@@ -107,4 +107,6 @@ dist
 .nvim/
 
 # documents
-docs/
+docs/.vitepress/dist
+docs/.vitepress/cache
+docs/api

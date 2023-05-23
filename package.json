@@ -13,28 +13,31 @@
     "test": "pnpm jest",
     "test:coverage": "pnpm jest --coverage",
     "lint": "pnpm eslint -f unix --ext .ts .",
-    "doc": "pnpm typedoc"
+    "docs:build": "pnpm typedoc && pnpm vitepress build docs",
+    "docs:preview": "pnpm vitepress preview docs"
   },
   "keywords": [],
   "author": "niuiic",
   "license": "MIT",
   "devDependencies": {
     "@digitak/esrun": "^3.2.24",
-    "@mxssfd/typedoc-theme": "^1.1.1",
     "@rollup/plugin-typescript": "^11.1.1",
     "@types/jest": "^29.5.1",
-    "@types/node": "^20.2.1",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
-    "@typescript-eslint/parser": "^5.59.6",
-    "eslint": "^8.40.0",
+    "@types/node": "^20.2.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
     "jest": "^29.5.0",
     "prettier-plugin-organize-imports": "^3.2.2",
-    "rollup": "^3.22.0",
+    "rollup": "^3.23.0",
     "ts-jest": "^29.1.0",
-    "tslib": "^2.5.1",
-    "typedoc": "^0.24.7",
+    "tslib": "^2.5.2",
+    "typedoc": "0.24.7",
+    "typedoc-plugin-markdown": "4.0.0-next.12",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typedoc-plugin-replace-text": "^2.2.0",
-    "typescript": "^5.0.4"
+    "typedoc-vitepress-theme": "1.0.0-next.1",
+    "typescript": "^5.0.4",
+    "vitepress": "1.0.0-beta.1"
   }
 }

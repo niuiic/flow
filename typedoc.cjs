@@ -2,8 +2,12 @@
 module.exports = {
   $schema: 'https://typedoc.org/schema.json',
   entryPoints: ['./src/index.ts'],
-  out: 'docs',
-  plugin: ['typedoc-plugin-missing-exports', 'typedoc-plugin-replace-text', '@mxssfd/typedoc-theme'],
+  plugin: [
+    'typedoc-plugin-markdown',
+    'typedoc-vitepress-theme',
+    'typedoc-plugin-missing-exports',
+    'typedoc-plugin-replace-text'
+  ],
   replaceText: {
     replacements: [
       {
@@ -24,6 +28,5 @@ module.exports = {
       }
     ]
   },
-  theme: 'my-theme',
   includeVersion: true
 }
