@@ -7,7 +7,7 @@ on:
     branches: ['main']
 
 jobs:
-  test:
+  doc:
     runs-on: ubuntu-latest
     permissions:
       contents: write
