@@ -14,8 +14,10 @@ export type IsUnion<T, A = T> = T extends T ? ([A] extends [T] ? false : true) :
 
 export type IsTuple<T> = [T] extends [any[]] ? (number extends T['length'] ? false : true) : false
 
-export type Expand<T> = T extends T
-  ? T extends (...args: infer A) => Promise<infer R>
+export type Expand<T, Ignore = never> = T extends T
+  ? T extends Ignore
+    ? T
+    : T extends (...args: infer A) => Promise<infer R>
     ? (...args: Expand<A>) => Promise<Expand<R>>
     : T extends (...args: infer A) => infer R
     ? (...args: Expand<A>) => Expand<R>

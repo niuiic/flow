@@ -10,8 +10,8 @@ type ImmutableTuple<T> = T extends [infer First, ...infer Rest]
     : readonly [Immutable<First>, ...ImmutableTuple<Rest>]
   : never
 
-export type Immutable<T> = T extends T
-  ? T extends Primitive | AnyFunction
+export type Immutable<T, Ignore = never> = T extends T
+  ? T extends Primitive | AnyFunction | Ignore
     ? T
     : T extends Array<infer U>
     ? IsTuple<T> extends true
