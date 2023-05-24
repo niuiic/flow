@@ -30,6 +30,7 @@ const resolveItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarIt
     })
 
 export default defineConfig({
+  base: '/flow/',
   title: 'Flow',
   description: 'Flow',
   themeConfig: {
