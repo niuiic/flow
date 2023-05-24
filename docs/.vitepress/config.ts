@@ -3,7 +3,7 @@ import apiSidebarItems from '../api/typedoc-sidebar.json'
 
 const existedItems: { text?: string; link?: string }[] = []
 
-const resolveItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] =>
+const fixedItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] =>
   items
     .filter((v) => {
       if (v.link === null && (!v.items || v.items.length === 0)) {
@@ -19,8 +19,7 @@ const resolveItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarIt
       return true
     })
     .map((v) => {
-      const childItems = v.items ? resolveItems(v.items) : []
-
+      const childItems = v.items ? fixedItems(v.items) : []
       return {
         ...v,
         text: v.text === '<internal>' ? '[internal]' : v.text,
@@ -34,11 +33,11 @@ export default defineConfig({
   title: 'Flow',
   description: 'Flow',
   themeConfig: {
-    nav: [{ text: 'API', link: '/api' }],
+    nav: [{ text: 'API', link: '/api/index' }],
     sidebar: [
       {
         text: 'API',
-        items: resolveItems(apiSidebarItems as unknown as DefaultTheme.SidebarItem[])
+        items: fixedItems(apiSidebarItems as unknown as DefaultTheme.SidebarItem[])
       }
     ],
 

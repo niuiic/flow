@@ -3,8 +3,11 @@ layout: home
 
 hero:
   name: Flow
-  text: Make your code as smooth as a flow
+  text: Help to Coding Flowly
   tagline: A functional library for TypeScript/JavaScript
+  image:
+    src: /logo.jpeg
+    alt: logo
   actions:
     - theme: brand
       text: Api Document
@@ -14,8 +17,8 @@ hero:
       link: https://github.com/niuiic/flow
 
 features:
-  - title: Code Examples
+  - title: Examples
     details: All code examples are located at `tests` of this repo.
-  - title: License
-    details: MIT License
+  - title: Copyright
+    details: Follow MIT License.
 ---

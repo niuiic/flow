@@ -1,5 +1,5 @@
 {
-  "name": "@niuiic/flow",
+  "name": "@flow/core",
   "version": "0.0.1",
   "description": "A functional library for TypeScript/JavaScript",
   "main": "index.js",
@@ -13,6 +13,7 @@
     "test": "pnpm jest",
     "test:coverage": "pnpm jest --coverage",
     "lint": "pnpm eslint -f unix --ext .ts .",
+    "docs:dev": "pnpm vitepress dev docs",
     "docs:build": "pnpm typedoc && pnpm vitepress build docs",
     "docs:preview": "pnpm vitepress preview docs"
   },
