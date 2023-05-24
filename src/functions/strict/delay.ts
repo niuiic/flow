@@ -8,7 +8,7 @@ import { isPromise } from 'util/types'
  *
  * @example
  * ```ts
- * console.log(await delay(1000, 'hello')) // 1000
+ * console.log(await delay(1000, 'hello')) // print hello after 1s
  * ```
  *
  * {@link #Repo/tests/functions/strict/delay.spec.ts | More examples}
