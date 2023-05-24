@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v3
 
       - name: Install Dependencies
-        run: pnpm i
+        run: pnpm i --frozen-lockfile
 
       - name: Build Doc
         run: pnpm docs:build
