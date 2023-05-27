@@ -1,4 +1,5 @@
 export * from './add.js'
+export * from './always.js'
 export * from './delay.js'
 export * from './each.js'
 export * from './gt.js'
