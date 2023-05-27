@@ -6,15 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "pnpm tsc",
-    "start": "pnpm esrun ./src/index.ts",
-    "dev": "pnpm esrun --watch ./src/*.ts",
     "package": "pnpm rollup -c rollup.config.mjs",
-    "debug": "pnpm build && node --inspect-brk ./dist/src/index.js",
+    "call": "pnpm esrun cli",
     "test": "pnpm jest",
     "test:coverage": "pnpm jest --coverage",
     "lint": "pnpm eslint -f unix --ext .ts .",
     "docs:dev": "pnpm vitepress dev docs",
-    "docs:build": "pnpm typedoc && pnpm vitepress build docs",
+    "docs:build": "pnpm typedoc && pnpm call cleanDoc && pnpm vitepress build docs",
     "docs:preview": "pnpm vitepress preview docs"
   },
   "keywords": [],

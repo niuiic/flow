@@ -103,8 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-# editor config
-.nvim/
+# editor
+.nvim/session
 
 # documents
 docs/.vitepress/dist
