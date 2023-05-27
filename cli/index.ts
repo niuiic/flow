@@ -1,5 +1,6 @@
 import { cleanDoc } from './doc.js'
 import { exportFn } from './export.js'
+import { lint } from './lint.js'
 
 const jobs: { name: string; fn: (...args: any[]) => any }[] = []
 
@@ -11,6 +12,11 @@ jobs.push({
 jobs.push({
   name: 'cleanDoc',
   fn: cleanDoc
+})
+
+jobs.push({
+  name: 'lint',
+  fn: lint
 })
 
 if (process.argv.length >= 3) {

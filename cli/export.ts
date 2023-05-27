@@ -6,10 +6,9 @@ import { fileName, getRootPath, walkDir } from './fs.js'
 
 /** "path" should be relative to project root */
 export const exportFn = (pathList: string[]) => {
-  const rootPath = getRootPath()
   pathList.forEach((path) => {
     let exportContent = ''
-    walkDir(join(rootPath, path), (path) => {
+    walkDir(join(getRootPath(), path), (path) => {
       if (statSync(path).isFile() && fileName(path) !== 'index') {
         exportContent += `export * from './${fileName(path)!}.js'\\n`
       }
