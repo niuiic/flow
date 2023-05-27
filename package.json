@@ -24,7 +24,7 @@
     "@digitak/esrun": "^3.2.24",
     "@rollup/plugin-typescript": "^11.1.1",
     "@types/jest": "^29.5.1",
-    "@types/node": "^20.2.3",
+    "@types/node": "^20.2.4",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
     "eslint": "^8.41.0",
@@ -34,10 +34,10 @@
     "ts-jest": "^29.1.0",
     "tslib": "^2.5.2",
     "typedoc": "0.24.7",
-    "typedoc-plugin-markdown": "4.0.0-next.12",
+    "typedoc-plugin-markdown": "4.0.0-next.13",
     "typedoc-plugin-missing-exports": "^2.0.0",
     "typedoc-plugin-replace-text": "^2.2.0",
-    "typedoc-vitepress-theme": "1.0.0-next.1",
+    "typedoc-vitepress-theme": "1.0.0-next.2",
     "typescript": "^5.0.4",
     "vitepress": "1.0.0-beta.1"
   }

@@ -1,7 +1,7 @@
 /** @type {import('typedoc').TypeDocOptions} */
 module.exports = {
   $schema: 'https://typedoc.org/schema.json',
-  entryPoints: ['./src/index.ts'],
+  entryPoints: ['./src/functions/lazy/index.ts', './src/functions/strict/index.ts'],
   plugin: [
     'typedoc-plugin-markdown',
     'typedoc-vitepress-theme',

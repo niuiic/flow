@@ -9,7 +9,7 @@ const fixedItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem
       if (v.link === null && (!v.items || v.items.length === 0)) {
         return false
       }
-      if (existedItems.find((v2) => v2.text === v.text && v2.link === v.link)) {
+      if (existedItems.find((v2) => v2.text === v.text && v2.link === v.link && v2.link !== null)) {
         return false
       }
       existedItems.push({
