@@ -4,8 +4,7 @@ import { join } from 'path'
 import { fileName, getRootPath, walkDir } from './fs.js'
 
 const eslint = () => {
-  const res = execSync('pnpm eslint -f unix --ext .ts .')
-  const error = res.toString()
+  const error = execSync(`pnpm eslint -f unix --ext .ts ${getRootPath()}`).toString()
   if (error !== '') {
     throw new Error(error)
   }
@@ -36,7 +35,25 @@ const checkTests = () => {
   }
 }
 
+const checkTs = () => {
+  const error = execSync(`pnpm tsc -p ${join(getRootPath(), 'tsconfig.json')} --noEmit`).toString()
+  if (error !== '') {
+    throw new Error(error)
+  }
+}
+
+const jobs = [eslint, checkTs, checkTests]
+
 export const lint = () => {
-  eslint()
-  checkTests()
+  const errors: string[] = []
+  jobs.forEach((job) => {
+    try {
+      job()
+    } catch (err) {
+      errors.push(err as string)
+    }
+  })
+  if (errors.length > 0) {
+    throw new Error(errors.join('\n\n'))
+  }
 }
