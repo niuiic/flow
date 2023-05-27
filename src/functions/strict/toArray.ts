@@ -23,7 +23,7 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
  * ) // [12, 14]
  * ```
  *
- * {@link #Repo/tests/functions/strict/size.spec.ts | More examples}
+ * {@link #Repo/tests/functions/strict/toArray.spec.ts | More examples}
  */
 function toArray<A extends UniversalIterable>(iterable: A): ArrayReturnType<A>
 

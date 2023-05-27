@@ -1,5 +1,4 @@
-import { toArray } from 'src/functions/strict/toArray.js'
-import { toAsync } from 'src/index.js'
+import { toArray, toAsync } from 'src/index.js'
 
 describe('toAsync', () => {
   describe('sync', () => {
