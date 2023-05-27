@@ -21,7 +21,7 @@ const checkTests = () => {
     if (statSync(path).isDirectory()) {
       return
     }
-    if (fileName(path) === 'index') {
+    if (['index', 'utils'].includes(fileName(path)!)) {
       return
     }
     const relativePath = path.slice(sourceDir.length + 1)
