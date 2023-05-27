@@ -7,5 +7,7 @@ elif [ "$1" = "test" ]; then
 elif [ "$1" = "doc" ]; then
 	pnpm docs:build
 elif [ "$1" = "export" ]; then
-	pnpm esrun cli export src/functions/lazy src/functions/strict
+	pnpm call export src/functions/lazy src/functions/strict
+elif [ "$1" = "lint" ]; then
+	pnpm lint
 fi
