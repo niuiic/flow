@@ -16,18 +16,19 @@ const checkTests = () => {
   const sourceDir = join(rootPath, 'src/functions')
   const testDir = join(rootPath, 'tests/functions')
   const missingTests: string[] = []
-
-  walkDir(sourceDir, (path) => {
-    if (statSync(path).isDirectory()) {
-      return
-    }
-    if (['index', 'utils'].includes(fileName(path)!)) {
-      return
-    }
-    const relativePath = path.slice(sourceDir.length + 1)
-    if (!existsSync(join(testDir, relativePath.replace('.ts', '.spec.ts')))) {
-      missingTests.push(relativePath)
-    }
+  ;[(join(sourceDir, 'lazy'), join(sourceDir, 'strict'))].forEach((dir) => {
+    walkDir(dir, (path) => {
+      if (statSync(path).isDirectory()) {
+        return
+      }
+      if (fileName(path) === 'index') {
+        return
+      }
+      const relativePath = path.slice(sourceDir.length + 1)
+      if (!existsSync(join(testDir, relativePath.replace('.ts', '.spec.ts')))) {
+        missingTests.push(relativePath)
+      }
+    })
   })
 
   if (missingTests.length > 0) {
