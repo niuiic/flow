@@ -15,7 +15,7 @@ const checkTests = () => {
   const sourceDir = join(rootPath, 'src/functions')
   const testDir = join(rootPath, 'tests/functions')
   const missingTests: string[] = []
-  ;[(join(sourceDir, 'lazy'), join(sourceDir, 'strict'))].forEach((dir) => {
+  ;[join(sourceDir, 'lazy'), join(sourceDir, 'strict')].forEach((dir) => {
     walkDir(dir, (path) => {
       if (statSync(path).isDirectory()) {
         return

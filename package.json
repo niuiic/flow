@@ -13,8 +13,7 @@
     "lint": "pnpm call lint",
     "docs:dev": "pnpm vitepress dev docs",
     "docs:build": "pnpm typedoc && pnpm call cleanDoc && pnpm vitepress build docs",
-    "docs:preview": "pnpm vitepress preview docs",
-    "prepare": "pnpm husky install"
+    "docs:preview": "pnpm vitepress preview docs"
   },
   "keywords": [],
   "author": "niuiic",
