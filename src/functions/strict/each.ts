@@ -28,10 +28,12 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  * {@link #Repo/tests/functions/strict/each.spec.ts | More examples}
  */
 function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
-function each<A, R = unknown>(fn: (args: Immutable<A>) => R): (iterable: Iterable<A>) => void
 
 function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R, iterable: AsyncIterable<A>): Promise<void>
-function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R): (iterable: AsyncIterable<A>) => Promise<void>
+
+function each<A, R = unknown>(
+  fn: (args: Immutable<Awaited<A>>) => R
+): (iterable: UniversalIterable<A>) => IterableReturnValue<UniversalIterable<A>, void>
 
 function each<A extends UniversalIterable, R>(
   fn: (args: Immutable<UniversalIterableItem<A>>) => R,
