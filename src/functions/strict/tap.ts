@@ -3,7 +3,7 @@ import { Immutable } from 'src/types/immutable.js'
 import { isPromise } from 'util/types'
 
 /**
- * Invoke an interceptor and return the original value.
+ * Invokes an interceptor and return the original value.
  *
  * @example
  * ```ts
