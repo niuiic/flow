@@ -1,4 +1,4 @@
-import { IterableReturnValue, UniversalIterable } from 'src/types/iterable.js'
+import { IterableReturnValue, UniversalIterable } from '../../types/iterable.js'
 import { range } from '../lazy/range.js'
 import { isAsyncIterable, isIterable } from '../utils.js'
 
