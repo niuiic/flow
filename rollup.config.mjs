@@ -9,7 +9,7 @@ export default {
   plugins: [
     typescript({
       sourceMap: false,
-      exclude: ['./tests/**/*.spec.ts']
+      exclude: ['./tests/**/*.spec.ts', './cli/**/*.ts']
     })
   ]
 }

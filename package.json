@@ -17,7 +17,12 @@
   },
   "keywords": [],
   "author": "niuiic",
+  "homepage": "https://github.com/niuiic/flow",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@digitak/esrun": "^3.2.24",
     "@rollup/plugin-typescript": "^11.1.1",
