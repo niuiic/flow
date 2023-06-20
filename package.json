@@ -1,5 +1,5 @@
 {
-  "name": "@flow/core",
+  "name": "@niuiic/flow",
   "version": "0.1.0",
   "description": "A functional library for TypeScript/JavaScript",
   "main": "dist/index.js",
