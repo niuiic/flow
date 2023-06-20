@@ -1,4 +1,3 @@
-import { Immutable } from 'src/types/immutable.js'
 import { IteratorReturnValue, UniversalIterable } from 'src/types/iterable.js'
 import { tap } from '../strict/tap.js'
 import { isAsyncIterable, isIterable } from '../utils.js'
@@ -30,14 +29,14 @@ import { map } from './map.js'
  *
  * {@link #Repo/tests/functions/lazy/peek.spec.ts | More examples}
  */
-function peek<A>(fn: (args: Immutable<A>) => unknown, iterable: Iterable<A>): IterableIterator<A>
-function peek<A>(fn: (args: Immutable<A>) => unknown, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
+function peek<A>(fn: (args: A) => unknown, iterable: Iterable<A>): IterableIterator<A>
+function peek<A>(fn: (args: A) => unknown, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
 function peek<A>(
-  fn: (args: Immutable<A>) => unknown
+  fn: (args: A) => unknown
 ): (iterable: UniversalIterable<A>) => IteratorReturnValue<UniversalIterable<A>>
 
 function peek<A>(
-  fn: (args: Immutable<A>) => unknown,
+  fn: (args: A) => unknown,
   iterable?: UniversalIterable<A>
 ):
   | IteratorReturnValue<UniversalIterable<A>>

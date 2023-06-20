@@ -1,6 +1,5 @@
 import { call, isAsyncIterable, isIterable } from 'src/functions/utils.js'
 import { AnyFunction, FixedPromise, MaybePromise } from 'src/types/basic.js'
-import { Immutable } from 'src/types/immutable.js'
 import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
 
 type FnReturenValue<A extends UniversalIterable, R = A> = A extends AsyncIterable<unknown> ? MaybePromise<R> : R
@@ -44,35 +43,35 @@ function reduce<A extends readonly [], R>(fn: AnyFunction, initialRes: R, iterab
 
 // same type for args and return value
 function reduce<A extends UniversalIterable>(
-  fn: (prevRes: Immutable<PrevRes<A>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A>,
+  fn: (prevRes: PrevRes<A>, args: UniversalIterableItem<A>) => FnReturenValue<A>,
   iterable: A
 ): IterableReturnValue<A>
 function reduce<A extends UniversalIterable>(
-  fn: (prevRes: Immutable<PrevRes<A>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A>
+  fn: (prevRes: PrevRes<A>, args: UniversalIterableItem<A>) => FnReturenValue<A>
 ): (iterable: A) => IterableReturnValue<A>
 
 // different type for args and return value
 function reduce<A extends UniversalIterable, R>(
-  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>,
+  fn: (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => FnReturenValue<A, R>,
   iterable: A
 ): IterableReturnValue<A, R>
 function reduce<A extends UniversalIterable, R>(
-  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>
+  fn: (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => FnReturenValue<A, R>
 ): (iterable: A) => IterableReturnValue<A, R>
 
 // with initialRes
 function reduce<A extends UniversalIterable, R>(
-  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>,
+  fn: (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => FnReturenValue<A, R>,
   initialRes: R,
   iterable: A
 ): IterableReturnValue<A, R>
 function reduce<A extends UniversalIterable, R>(
-  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => FnReturenValue<A, R>,
+  fn: (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => FnReturenValue<A, R>,
   initialRes: R
 ): (iterable: A) => IterableReturnValue<A, R>
 
 function reduce<A extends UniversalIterable, R>(
-  fn: (prevRes: Immutable<PrevRes<A, R>>, args: Immutable<UniversalIterableItem<A>>) => R,
+  fn: (prevRes: PrevRes<A, R>, args: UniversalIterableItem<A>) => R,
   initialResOrIterable?: MaybePromise<R> | A,
   iterable?: A
 ): MaybePromise<R | undefined> | ((iterable: A) => IterableReturnValue<A, R>) {

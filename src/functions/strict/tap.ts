@@ -1,5 +1,4 @@
 import { FixedPromise, MaybePromise } from 'src/types/basic.js'
-import { Immutable } from 'src/types/immutable.js'
 import { isPromise } from 'util/types'
 
 /**
@@ -16,13 +15,11 @@ import { isPromise } from 'util/types'
  *
  * {@link #Repo/tests/functions/strict/tap.spec.ts | More examples}
  */
-function tap<A, R>(fn: (args: Immutable<Awaited<A>>) => R, args: A): A extends Promise<unknown> ? FixedPromise<A> : A
+function tap<A, R>(fn: (args: Awaited<A>) => R, args: A): A extends Promise<unknown> ? FixedPromise<A> : A
 
-function tap<A, R>(
-  fn: (args: Immutable<Awaited<A>>) => R
-): (args: A) => A extends Promise<unknown> ? FixedPromise<A> : A
+function tap<A, R>(fn: (args: Awaited<A>) => R): (args: A) => A extends Promise<unknown> ? FixedPromise<A> : A
 
-function tap<A, R>(fn: (args: Immutable<Awaited<A>>) => R, args?: A): MaybePromise<A> | ((args: A) => MaybePromise<A>) {
+function tap<A, R>(fn: (args: Awaited<A>) => R, args?: A): MaybePromise<A> | ((args: A) => MaybePromise<A>) {
   if (args === undefined) {
     return (args: A) => tap(fn, args)
   }

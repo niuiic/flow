@@ -1,5 +1,4 @@
 import { isAsyncIterable, isIterable, isPromise } from 'src/functions/utils.js'
-import { Immutable } from 'src/types/immutable.js'
 import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/iterable.js'
 
 function sync<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void {
@@ -27,16 +26,16 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  *
  * {@link #Repo/tests/functions/strict/each.spec.ts | More examples}
  */
-function each<A, R = unknown>(fn: (args: Immutable<A>) => R, iterable: Iterable<A>): void
+function each<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void
 
-function each<A, R = unknown>(fn: (args: Immutable<Awaited<A>>) => R, iterable: AsyncIterable<A>): Promise<void>
+function each<A, R = unknown>(fn: (args: Awaited<A>) => R, iterable: AsyncIterable<A>): Promise<void>
 
 function each<A, R = unknown>(
-  fn: (args: Immutable<Awaited<A>>) => R
+  fn: (args: Awaited<A>) => R
 ): (iterable: UniversalIterable<A>) => IterableReturnValue<UniversalIterable<A>, void>
 
 function each<A extends UniversalIterable, R>(
-  fn: (args: Immutable<UniversalIterableItem<A>>) => R,
+  fn: (args: UniversalIterableItem<A>) => R,
   iterable?: A
 ): void | Promise<void> | ((iterable: A) => IterableReturnValue<A, void>) {
   type FixedFn = <T1, T2>(args: T1) => T2
