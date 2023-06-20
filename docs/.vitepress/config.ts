@@ -29,7 +29,6 @@ const fixedItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem
     })
 
 export default defineConfig({
-  base: '/flow/',
   title: 'Flow',
   description: 'Flow',
   themeConfig: {
