@@ -9,7 +9,7 @@
     "dist"
   ],
   "engines": {
-    "node": "20"
+    "node": ">=16"
   },
   "scripts": {
     "build": "pnpm tsc",
