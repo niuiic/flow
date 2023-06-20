@@ -14,6 +14,7 @@ export type IsUnion<T, A = T> = T extends T ? ([A] extends [T] ? false : true) :
 
 export type IsTuple<T> = [T] extends [any[]] ? (number extends T['length'] ? false : true) : false
 
+/** Expand nested type deeply */
 export type Expand<T, Ignore = never> = T extends T
   ? T extends Ignore
     ? T

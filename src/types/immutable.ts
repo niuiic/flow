@@ -10,6 +10,7 @@ type ImmutableTuple<T, Ignore = never> = T extends [infer First, ...infer Rest]
     : readonly [Immutable<First, Ignore>, ...ImmutableTuple<Rest, Ignore>]
   : never
 
+/** Make types to readonly, work recursively */
 export type Immutable<T, Ignore = never> = T extends T
   ? T extends Primitive | AnyFunction | Ignore
     ? T
