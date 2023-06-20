@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A functional library for TypeScript/JavaScript",
   "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "pnpm tsc",
@@ -15,17 +16,25 @@
     "docs:build": "pnpm typedoc && pnpm call cleanDoc && pnpm vitepress build docs",
     "docs:preview": "pnpm vitepress preview docs"
   },
-  "keywords": [],
   "files": [
-    "dist/*"
+    "dist/",
+    "tsconfig*.json"
   ],
   "author": "niuiic",
-  "homepage": "https://github.com/niuiic/flow",
+  "homepage": "https://niuiic.github.io/flow",
   "license": "MIT",
-  "repository": "https://github.com/niuiic/flow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niuiic/flow.git"
+  },
+  "keywords": [
+    "fp",
+    "lazy",
+    "concurrency"
+  ],
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
     "@digitak/esrun": "^3.2.24",
