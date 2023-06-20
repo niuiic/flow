@@ -19,6 +19,7 @@
   "author": "niuiic",
   "homepage": "https://github.com/niuiic/flow",
   "license": "MIT",
+  "repository": "https://github.com/niuiic/flow",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
