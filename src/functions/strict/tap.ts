@@ -1,5 +1,5 @@
 import { FixedPromise, MaybePromise } from 'src/types/basic.js'
-import { isPromise } from 'util/types'
+import { isPromise } from '../utils.js'
 
 /**
  * Invokes an interceptor and return the original value.

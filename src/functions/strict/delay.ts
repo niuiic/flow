@@ -1,5 +1,5 @@
 import { FixedPromise } from 'src/types/basic.js'
-import { isPromise } from 'util/types'
+import { isPromise } from '../utils.js'
 
 /**
  * Delay the `value` by `wait` time.

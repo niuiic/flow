@@ -1,6 +1,5 @@
 import { IteratorReturnValue, UniversalIterable } from 'src/types/iterable.js'
-import { isPromise } from 'util/types'
-import { isAsyncIterable, isIterable } from '../utils.js'
+import { isAsyncIterable, isIterable, isPromise } from '../utils.js'
 
 function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R> {
   const iterator = iterable[Symbol.iterator]()

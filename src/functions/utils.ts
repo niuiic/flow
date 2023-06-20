@@ -1,7 +1,7 @@
 import { AnyFunction, FixedPromise } from 'src/types/basic.js'
 import { Iter } from 'src/types/iterable.js'
 
-export function isPromise<A>(args: Promise<A> | A): args is FixedPromise<A> {
+export function isPromise<A>(args: unknown): args is FixedPromise<A> {
   if (args instanceof Promise) {
     return true
   }
