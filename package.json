@@ -16,6 +16,9 @@
     "docs:preview": "pnpm vitepress preview docs"
   },
   "keywords": [],
+  "files": [
+    "dist/*"
+  ],
   "author": "niuiic",
   "homepage": "https://github.com/niuiic/flow",
   "license": "MIT",
