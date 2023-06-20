@@ -15,8 +15,6 @@ elif [ "$1" = "export" ]; then
 elif [ "$1" = "lint" ]; then
 	pnpm lint
 elif [ "$1" = "package" ]; then
-	if [ -f ./dist ]; then
-		rm -rf ./dist
-	fi
+	rm -rf ./dist
 	pnpm package
 fi
