@@ -20,7 +20,7 @@
     "docs:preview": "pnpm vitepress preview docs"
   },
   "author": "niuiic",
-  "homepage": "https://niuiic.github.io/flow",
+  "homepage": "https://flow.niuiic.com",
   "license": "MIT",
   "repository": {
     "type": "git",
