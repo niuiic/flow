@@ -1,3 +1,5 @@
+set -eE
+
 if [ "$1" = "run" ]; then
 	pnpm start
 elif [ "$1" = "build" ]; then
@@ -12,4 +14,9 @@ elif [ "$1" = "export" ]; then
 	pnpm call export src/functions/lazy src/functions/strict
 elif [ "$1" = "lint" ]; then
 	pnpm lint
+elif [ "$1" = "package" ]; then
+	if [ -f ./dist ]; then
+		rm -rf ./dist
+	fi
+	pnpm package
 fi

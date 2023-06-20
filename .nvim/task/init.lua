@@ -80,3 +80,14 @@ overseer.register_template({
 		}
 	end,
 })
+
+overseer.register_template({
+	name = "package",
+	builder = function()
+		return {
+			cmd = { scriptPath },
+			args = { "package" },
+			components = { "on_exit_set_status", "on_complete_notify" },
+		}
+	end,
+})
