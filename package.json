@@ -1,6 +1,6 @@
 {
   "name": "@niuiic/flow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A functional library for TypeScript/JavaScript",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
