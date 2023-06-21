@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "pnpm tsc",
-    "package": "pnpm rollup -c rollup.config.mjs && cp package.json dist/cjs && sed -i '/\"type\": \"module\",/d' dist/cjs/package.json",
+    "package": "pnpm rollup -c rollup.config.mjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
     "release": "release-it",
     "call": "pnpm esrun cli",
     "test": "pnpm jest",
