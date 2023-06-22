@@ -91,3 +91,14 @@ overseer.register_template({
 		}
 	end,
 })
+
+overseer.register_template({
+	name = "clean",
+	builder = function()
+		return {
+			cmd = { scriptPath },
+			args = { "clean" },
+			components = { "on_exit_set_status", "on_complete_notify" },
+		}
+	end,
+})

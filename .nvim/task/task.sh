@@ -17,4 +17,6 @@ elif [ "$1" = "lint" ]; then
 elif [ "$1" = "package" ]; then
 	rm -rf ./dist
 	pnpm package
+elif [ "$1" = "clean" ]; then
+	rm -rf ./dist ./coverage
 fi
