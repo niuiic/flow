@@ -1,4 +1,4 @@
-import { apply } from 'src/functions/strict/apply.js'
+import { apply } from 'src/index.js'
 
 describe('apply', () => {
   it('should return a function if "args" is not passed', () => {

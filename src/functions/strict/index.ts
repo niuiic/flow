@@ -1,5 +1,6 @@
 export * from './add.js'
 export * from './always.js'
+export * from './apply.js'
 export * from './consume.js'
 export * from './delay.js'
 export * from './each.js'
