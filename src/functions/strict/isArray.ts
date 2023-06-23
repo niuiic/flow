@@ -1,7 +1,7 @@
 import { Include } from '../../types/include.js'
 
 /**
- * Returns true if `args` is an Array.
+ * Check whether `args` is an array.
  *
  * @example
  * ```ts
