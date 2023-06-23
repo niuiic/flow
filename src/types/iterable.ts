@@ -1,4 +1,4 @@
-import { FixedPromise } from './basic.js'
+import { FixedPromise } from './promise.js'
 
 /** Item of Iterable or AsyncIterable */
 export type UniversalIterableItem<T extends Iterable<unknown> | AsyncIterable<unknown>> = T extends Iterable<infer U>
