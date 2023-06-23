@@ -28,7 +28,7 @@ async function async(iterable: AsyncIterable<number>) {
 }
 
 /**
- * return the largest item of the iterable/asyncIterable
+ * Return the largest item of the iterable/asyncIterable
  *
  * @example
  * ```ts
