@@ -1,4 +1,4 @@
-import { FixedPromise, MaybePromise } from '../../types/basic.js'
+import { FixedPromise, MaybePromise } from '../../types/index.js'
 import { isPromise } from '../utils.js'
 
 /**

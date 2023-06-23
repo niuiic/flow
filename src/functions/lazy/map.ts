@@ -1,4 +1,4 @@
-import { IteratorReturnValue, UniversalIterable } from '../../types/iterable.js'
+import { IteratorReturnValue, UniversalIterable } from '../../types/index.js'
 import { isAsyncIterable, isIterable, isPromise } from '../utils.js'
 
 function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R> {

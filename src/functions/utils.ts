@@ -1,5 +1,4 @@
-import { FixedPromise } from '../types/basic.js'
-import { Iter } from '../types/iterable.js'
+import { FixedPromise, Iter } from '../types/index.js'
 
 export function isPromise<A>(args: unknown): args is FixedPromise<A> {
   if (args instanceof Promise) {

@@ -1,4 +1,4 @@
-import { IterableReturnValue, UniversalIterable } from '../../types/iterable.js'
+import { IterableReturnValue, UniversalIterable } from '../../types/index.js'
 import { isAsyncIterable, isIterable } from '../utils.js'
 import { each } from './each.js'
 

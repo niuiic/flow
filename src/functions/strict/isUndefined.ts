@@ -1,4 +1,4 @@
-import { Include } from '../../types/basic.js'
+import { Include } from '../../types/index.js'
 
 /**
  * Check whether `args` is undefined.
