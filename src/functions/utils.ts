@@ -1,4 +1,4 @@
-import { AnyFunction, FixedPromise } from '../types/basic.js'
+import { FixedPromise } from '../types/basic.js'
 import { Iter } from '../types/iterable.js'
 
 export function isPromise<A>(args: unknown): args is FixedPromise<A> {
@@ -31,16 +31,4 @@ export function call<A, F extends (args: Awaited<A>) => any>(
   fn: F
 ): A extends Promise<unknown> ? FixedPromise<ReturnType<F>> : ReturnType<F> {
   return isPromise(args) ? args.then(fn as any) : fn(args as any)
-}
-
-export function isFunction(args: unknown): args is AnyFunction {
-  return typeof args === 'function'
-}
-
-export function isNumber(args: unknown): args is number {
-  return typeof args === 'number'
-}
-
-export function isString(args: unknown): args is string {
-  return typeof args === 'string'
 }

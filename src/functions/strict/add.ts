@@ -1,5 +1,7 @@
-import { isNumber, isPromise, isString } from '../../functions/utils.js'
+import { isPromise } from '../../functions/utils.js'
 import { FixedPromise, MaybePromise } from '../../types/basic.js'
+import { isNumber } from './isNumber.js'
+import { isString } from './isString.js'
 
 /** A or B is async ? FixedPromise<T> : Awaited<T> */
 type AddReturnValue<T, A extends T, B extends T> = [A] extends [FixedPromise<T>]
