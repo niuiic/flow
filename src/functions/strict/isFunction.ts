@@ -1,5 +1,5 @@
-import { AnyFunction } from 'src/types/basic.js'
-import { Include } from '../../types/include.js'
+import { AnyFunction } from '../../types/function.js'
+import { Include } from '../../types/basic.js'
 
 /**
  * Check whether `args` is a function.

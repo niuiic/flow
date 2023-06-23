@@ -1,4 +1,4 @@
-import { Include } from '../../types/include.js'
+import { Include } from '../../types/basic.js'
 
 /**
  * Check whether `args` is an array.

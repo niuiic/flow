@@ -1,4 +1,4 @@
-import { Include } from '../../types/include.js'
+import { Include } from '../../types/basic.js'
 import { isNull } from './isNull.js'
 import { isUndefined } from './isUndefined.js'
 

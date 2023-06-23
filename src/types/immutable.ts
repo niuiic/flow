@@ -1,4 +1,5 @@
-import { AnyFunction, IsTuple, Primitive } from './basic.js'
+import { IsTuple, Primitive } from './basic.js'
+import { AnyFunction } from './function.js'
 
 type ImmutableArray<T, Ignore = never> = ReadonlyArray<Immutable<T, Ignore>>
 type ImmutableMap<K, V, Ignore = never> = ReadonlyMap<Immutable<K, Ignore>, Immutable<V, Ignore>>
