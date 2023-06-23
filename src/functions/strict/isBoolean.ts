@@ -1,12 +1,12 @@
 import { Include } from '../../types/include.js'
 
 /**
- * Returns true if `a` is an Array.
+ * Check whether `args` is boolean.
  *
  * @example
  * ```ts
- * isArray([1, 2, 3]); // true
- * isArray(2); // false
+ * isArray([1, 2, 3]); // false
+ * isArray(false); // true
  * ```
  *
  * {@link #Repo/tests/functions/strict/isBoolean.spec.ts | More examples}
