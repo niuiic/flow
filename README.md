@@ -19,7 +19,7 @@ A functional library for TypeScript/JavaScript.
 
 ## Documentation
 
-[Document Online](https://niuiic.github.io/flow)
+[Document Online](https://flow.niuiic.com)
 
 Generate documents by `pnpm docs:build`.
 
