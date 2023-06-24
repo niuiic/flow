@@ -1,4 +1,4 @@
-import { AnyFunction, Include } from '../../types/index.js'
+import { AnyFunction, Include } from 'src/types/index.js'
 
 /**
  * Check whether `args` is a function.

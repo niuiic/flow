@@ -1,4 +1,4 @@
-import { AnyFunction } from '../../types/index.js'
+import { AnyFunction } from 'src/types/index.js'
 
 /**
  * Apply function `fn` to the arguments list `args`.

@@ -1,4 +1,4 @@
-import { isPromise } from '../../functions/utils.js'
+import { isPromise } from '../utils.js'
 
 /**
  * Returns AsyncIterable, it is used when you want to handle Promise values inside Iterable.

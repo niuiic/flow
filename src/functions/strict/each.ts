@@ -1,5 +1,5 @@
-import { isAsyncIterable, isIterable, isPromise } from '../../functions/utils.js'
-import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from '../../types/index.js'
+import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/index.js'
+import { isAsyncIterable, isIterable, isPromise } from '../utils.js'
 
 function sync<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void {
   for (const v of iterable) {

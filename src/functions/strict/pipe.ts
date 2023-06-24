@@ -1,5 +1,5 @@
-import { call } from '../../functions/utils.js'
-import { PipeReturnValue } from '../../types/index.js'
+import { PipeReturnValue } from 'src/types/index.js'
+import { call } from '../utils.js'
 import { reduce } from './reduce.js'
 
 /**

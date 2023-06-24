@@ -1,5 +1,5 @@
-import { isPromise } from '../../functions/utils.js'
-import { FixedPromise, MaybePromise } from '../../types/index.js'
+import { FixedPromise, MaybePromise } from 'src/types/index.js'
+import { isPromise } from '../utils.js'
 import { isNumber } from './isNumber.js'
 import { isString } from './isString.js'
 
