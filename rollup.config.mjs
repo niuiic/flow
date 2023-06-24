@@ -1,7 +1,9 @@
 import typescript from '@rollup/plugin-typescript'
 import path from 'path'
 import { defineConfig } from 'rollup'
+import dts from 'rollup-plugin-dts'
 import pkg from './package.json' assert { type: 'json' }
+import tsConfig from './tsconfig.json' assert { type: 'json' }
 
 export default defineConfig([
   {
@@ -18,7 +20,6 @@ export default defineConfig([
     plugins: [
       typescript({
         outDir: path.dirname(pkg.module),
-        declarationDir: path.dirname(pkg.module),
         exclude: ['./tests/**/*.spec.ts', './cli/**/*.ts']
       })
     ]
@@ -37,8 +38,26 @@ export default defineConfig([
     plugins: [
       typescript({
         outDir: path.dirname(pkg.main),
-        declarationDir: path.dirname(pkg.main),
         exclude: ['./tests/**/*.spec.ts', './cli/**/*.ts']
+      })
+    ]
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      dir: path.dirname(pkg.types),
+      name: pkg.name,
+      format: 'es',
+      exports: 'named',
+      preserveModules: true,
+      preserveModulesRoot: 'src'
+    },
+    plugins: [
+      dts({
+        compilerOptions: {
+          baseUrl: tsConfig.compilerOptions.baseUrl,
+          paths: tsConfig.compilerOptions.paths
+        }
       })
     ]
   }

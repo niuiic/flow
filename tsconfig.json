@@ -13,8 +13,9 @@
     "lib": ["ESNext"],
     "skipLibCheck": true,
     "baseUrl": ".",
-    "noErrorTruncation": true,
-    "declaration": true,
-    "declarationDir": "./dist/types"
+    "paths": {
+      "src/*": ["src/*"]
+    },
+    "noErrorTruncation": true
   }
 }
