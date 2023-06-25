@@ -15,17 +15,16 @@ import { isPromise } from '../utils.js'
  */
 function delay(wait: number): Promise<void>
 
-function delay<A>(wait: number, value: A): A extends Promise<unknown> ? never : FixedPromise<A>
+function delay<A>(wait: number, value: A): FixedPromise<A>
 
 function delay<A>(wait: number, value?: A): Promise<A | undefined> {
   return new Promise((resolve, reject) => {
     if (isPromise(value)) {
       value.catch(reject)
-
-      setTimeout(() => {
-        resolve(value)
-      }, wait)
     }
+    setTimeout(() => {
+      resolve(value)
+    }, wait)
   })
 }
 
