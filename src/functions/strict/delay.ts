@@ -21,6 +21,7 @@ function delay<A>(wait: number, value?: A): Promise<A | undefined> {
   return new Promise((resolve, reject) => {
     if (isPromise(value)) {
       value.catch(reject)
+      return
     }
     setTimeout(() => {
       resolve(value)
