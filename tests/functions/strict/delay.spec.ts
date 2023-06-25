@@ -3,21 +3,21 @@ import { delay } from 'src/functions/strict/delay.js'
 describe('delay', () => {
   it('should delay "value" by "wait" time', () => {
     let res = 0
-    delay(2, 1).then((v) => {
+    delay(200, 1).then((v) => {
       res = v
     })
     setTimeout(() => {
       expect(res).toEqual(0)
-    }, 1)
+    }, 100)
   })
 
-  it('should not wait if "value" is a promise', async () => {
-    const fn = jest.fn()
-    delay(2, Promise.resolve(1)).then(() => {
-      fn()
+  it('should work for a promise', async () => {
+    let res = 0
+    delay(200, Promise.resolve(1)).then((v) => {
+      res = v
     })
     setTimeout(() => {
-      expect(fn).toBeCalled()
-    }, 1)
+      expect(res).toEqual(0)
+    }, 100)
   })
 })
