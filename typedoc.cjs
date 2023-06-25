@@ -15,12 +15,8 @@ module.exports = {
         replace: 'https://github.com/niuiic/flow/blob/main'
       },
       {
-        pattern: '<',
-        replace: '&lt;'
-      },
-      {
-        pattern: '>',
-        replace: '&gt;'
+        pattern: '<(.*)>',
+        replace: '&lt;$1&gt;'
       },
       {
         pattern: '&lt;a(.*)&gt;(.*)&lt;\\/a&gt;',

@@ -39,6 +39,7 @@ export function isConcurrent(concurrent: unknown): concurrent is Concurrent {
  *   each(console.log), // log 1, 2, 3, 4, 5, 6
  * ); // takes 6 seconds
  * // Tasks start sequentially, each task starts after the previous one finished.
+ * ```
  *
  * {@link #Repo/tests/functions/lazy/concurrent.spec.ts | More examples}
  */
