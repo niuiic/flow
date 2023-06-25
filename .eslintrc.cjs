@@ -28,6 +28,7 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_'
       }
     ],
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-empty-function': 'off'
   }
 }
