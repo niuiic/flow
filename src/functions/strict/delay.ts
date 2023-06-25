@@ -4,8 +4,6 @@ import { isPromise } from '../utils.js'
 /**
  * Delay the `value` by `wait` time.
  *
- * `value` should not be a promise.
- *
  * @example
  * ```ts
  * console.log(await delay(1000, 'hello')) // print hello after 1s
@@ -21,7 +19,6 @@ function delay<A>(wait: number, value?: A): Promise<A | undefined> {
   return new Promise((resolve, reject) => {
     if (isPromise(value)) {
       value.catch(reject)
-      return
     }
     setTimeout(() => {
       resolve(value)
