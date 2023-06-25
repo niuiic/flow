@@ -1,4 +1,4 @@
-import { each, peek, pipe, toAsync } from 'src/index.js'
+import { consume, peek, pipe, toAsync } from 'src/index.js'
 
 describe('peek', () => {
   describe('sync', () => {
@@ -9,7 +9,7 @@ describe('peek', () => {
         peek((v) => {
           sum = sum + v
         }),
-        each(console.log)
+        consume(Infinity)
       )
       expect(sum).toEqual(10)
     })
@@ -24,7 +24,7 @@ describe('peek', () => {
         peek((v) => {
           sum = sum + v
         }),
-        each(console.log)
+        consume(Infinity)
       ).then(() => {
         expect(sum).toEqual(10)
       })

@@ -7,7 +7,7 @@ describe('isObject', () => {
   })
 
   it('should return true if "args" is an object', () => {
-    expect(isObject(console.log)).toEqual(true)
+    expect(isObject(() => {})).toEqual(true)
     expect(isObject({})).toEqual(true)
     expect(isObject([1, 2])).toEqual(true)
   })

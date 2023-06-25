@@ -6,6 +6,6 @@ describe('isFunction', () => {
   })
 
   it('should return true if "args" is a function', () => {
-    expect(isFunction(console.log)).toEqual(true)
+    expect(isFunction(() => {})).toEqual(true)
   })
 })

@@ -2,7 +2,7 @@ import { apply } from 'src/index.js'
 
 describe('apply', () => {
   it('should return a function if "args" is not passed', () => {
-    expect(typeof apply(console.log)).toEqual('function')
+    expect(typeof apply(() => {})).toEqual('function')
   })
 
   it('should apply "fn" to "args"', () => {
