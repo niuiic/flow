@@ -40,3 +40,5 @@ export type Append<T extends unknown[], U> = [...T, U]
 export type Prepend<T extends unknown[], U> = [U, ...T]
 
 export type Include<A, B> = A extends B ? A : never
+
+export type Entries<T extends AnyObject, K extends keyof T = keyof T> = K extends K ? [K, T[K]] : never

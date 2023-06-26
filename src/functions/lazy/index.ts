@@ -1,4 +1,5 @@
 export * from './concurrent.js'
+export * from './entries.js'
 export * from './map.js'
 export * from './peek.js'
 export * from './range.js'
