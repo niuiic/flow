@@ -9,7 +9,7 @@ import { AnyFunction, Include } from 'src/types/index.js'
  * isFunction(2); // false
  * ```
  *
- * {@link #Repo/tests/functions/strict/isFunction.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/isFunction.spec.ts | More examples}
  */
 function isFunction<A>(args: A): args is Include<A, AnyFunction> {
   return typeof args === 'function'

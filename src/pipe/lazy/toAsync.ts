@@ -12,7 +12,7 @@ import { isPromise } from 'src/utils.js'
  * console.log(res) // 6
  * ```
  *
- * {@link #Repo/tests/functions/lazy/toAsync.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/lazy/toAsync.spec.ts | More examples}
  */
 export function toAsync<T>(args: Iterable<T | Promise<T>>): AsyncIterableIterator<Awaited<T>> {
   const iterator = args[Symbol.iterator]()

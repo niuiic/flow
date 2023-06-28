@@ -10,7 +10,7 @@ import { Include } from 'src/types/index.js'
  * isArray(null); // false
  * ```
  *
- * {@link #Repo/tests/functions/strict/isUndefined.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/isUndefined.spec.ts | More examples}
  */
 function isUndefined<A>(args: A): args is Include<A, undefined> {
   return args === undefined

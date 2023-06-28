@@ -24,7 +24,7 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  * each(console.log, [1, 2, 3]); // log 1, 2, 3
  * ```
  *
- * {@link #Repo/tests/functions/strict/each.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/each.spec.ts | More examples}
  */
 function each<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void
 

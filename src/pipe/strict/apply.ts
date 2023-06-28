@@ -8,7 +8,7 @@ import { AnyFunction } from 'src/types/index.js'
  * apply(Math.max, [1, 2, 3, 4, 5]); // 5
  * ```
  *
- * {@link #Repo/tests/functions/strict/apply.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/apply.spec.ts | More examples}
  */
 function apply<A extends AnyFunction, P extends Parameters<A>>(fn: A, args: P): ReturnType<typeof fn>
 

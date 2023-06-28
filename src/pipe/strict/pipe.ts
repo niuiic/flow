@@ -10,7 +10,7 @@ import { reduce } from './reduce.js'
  * console.log(pipe([1, 2, 3], take(2), max)) // 2
  * ```
  *
- * {@link #Repo/tests/functions/lazy/pipe.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/lazy/pipe.spec.ts | More examples}
  */
 
 function pipe<A1, R>(...args: [initialValue: A1, fn1: (args: Awaited<A1>) => R]): PipeReturnValue<[A1, R]>

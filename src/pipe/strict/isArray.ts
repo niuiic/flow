@@ -9,7 +9,7 @@ import { Include } from 'src/types/index.js'
  * isArray(2); // false
  * ```
  *
- * {@link #Repo/tests/functions/strict/isArray.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/isArray.spec.ts | More examples}
  */
 function isArray<A>(args: A): args is Include<A, unknown[] | Readonly<unknown[]>> {
   return Array.isArray(args)

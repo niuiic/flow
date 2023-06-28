@@ -6,7 +6,7 @@
  * console.log(gt(5, 1)) // true
  * ```
  *
- * {@link #Repo/tests/functions/strict/gt.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/gt.spec.ts | More examples}
  */
 function gt(a: string): (b: string) => boolean
 function gt(a: number): (b: number) => boolean

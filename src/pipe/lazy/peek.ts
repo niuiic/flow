@@ -27,7 +27,7 @@ import { map } from './map.js'
  * }
  * ```
  *
- * {@link #Repo/tests/functions/lazy/peek.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/lazy/peek.spec.ts | More examples}
  */
 function peek<A>(fn: (args: A) => unknown, iterable: Iterable<A>): IterableIterator<A>
 function peek<A>(fn: (args: A) => unknown, iterable: AsyncIterable<A>): AsyncIterableIterator<A>

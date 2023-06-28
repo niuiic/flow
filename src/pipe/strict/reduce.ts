@@ -41,7 +41,7 @@ async function async<A, R>(
  * console.log(reduce((a, b) => a + b, [1, 2, 3, 4])) // 10
  * ```
  *
- * {@link #Repo/tests/functions/strict/reduce.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/reduce.spec.ts | More examples}
  */
 // no item
 function reduce<A extends readonly []>(fn: AnyFunction, iterable: A): undefined

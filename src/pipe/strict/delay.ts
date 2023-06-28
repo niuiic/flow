@@ -9,7 +9,7 @@ import { isPromise } from 'src/utils.js'
  * console.log(await delay(1000, 'hello')) // print hello after 1s
  * ```
  *
- * {@link #Repo/tests/functions/strict/delay.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/delay.spec.ts | More examples}
  */
 function delay(wait: number): Promise<void>
 

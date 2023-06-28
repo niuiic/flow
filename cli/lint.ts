@@ -12,8 +12,8 @@ const eslint = () => {
 
 const checkTests = () => {
   const rootPath = getRootPath()
-  const sourceDir = join(rootPath, 'src/functions')
-  const testDir = join(rootPath, 'tests/functions')
+  const sourceDir = join(rootPath, 'src/pipe')
+  const testDir = join(rootPath, 'tests/pipe')
   const missingTests: string[] = []
   ;[join(sourceDir, 'lazy'), join(sourceDir, 'strict')].forEach((dir) => {
     walkDir(dir, (path) => {

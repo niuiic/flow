@@ -6,7 +6,7 @@
  * console.log(not(undefined)) // true
  * ```
  *
- * {@link #Repo/tests/functions/strict/not.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/not.spec.ts | More examples}
  */
 function not(args: unknown): boolean {
   return !args

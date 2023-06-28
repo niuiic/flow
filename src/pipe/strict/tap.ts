@@ -13,7 +13,7 @@ import { isPromise } from 'src/utils.js'
  * // res2 = {a: 'b'}
  * ```
  *
- * {@link #Repo/tests/functions/strict/tap.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/tap.spec.ts | More examples}
  */
 function tap<A, R>(fn: (args: Awaited<A>) => R, args: A): A extends Promise<unknown> ? FixedPromise<A> : A
 

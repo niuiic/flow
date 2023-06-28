@@ -8,7 +8,7 @@
  * }
  * ```
  *
- * {@link #Repo/tests/functions/lazy/range.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/lazy/range.spec.ts | More examples}
  */
 function range(length: number): IterableIterator<number>
 

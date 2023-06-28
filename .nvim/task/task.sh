@@ -11,7 +11,7 @@ elif [ "$1" = "test-coverage" ]; then
 elif [ "$1" = "doc" ]; then
 	pnpm docs:build
 elif [ "$1" = "export" ]; then
-	pnpm call export src/functions/lazy src/functions/strict src/types
+	pnpm call export src/pipe/lazy src/pipe/strict src/types src/flow
 elif [ "$1" = "lint" ]; then
 	pnpm lint
 elif [ "$1" = "package" ]; then

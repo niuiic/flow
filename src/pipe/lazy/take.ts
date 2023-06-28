@@ -39,7 +39,7 @@ function async<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIter
  * // 1, 2
  * ```
  *
- * {@link #Repo/tests/functions/lazy/take.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/lazy/take.spec.ts | More examples}
  */
 function take<A>(length: number, iterable: Iterable<A>): IterableIterator<A>
 

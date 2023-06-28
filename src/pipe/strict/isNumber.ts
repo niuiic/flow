@@ -9,7 +9,7 @@ import { Include } from 'src/types/index.js'
  * isNumber("a"); // false
  * ```
  *
- * {@link #Repo/tests/functions/strict/isNumber.spec.ts | More examples}
+ * {@link #Repo/tests/pipe/strict/isNumber.spec.ts | More examples}
  */
 function isNumber<A>(args: A): args is Include<A, number> {
   return typeof args === 'number'
