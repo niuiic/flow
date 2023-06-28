@@ -1,7 +1,12 @@
 /** @type {import('typedoc').TypeDocOptions} */
 module.exports = {
   $schema: 'https://typedoc.org/schema.json',
-  entryPoints: ['./src/functions/lazy/index.ts', './src/functions/strict/index.ts', './src/types/index.ts'],
+  entryPoints: [
+    './src/functions/lazy/index.ts',
+    './src/functions/strict/index.ts',
+    './src/types/index.ts',
+    './src/flow/index.ts'
+  ],
   plugin: [
     'typedoc-plugin-markdown',
     'typedoc-vitepress-theme',
