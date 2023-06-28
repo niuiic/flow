@@ -1,6 +1,6 @@
 import { IteratorReturnValue, UniversalIterable } from 'src/types/index.js'
 import { tap } from '../strict/tap.js'
-import { isAsyncIterable, isIterable } from '../utils.js'
+import { isAsyncIterable, isIterable } from 'src/utils.js'
 import { map } from './map.js'
 
 /**

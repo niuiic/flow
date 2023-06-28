@@ -2,10 +2,10 @@
 module.exports = {
   $schema: 'https://typedoc.org/schema.json',
   entryPoints: [
-    './src/functions/lazy/index.ts',
-    './src/functions/strict/index.ts',
-    './src/types/index.ts',
-    './src/flow/index.ts'
+    './src/pipe/lazy/index.ts',
+    './src/pipe/strict/index.ts',
+    './src/flow/index.ts',
+    './src/types/index.ts'
   ],
   plugin: [
     'typedoc-plugin-markdown',

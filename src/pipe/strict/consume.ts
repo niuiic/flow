@@ -1,6 +1,6 @@
 import { IterableReturnValue, UniversalIterable } from 'src/types/index.js'
 import { range } from '../lazy/range.js'
-import { isAsyncIterable, isIterable } from '../utils.js'
+import { isAsyncIterable, isIterable } from 'src/utils.js'
 
 function sync<T>(iterable: Iterable<T>, length: number) {
   const iterator = iterable[Symbol.iterator]()

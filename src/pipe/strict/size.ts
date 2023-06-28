@@ -1,5 +1,5 @@
 import { IterableReturnValue, UniversalIterable } from 'src/types/index.js'
-import { isAsyncIterable, isIterable } from '../utils.js'
+import { isAsyncIterable, isIterable } from 'src/utils.js'
 import { each } from './each.js'
 
 function sync<A extends Iterable<unknown>>(iterable: A) {

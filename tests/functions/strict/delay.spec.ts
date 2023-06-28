@@ -1,4 +1,4 @@
-import { delay } from 'src/functions/strict/delay.js'
+import { delay } from 'src/index.js'
 
 describe('delay', () => {
   it('should delay "value" by "wait" time', () => {

@@ -1,5 +1,5 @@
 import { IteratorResolve, Reject } from 'src/types/index.js'
-import { isAsyncIterable } from '../utils.js'
+import { isAsyncIterable } from 'src/utils.js'
 
 export class Concurrent {
   /** number of concurrency */

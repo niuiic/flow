@@ -1,4 +1,4 @@
-import { AnyObject, Entries } from 'src/index.js'
+import { AnyObject, Entries } from 'src/types/index.js'
 
 function* entries<A extends AnyObject>(args: A): Generator<Entries<A>, void> {
   for (const k in args) {

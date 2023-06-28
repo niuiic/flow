@@ -1,5 +1,5 @@
 import { IteratorReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/index.js'
-import { isAsyncIterable, isIterable } from '..//utils.js'
+import { isAsyncIterable, isIterable } from 'src/utils.js'
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]()

@@ -6,7 +6,7 @@ import {
   UniversalIterable,
   UniversalIterableItem
 } from 'src/types/index.js'
-import { call, isAsyncIterable, isIterable } from '../utils.js'
+import { call, isAsyncIterable, isIterable } from 'src/utils.js'
 
 type FnReturenValue<A extends UniversalIterable, R = A> = A extends AsyncIterable<unknown> ? MaybePromise<R> : R
 type PrevRes<A extends UniversalIterable, R = UniversalIterableItem<A>> = A extends AsyncIterable<unknown>

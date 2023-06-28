@@ -1,5 +1,5 @@
 import { ArrayReturnType, UniversalIterable } from 'src/types/index.js'
-import { isAsyncIterable, isIterable } from '../utils.js'
+import { isAsyncIterable, isIterable } from 'src/utils.js'
 
 async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
   const res: A[] = []

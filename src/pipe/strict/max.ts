@@ -1,5 +1,5 @@
 import { IterableReturnValue } from 'src/types/index.js'
-import { isAsyncIterable, isIterable } from '../utils.js'
+import { isAsyncIterable, isIterable } from 'src/utils.js'
 
 function sync(iterable: Iterable<number>) {
   let max = NaN

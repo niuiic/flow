@@ -1,5 +1,5 @@
-import { isPromise } from 'src/functions/utils.js'
 import { FixedPromise } from 'src/types/index.js'
+import { isPromise } from 'src/utils.js'
 
 class Result<T> {
   private success: boolean
