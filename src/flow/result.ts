@@ -14,7 +14,7 @@ class Result<T> {
     throw new Error('Wrong arguments')
   }
 
-  /** Return data if result is success, or throw an error */
+  /** Return data of result if result is success, or throw an error */
   public unwrap(): T {
     if (this.success) {
       return this.data!
@@ -22,7 +22,7 @@ class Result<T> {
     throw new Error('Result is failure')
   }
 
-  /** Return data if result is success, or return `data` */
+  /** Return data of result if result is success, or return `data` */
   public unwrapOr(data: T) {
     if (this.success) {
       return this.data!
@@ -30,7 +30,7 @@ class Result<T> {
     return data
   }
 
-  /** Return data if result is success, or return the result of `fn` */
+  /** Return data of result if result is success, or return the result of `fn` */
   public unwrapOrElse(fn: () => T): T {
     if (this.success) {
       return this.data!
@@ -45,7 +45,7 @@ class Result<T> {
     }
   }
 
-  /** Replace `data` of result with the result of `fn`, if result is success */
+  /** Return the result of `fn`, if result is success */
   public map<R>(fn: (data: T) => R): Result<R> {
     if (!this.success) {
       return new Result({ err: this.err! })
@@ -53,7 +53,7 @@ class Result<T> {
     return new Result({ data: fn(this.data!) })
   }
 
-  /** Replace `data` of result with the result of `fn`, if result is success, or `data` */
+  /** Return the result of `fn`, if result is success, or `data` */
   public mapOr<R>(fn: (data: T) => R, data: R): Result<R> {
     if (!this.success) {
       return new Result({ data })
@@ -61,7 +61,7 @@ class Result<T> {
     return new Result({ data: fn(this.data!) })
   }
 
-  /** Replace `data` of result with the result of `fn`, if result is success, or the result of `fn2` */
+  /** Return the result of `fn`, if result is success, or the result of `fn2` */
   public mapOrElse<R>(fn: (data: T) => R, fn2: () => R): Result<R> {
     if (!this.success) {
       return new Result({ data: fn2() })
