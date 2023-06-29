@@ -12,23 +12,26 @@ const eslint = () => {
 
 const checkTests = () => {
   const rootPath = getRootPath()
-  const sourceDir = join(rootPath, 'src/pipe')
-  const testDir = join(rootPath, 'tests/pipe')
+  const sourceDir = join(rootPath, 'src')
+  const testDir = join(rootPath, 'tests')
   const missingTests: string[] = []
-  ;[join(sourceDir, 'lazy'), join(sourceDir, 'strict')].forEach((dir) => {
-    walkDir(dir, (path) => {
-      if (statSync(path).isDirectory()) {
-        return
-      }
-      if (fileName(path) === 'index') {
-        return
-      }
-      const relativePath = path.slice(sourceDir.length + 1)
-      if (!existsSync(join(testDir, relativePath.replace('.ts', '.spec.ts')))) {
-        missingTests.push(relativePath)
-      }
+
+  ;['pipe/lazy', 'pipe/strict', 'flow']
+    .map((path) => join(sourceDir, path))
+    .forEach((dir) => {
+      walkDir(dir, (path) => {
+        if (statSync(path).isDirectory()) {
+          return
+        }
+        if (fileName(path) === 'index') {
+          return
+        }
+        const relativePath = path.slice(sourceDir.length + 1)
+        if (!existsSync(join(testDir, relativePath.replace('.ts', '.spec.ts')))) {
+          missingTests.push(relativePath)
+        }
+      })
     })
-  })
 
   if (missingTests.length > 0) {
     throw new Error(`Tests for [${missingTests.join(', ')}] are missing.`)

@@ -32,11 +32,11 @@ class Result<T> {
   }
 
   /** Return data of result if result is success, or return the result of `fn` */
-  public unwrapOrElse(fn: () => T): T {
+  public unwrapOrElse(fn: (err: string) => T): T {
     if (this.success) {
       return this.data!
     }
-    return fn()
+    return fn(this.err!)
   }
 
   /** Return error message if result is failure */
@@ -63,9 +63,9 @@ class Result<T> {
   }
 
   /** Return the result of `fn`, if result is success, or the result of `fn2` */
-  public mapOrElse<R>(fn: (data: T) => R, fn2: () => R): Result<R> {
+  public mapOrElse<R>(fn: (data: T) => R, fn2: (err: string) => R): Result<R> {
     if (!this.success) {
-      return new Result({ data: fn2() })
+      return new Result({ data: fn2(this.err!) })
     }
     return new Result({ data: fn(this.data!) })
   }
