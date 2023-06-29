@@ -3,15 +3,15 @@ layout: home
 
 hero:
   name: Flow
-  text: Help to Coding Flowly
+  text: Coding Flowly
   tagline: A functional library for TypeScript/JavaScript
   image:
     src: /logo.jpeg
     alt: logo
   actions:
     - theme: brand
-      text: Api Document
-      link: /api/index
+      text: Get Started
+      link: /guide/quickstart
     - theme: alt
       text: View on Github
       link: https://github.com/niuiic/flow

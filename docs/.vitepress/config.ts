@@ -30,10 +30,20 @@ const fixedItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem
 
 export default defineConfig({
   title: 'Flow',
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.png' }]],
   description: 'Flow',
   themeConfig: {
-    nav: [{ text: 'API', link: '/api/index' }],
+    siteTitle: 'Flow',
+    logo: '/favicon.png',
+    nav: [
+      { text: 'Guide', link: '/guide/quickstart' },
+      { text: 'API', link: '/api/flow/index' }
+    ],
     sidebar: [
+      {
+        text: 'Guide',
+        items: [{ text: 'Quickstart', link: '/guide/quickstart' }]
+      },
       {
         text: 'API',
         items: fixedItems(apiSidebarItems as unknown as DefaultTheme.SidebarItem[])
