@@ -23,7 +23,7 @@ pnpm add @niuiic/flow
 ## Usage
 
 ::: warning
-no support for es5 now
+No support for es5 now
 :::
 
 ### Import
