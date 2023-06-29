@@ -4,12 +4,23 @@ import { Result, err, ok } from './result.js'
 
 /**
  * Call `fn` if `result` is failure.
+ *
+ * @example
+ * ```ts
+ * const userInfo = (await errThen(queryUserInfo, err(userId))).unwrap() // panic
+ * // with flow
+ * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
+ * ```
+ *
+ * {@link #Repo/tests/flow/errThen.spec.ts | More examples}
  */
-function errThen<T>(fn: (err: string) => unknown, result: Result<T>): MaybePromise<Result<T>>
-function errThen<T>(fn: (err: string) => unknown): (result: Result<T>) => MaybePromise<Result<T>>
+function errThen<T>(fn: (err: string) => Promise<unknown>, result: Result<T>): MaybePromise<Result<T>>
+function errThen<T>(fn: (err: string) => Promise<unknown>): (result: Result<T>) => MaybePromise<Result<T>>
+function errThen<T>(fn: (err: string) => unknown, result: Result<T>): Result<T>
+function errThen<T>(fn: (err: string) => unknown): (result: Result<T>) => Result<T>
 
 function errThen<T>(
-  fn: (err: string) => unknown,
+  fn: (err: string) => MaybePromise<unknown>,
   result?: Result<T>
 ): MaybePromise<Result<T>> | ((result: Result<T>) => MaybePromise<Result<T>>) {
   if (result === undefined) {
