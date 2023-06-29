@@ -10,8 +10,9 @@ class Result<T> {
     } else if ('data' in args && !('err' in args)) {
       this.data = args.data
       this.success = true
+    } else {
+      throw new Error('Wrong arguments')
     }
-    throw new Error('Wrong arguments')
   }
 
   /** Return data of result if result is success, or throw an error */
