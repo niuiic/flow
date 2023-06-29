@@ -3,7 +3,7 @@ import { call } from 'src/utils.js'
 import { reduce } from './reduce.js'
 
 /**
- * Compose functions from left to right
+ * Compose functions from left to right.
  *
  * @example
  * ```ts
