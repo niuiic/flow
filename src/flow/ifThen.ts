@@ -4,6 +4,15 @@ import { Result, err, ok } from './result.js'
 
 /**
  * Call `fn` if `result` is success and `condition` is satisfied.
+ *
+ * @example
+ * ```ts
+ * const userInfo = (await ifThen((userId) => userId > 1, queryUserInfo, ok(userId))).unwrap()
+ * // with flow
+ * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), ifThen(isNotAdmin, printUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
+ * ```
+ *
+ * {@link #Repo/tests/flow/ifThen.spec.ts | More examples}
  */
 function ifThen<T>(
   condition: (data: T) => boolean,

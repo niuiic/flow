@@ -5,6 +5,16 @@ import { Result } from './result.js'
 
 type FnReturnType = MaybePromise<Result<unknown>>
 
+/**
+ * Compose steps from left to right.
+ *
+ * @example
+ * ```ts
+ * const data = (await flow(ok(filePath), andThen(readFileToStr), expect('file should exists'))).unwrap()
+ * ```
+ *
+ * {@link #Repo/tests/flow/flow.spec.ts | More examples}
+ */
 function flow<A1 extends FnReturnType, R extends FnReturnType>(
   ...args: [initialValue: A1, fn1: (args: Awaited<A1>) => R]
 ): FlowReturnValue<[A1, R]>

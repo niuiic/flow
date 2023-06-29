@@ -2,6 +2,15 @@ import { Result, err } from './result.js'
 
 /**
  * Convert data of `result`.
+ *
+ * @example
+ * ```ts
+ * const userInfo = (await ifThen((userId) => userId > 1, queryUserInfo, into(injectUserId, ok()))).unwrap()
+ * // with flow
+ * const userInfo = (await flow(ok(userId), into(injectUserName), andThen(queryUserInfo), ifThen(isNotAdmin, printUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
+ * ```
+ *
+ * {@link #Repo/tests/flow/into.spec.ts | More examples}
  */
 function into<T, R>(fn: (data: T) => Result<R>, result: Result<T>): Result<R>
 function into<T, R>(fn: (data: T) => Result<R>): (result: Result<T>) => Result<R>

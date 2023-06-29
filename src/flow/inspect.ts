@@ -4,14 +4,29 @@ import { Result, err, ok } from './result.js'
 
 /**
  * Inject a function to check the progress.
+ *
+ * @example
+ * ```ts
+ * // with flow
+ * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(isQuerySuccess), errThen(notify))).unwrapOr(defaultUserInfo)
+ * ```
+ *
+ * {@link #Repo/tests/flow/into.spec.ts | More examples}
  */
 function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown,
+  fn: (args: { success: true; data: T } | { success: false; err: string }) => Promise<unknown>,
   result: Result<T>
 ): MaybePromise<Result<T>>
 function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown
+  fn: (args: { success: true; data: T } | { success: false; err: string }) => Promise<unknown>
 ): (result: Result<T>) => MaybePromise<Result<T>>
+function inspect<T>(
+  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown,
+  result: Result<T>
+): Result<T>
+function inspect<T>(
+  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown
+): (result: Result<T>) => Result<T>
 
 function inspect<T>(
   fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown,
