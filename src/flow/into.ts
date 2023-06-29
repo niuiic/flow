@@ -1,4 +1,4 @@
-import { Result, err } from './result.js'
+import { Result, err, ok } from './result.js'
 
 /**
  * Convert data of `result`.
@@ -12,16 +12,16 @@ import { Result, err } from './result.js'
  *
  * {@link #Repo/tests/flow/into.spec.ts | More examples}
  */
-function into<T, R>(fn: (data: T) => Result<R>, result: Result<T>): Result<R>
-function into<T, R>(fn: (data: T) => Result<R>): (result: Result<T>) => Result<R>
+function into<T, R>(fn: (data: T) => R, result: Result<T>): Result<R>
+function into<T, R>(fn: (data: T) => R): (result: Result<T>) => Result<R>
 
-function into<T, R>(fn: (data: T) => Result<R>, result?: Result<T>): Result<R> | ((result: Result<T>) => Result<R>) {
+function into<T, R>(fn: (data: T) => R, result?: Result<T>): Result<R> | ((result: Result<T>) => Result<R>) {
   if (result === undefined) {
     return (result) => into(fn, result)
   }
 
   if (result.isSuccess()) {
-    return fn(result.unwrap())
+    return ok(fn(result.unwrap()))
   }
 
   return err(result.error()!)
