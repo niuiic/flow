@@ -18,5 +18,5 @@ elif [ "$1" = "package" ]; then
 	rm -rf ./dist
 	pnpm package
 elif [ "$1" = "clean" ]; then
-	rm -rf ./dist ./coverage
+	rm -rf ./dist ./coverage ./docs/.vitepress/dist
 fi
