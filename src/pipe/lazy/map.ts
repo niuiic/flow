@@ -72,22 +72,20 @@ function map<A extends UniversalIterable<unknown>, R>(
   fn: (args: UniversalIterableItem<A>) => R
 ): (iterable: A) => IteratorReturnValue<A, R>
 
-function map<A, R>(
-  fn: (args: A) => R,
-  iterable?: UniversalIterable<A>
-):
-  | ((iterable: UniversalIterable<A>) => IteratorReturnValue<UniversalIterable<R>>)
-  | IteratorReturnValue<UniversalIterable<R>> {
+function map<A extends UniversalIterable<unknown>, R>(
+  fn: (args: UniversalIterableItem<A>) => R,
+  iterable?: A
+): ((iterable: A) => IteratorReturnValue<A, R>) | IteratorReturnValue<A, R> {
   if (iterable === undefined) {
-    return (iterable: UniversalIterable<A>) => map(fn, iterable as any) as IteratorReturnValue<UniversalIterable<R>>
+    return (iterable) => map(fn, iterable as any) as IteratorReturnValue<A, R>
   }
 
   if (isIterable(iterable)) {
-    return sync(fn, iterable)
+    return sync(fn, iterable as Iterable<any>) as IteratorReturnValue<A, R>
   }
 
   if (isAsyncIterable(iterable)) {
-    return async(fn, iterable)
+    return async(fn, iterable as AsyncIterable<any>) as IteratorReturnValue<A, R>
   }
 
   throw new IterableTypeException()
