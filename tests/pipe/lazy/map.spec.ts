@@ -15,7 +15,7 @@ describe('map', () => {
     })
 
     it('should return a function if "iterable" is not passed', () => {
-      expect(typeof map((v: number) => v + 1)).toEqual('function')
+      expect(typeof map(() => 1)).toEqual('function')
     })
   })
 
