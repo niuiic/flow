@@ -171,6 +171,11 @@ function* sync<A>(fn: (data: A) => boolean, iterable: Iterable<A>) {
  *
  * @example
  * ```ts
+ * const iterator =  filter((v) => v > 2, [1, 3, 4])
+ * iterator.next().value = 3
+ * iterator.next().value = 4
+ * iterator.next().done = true
+ * ```
  *
  * {@link #Repo/tests/pipe/lazy/filter.spec.ts | More examples}
  */
