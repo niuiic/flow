@@ -3,7 +3,7 @@ import { concurrent, delay, each, map, pipe, takeUntil, toArray, toAsync } from 
 describe('takeUntil', () => {
   describe('sync', () => {
     it('should work for iterable', () => {
-      expect(toArray(takeUntil((v) => v > 2, [1, 2, 3, 4]))).toEqual([1, 2])
+      expect(toArray(takeUntil((v) => v > 2, [1, 2, 3, 4]))).toEqual([1, 2, 3])
     })
 
     it('should return a function if "iterable" is not passed', () => {
@@ -19,7 +19,7 @@ describe('takeUntil', () => {
         takeUntil((v) => v > 2),
         toArray
       ).then((res) => {
-        expect(res).toEqual([1, 2])
+        expect(res).toEqual([1, 2, 3])
       })
     })
 
@@ -34,7 +34,7 @@ describe('takeUntil', () => {
         concurrent(2),
         each((v) => (sum = sum + v))
       ).then(() => {
-        expect(sum).toEqual(10)
+        expect(sum).toEqual(15)
       })
     })
   })

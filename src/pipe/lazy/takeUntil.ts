@@ -4,6 +4,8 @@ import { concurrent as concurrentFn, isConcurrent } from './concurrent.js'
 
 function* sync<A>(fn: (args: A) => unknown, iterable: Iterable<A>) {
   for (const item of iterable) {
+    yield item
+
     const res = fn(item)
     if (isPromise(res)) {
       throw new IterableAsyncFnException()
@@ -11,8 +13,6 @@ function* sync<A>(fn: (args: A) => unknown, iterable: Iterable<A>) {
     if (res) {
       break
     }
-
-    yield item
   }
 }
 
@@ -40,7 +40,6 @@ function asyncSequential<A>(
       const satisfyCondition = await fn(value)
       if (satisfyCondition) {
         end = true
-        return { done: true, value: undefined }
       }
 
       return { done: false, value }
@@ -74,6 +73,7 @@ function async<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterabl
  * ```ts
  * const iterator =  filter((v) => v > 2, [1, 3, 4])
  * iterator.next().value = 1
+ * iterator.next().value = 3
  * iterator.next().done = true
  * ```
  *
