@@ -13,25 +13,25 @@ import { Result } from './result.js'
  *
  * {@link #Repo/tests/flow/anyway.spec.ts | More examples}
  */
-function anyway<T, R>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => Result<R>,
-  result: Result<T>
+function anyway<A, R>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => Result<R>,
+  result: Result<A>
 ): Result<R>
-function anyway<T, R>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => Result<R>
-): (result: Result<T>) => Result<R>
-function anyway<T, R>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => Promise<Result<R>>,
-  result: Result<T>
+function anyway<A, R>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => Result<R>
+): (result: Result<A>) => Result<R>
+function anyway<A, R>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<Result<R>>,
+  result: Result<A>
 ): MaybePromise<Result<R>>
-function anyway<T, R>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => Promise<Result<R>>
-): (result: Result<T>) => MaybePromise<Result<R>>
+function anyway<A, R>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<Result<R>>
+): (result: Result<A>) => MaybePromise<Result<R>>
 
-function anyway<T, R>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => MaybePromise<Result<R>>,
-  result?: Result<T>
-): MaybePromise<Result<R>> | ((result: Result<T>) => MaybePromise<Result<R>>) {
+function anyway<A, R>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => MaybePromise<Result<R>>,
+  result?: Result<A>
+): MaybePromise<Result<R>> | ((result: Result<A>) => MaybePromise<Result<R>>) {
   if (result === undefined) {
     return (result) => anyway(fn as () => any, result)
   }

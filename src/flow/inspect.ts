@@ -13,25 +13,25 @@ import { Result, err, ok } from './result.js'
  *
  * {@link #Repo/tests/flow/into.spec.ts | More examples}
  */
-function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => Promise<unknown>,
-  result: Result<T>
-): MaybePromise<Result<T>>
-function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => Promise<unknown>
-): (result: Result<T>) => MaybePromise<Result<T>>
-function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown,
-  result: Result<T>
-): Result<T>
-function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown
-): (result: Result<T>) => Result<T>
+function inspect<A>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<unknown>,
+  result: Result<A>
+): MaybePromise<Result<A>>
+function inspect<A>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<unknown>
+): (result: Result<A>) => MaybePromise<Result<A>>
+function inspect<A>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => unknown,
+  result: Result<A>
+): Result<A>
+function inspect<A>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => unknown
+): (result: Result<A>) => Result<A>
 
-function inspect<T>(
-  fn: (args: { success: true; data: T } | { success: false; err: string }) => unknown,
-  result?: Result<T>
-): MaybePromise<Result<T>> | ((result: Result<T>) => MaybePromise<Result<T>>) {
+function inspect<A>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => unknown,
+  result?: Result<A>
+): MaybePromise<Result<A>> | ((result: Result<A>) => MaybePromise<Result<A>>) {
   if (result === undefined) {
     return (result) => inspect(fn, result)
   }

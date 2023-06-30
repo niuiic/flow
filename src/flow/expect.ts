@@ -12,10 +12,10 @@ import { Result, ok } from './result.js'
  *
  * {@link #Repo/tests/flow/expect.spec.ts | More examples}
  */
-function expect<T>(err: string, result: Result<T>): Result<T>
-function expect<T>(err: string): (result: Result<T>) => Result<T>
+function expect<A>(err: string, result: Result<A>): Result<A>
+function expect<A>(err: string): (result: Result<A>) => Result<A>
 
-function expect<T>(err: string, result?: Result<T>): Result<T> | ((result: Result<T>) => Result<T>) {
+function expect<A>(err: string, result?: Result<A>): Result<A> | ((result: Result<A>) => Result<A>) {
   if (result === undefined) {
     return (result) => expect(err, result)
   }

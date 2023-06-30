@@ -13,15 +13,15 @@ import { Result, err } from './result.js'
  *
  * {@link #Repo/tests/flow/andThen.spec.ts | More examples}
  */
-function andThen<T, R extends Result<unknown>>(fn: (data: T) => R, result: Result<T>): R
-function andThen<T, R extends Result<unknown>>(fn: (data: T) => R): (result: Result<T>) => R
-function andThen<T, R extends Result<unknown>>(fn: (data: T) => MaybePromise<R>, result: Result<T>): MaybePromise<R>
-function andThen<T, R extends Result<unknown>>(fn: (data: T) => MaybePromise<R>): (result: Result<T>) => MaybePromise<R>
+function andThen<A, R extends Result<unknown>>(fn: (data: A) => R, result: Result<A>): R
+function andThen<A, R extends Result<unknown>>(fn: (data: A) => R): (result: Result<A>) => R
+function andThen<A, R extends Result<unknown>>(fn: (data: A) => MaybePromise<R>, result: Result<A>): MaybePromise<R>
+function andThen<A, R extends Result<unknown>>(fn: (data: A) => MaybePromise<R>): (result: Result<A>) => MaybePromise<R>
 
-function andThen<T, R extends Result<unknown>>(
-  fn: (data: T) => MaybePromise<R>,
-  result?: Result<T>
-): MaybePromise<R> | ((result: Result<T>) => MaybePromise<R>) {
+function andThen<A, R extends Result<unknown>>(
+  fn: (data: A) => MaybePromise<R>,
+  result?: Result<A>
+): MaybePromise<R> | ((result: Result<A>) => MaybePromise<R>) {
   if (result === undefined) {
     return (result) => andThen(fn, result)
   }

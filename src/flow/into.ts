@@ -12,10 +12,10 @@ import { Result, err, ok } from './result.js'
  *
  * {@link #Repo/tests/flow/into.spec.ts | More examples}
  */
-function into<T, R>(fn: (data: T) => R, result: Result<T>): Result<R>
-function into<T, R>(fn: (data: T) => R): (result: Result<T>) => Result<R>
+function into<A, R>(fn: (data: A) => R, result: Result<A>): Result<R>
+function into<A, R>(fn: (data: A) => R): (result: Result<A>) => Result<R>
 
-function into<T, R>(fn: (data: T) => R, result?: Result<T>): Result<R> | ((result: Result<T>) => Result<R>) {
+function into<A, R>(fn: (data: A) => R, result?: Result<A>): Result<R> | ((result: Result<A>) => Result<R>) {
   if (result === undefined) {
     return (result) => into(fn, result)
   }
