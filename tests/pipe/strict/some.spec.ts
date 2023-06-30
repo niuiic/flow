@@ -2,6 +2,10 @@ import { some, toAsync } from 'src/index.js'
 
 describe('some', () => {
   describe('sync', () => {
+    it('should return false "iterable" has no item', () => {
+      expect(some((a) => a % 2 !== 0, [])).toEqual(false)
+    })
+
     it('should return true if any of values satisfies "fn"', () => {
       expect(some((a) => a % 2 !== 0, [1, 4, 6, 8, 10])).toEqual(true)
     })

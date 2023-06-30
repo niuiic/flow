@@ -26,19 +26,19 @@ import { reduce } from './reduce.js'
  *
  * {@link #Repo/tests/pipe/strict/some.spec.ts | More examples}
  */
-function some<A extends readonly []>(fn: (args: IterableItem<A>) => unknown, iterable: A): false
+function some<A extends readonly []>(fn: (args: IterableItem<A>) => boolean, iterable: A): false
 
-function some<A>(fn: (args: A) => unknown, iterable: Iterable<A>): unknown
-function some<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): Promise<unknown>
+function some<A>(fn: (args: A) => unknown, iterable: Iterable<A>): boolean
+function some<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): Promise<boolean>
 
 function some<A extends UniversalIterable>(
   fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown
-): (iterable: A) => IterableReturnValue<A, unknown>
+): (iterable: A) => IterableReturnValue<A, boolean>
 
 function some<A extends UniversalIterable>(
   fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown,
   iterable?: A
-): ((iterable: A) => IterableReturnValue<A, unknown>) | IterableReturnValue<A, unknown> {
+): ((iterable: A) => IterableReturnValue<A, boolean>) | IterableReturnValue<A, boolean> {
   if (iterable === undefined) {
     return (iterable) => some(fn, iterable as any) as any
   }
@@ -48,8 +48,7 @@ function some<A extends UniversalIterable>(
       iterable,
       map(fn),
       takeUntil(identity),
-      reduce((a, b) => a && b),
-      (args) => args ?? true,
+      reduce((a, b) => a || b),
       Boolean
     ) as any
   }
