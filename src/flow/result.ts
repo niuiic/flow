@@ -1,3 +1,14 @@
+/**
+ * To describe a result of program.
+ *
+ * @example
+ * ```ts
+ * new Result({ data: 1 }).unwrapOr(2) // 1
+ * new Result({ err: '' }).unwrapOr(2) // 2
+ * ````
+ *
+ * {@link #Repo/tests/flow/result.spec.ts | More examples}
+ */
 class Result<T> {
   private success: boolean
   private err: string | undefined
@@ -81,12 +92,14 @@ class Result<T> {
   }
 }
 
+/** Generate a fail result */
 function err<T>(err: string): Result<T> {
   return new Result<T>({
     err
   })
 }
 
+/** Generate a success result */
 function ok<T>(data: T): Result<T> {
   return new Result<T>({
     data
