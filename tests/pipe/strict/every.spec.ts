@@ -1,4 +1,4 @@
-import { every } from 'src/index.js'
+import { every, toAsync } from 'src/index.js'
 
 describe('every', () => {
   describe('sync', () => {
@@ -11,7 +11,14 @@ describe('every', () => {
     })
 
     it('should return false if any of values does not satisfy "fn"', () => {
-      expect(every((a) => a % 2 === 0, [1, 4, 6, 8, 10])).toEqual(false)
+      expect(
+        every(
+          (a) => {
+            return a % 2 === 0
+          },
+          [1, 4, 6, 8, 10]
+        )
+      ).toEqual(false)
     })
 
     it('should return a function if "iterable" is not passed', () => {
@@ -21,12 +28,12 @@ describe('every', () => {
 
   describe('async', () => {
     it('should work for asyncIterable', () => {
-      // every((a) => a % 2 === 0, toAsync([2, 4, 6, 8, 10])).then((res) => {
-      //   expect(res).toEqual(true)
-      // })
-      // every((a) => a % 2 === 0, toAsync([1, 4, 6, 8, 10])).then((res) => {
-      //   expect(res).toEqual(false)
-      // })
+      every((a) => a % 2 === 0, toAsync([2, 4, 6, 8, 10])).then((res) => {
+        expect(res).toEqual(true)
+      })
+      every((a) => a % 2 === 0, toAsync([1, 4, 6, 8, 10])).then((res) => {
+        expect(res).toEqual(false)
+      })
     })
   })
 })
