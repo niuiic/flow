@@ -68,11 +68,11 @@ function async<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncItera
  */
 function map<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R>
 function map<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncIterableIterator<Awaited<R>>
-function map<A extends UniversalIterable<unknown>, R>(
+function map<A extends UniversalIterable, R>(
   fn: (args: UniversalIterableItem<A>) => R
 ): (iterable: A) => IteratorReturnValue<A, R>
 
-function map<A extends UniversalIterable<unknown>, R>(
+function map<A extends UniversalIterable, R>(
   fn: (args: UniversalIterableItem<A>) => R,
   iterable?: A
 ): ((iterable: A) => IteratorReturnValue<A, R>) | IteratorReturnValue<A, R> {

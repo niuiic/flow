@@ -15,7 +15,7 @@ export type AsyncIterableItem<T extends AsyncIterable<unknown>> = T extends Asyn
 
 /** T is AsyncIterable ? FixedPromise<R> : R */
 export type IterableReturnValue<
-  T extends UniversalIterable<unknown>,
+  T extends UniversalIterable,
   R = UniversalIterableItem<T>
 > = T extends AsyncIterable<unknown> ? FixedPromise<R> : T extends Iterable<unknown> ? R : never
 

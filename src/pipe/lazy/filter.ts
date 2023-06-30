@@ -185,7 +185,7 @@ function filter<A>(fn: (args: A) => boolean, iterable: Iterable<A>): IterableIte
 function filter<A, B extends A>(fn: (args: A) => args is B, iterable: AsyncIterable<A>): AsyncIterableIterator<B>
 function filter<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
 
-function filter<A extends UniversalIterable<unknown>, B extends UniversalIterableItem<A>>(
+function filter<A extends UniversalIterable, B extends UniversalIterableItem<A>>(
   fn: (args: UniversalIterableItem<A>) => args is B
 ): (iterable: A) => IteratorReturnValue<A, B>
 function filter<A, B extends UniversalIterable<A>>(
