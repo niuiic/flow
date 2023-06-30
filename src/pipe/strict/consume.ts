@@ -1,5 +1,5 @@
 import { IterableReturnValue, UniversalIterable } from 'src/types/index.js'
-import { IterableException, isAsyncIterable, isIterable } from 'src/utils.js'
+import { IterableTypeException, isAsyncIterable, isIterable } from 'src/utils.js'
 import { range } from '../lazy/range.js'
 
 function sync<T>(iterable: Iterable<T>, length: number) {
@@ -50,7 +50,7 @@ function consume<A extends UniversalIterable>(
     return async(iterable, length) as IterableReturnValue<A, void>
   }
 
-  throw new IterableException()
+  throw new IterableTypeException()
 }
 
 export { consume }

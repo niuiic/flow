@@ -1,5 +1,5 @@
 import { IterableReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/index.js'
-import { IterableException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
+import { IterableTypeException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
 
 function sync<A, R = unknown>(fn: (args: A) => R, iterable: Iterable<A>): void {
   for (const v of iterable) {
@@ -52,7 +52,7 @@ function each<A extends UniversalIterable, R>(
     return async(fn as FixedFn, iterable)
   }
 
-  throw new IterableException()
+  throw new IterableTypeException()
 }
 
 export { each }

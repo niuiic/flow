@@ -1,5 +1,5 @@
 import { ArrayReturnType, UniversalIterable } from 'src/types/index.js'
-import { IterableException, isAsyncIterable, isIterable } from 'src/utils.js'
+import { IterableTypeException, isAsyncIterable, isIterable } from 'src/utils.js'
 
 async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
   const res: A[] = []
@@ -33,7 +33,7 @@ function toArray<A>(iterable: UniversalIterable<A>) {
     return Array.from(iterable)
   }
 
-  throw new IterableException()
+  throw new IterableTypeException()
 }
 
 export { toArray }

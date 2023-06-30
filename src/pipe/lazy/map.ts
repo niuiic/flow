@@ -1,5 +1,5 @@
 import { IteratorReturnValue, UniversalIterable } from 'src/types/index.js'
-import { IterableException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
+import { IterableTypeException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
 
 function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R> {
   const iterator = iterable[Symbol.iterator]()
@@ -88,7 +88,7 @@ function map<A, R>(
     return async(fn, iterable)
   }
 
-  throw new IterableException()
+  throw new IterableTypeException()
 }
 
 export { map }

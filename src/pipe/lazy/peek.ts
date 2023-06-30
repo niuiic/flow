@@ -1,5 +1,5 @@
 import { IteratorReturnValue, UniversalIterable } from 'src/types/index.js'
-import { IterableException, isAsyncIterable, isIterable } from 'src/utils.js'
+import { IterableTypeException, isAsyncIterable, isIterable } from 'src/utils.js'
 import { tap } from '../strict/tap.js'
 import { map } from './map.js'
 
@@ -55,7 +55,7 @@ function peek<A>(
     return map(tap(fn as any), iterable) as ReturnValue
   }
 
-  throw new IterableException()
+  throw new IterableTypeException()
 }
 
 export { peek }
