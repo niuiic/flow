@@ -12,7 +12,7 @@ describe('inspect', () => {
 
   it('should return "result"', () => {
     const result = err('')
-    expect(inspect(console.log, result)).toEqual(result)
+    expect(inspect(() => {}, result)).toEqual(result)
   })
 
   it('should return a function if "result" is not passwd', () => {
