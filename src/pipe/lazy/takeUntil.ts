@@ -33,11 +33,14 @@ function asyncSequential<A>(
       }
 
       const { done, value } = await iterator.next(concurrent)
-      if (done) {
+      if (done || end) {
         return { done: true, value: undefined }
       }
 
       const satisfyCondition = await fn(value)
+      if (end) {
+        return { done: true, value: undefined }
+      }
       if (satisfyCondition) {
         end = true
       }
