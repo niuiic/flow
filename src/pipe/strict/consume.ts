@@ -1,6 +1,6 @@
 import { IterableReturnValue, UniversalIterable } from 'src/types/index.js'
+import { IterableException, isAsyncIterable, isIterable } from 'src/utils.js'
 import { range } from '../lazy/range.js'
-import { isAsyncIterable, isIterable } from 'src/utils.js'
 
 function sync<T>(iterable: Iterable<T>, length: number) {
   const iterator = iterable[Symbol.iterator]()
@@ -50,7 +50,7 @@ function consume<A extends UniversalIterable>(
     return async(iterable, length) as IterableReturnValue<A, void>
   }
 
-  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
+  throw new IterableException()
 }
 
 export { consume }

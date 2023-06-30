@@ -31,3 +31,9 @@ export function call<A, F extends (args: Awaited<A>) => any>(
 ): A extends Promise<unknown> ? FixedPromise<ReturnType<F>> : ReturnType<F> {
   return isPromise(args) ? args.then(fn as any) : fn(args as any)
 }
+
+export class IterableException extends Error {
+  constructor() {
+    super('"iterable" must be type of Iterable or AsyncIterable')
+  }
+}

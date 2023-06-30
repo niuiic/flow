@@ -1,5 +1,5 @@
 import { IteratorReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/index.js'
-import { isAsyncIterable, isIterable } from 'src/utils.js'
+import { IterableException, isAsyncIterable, isIterable } from 'src/utils.js'
 
 function* sync<A>(length: number, iterable: Iterable<A>): IterableIterator<A> {
   const iterator = iterable[Symbol.iterator]()
@@ -70,7 +70,7 @@ function take<A extends UniversalIterable>(
     return async(length, iterable)
   }
 
-  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
+  throw new IterableException()
 }
 
 export { take }

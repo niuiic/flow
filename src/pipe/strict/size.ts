@@ -1,5 +1,5 @@
 import { IterableReturnValue, UniversalIterable } from 'src/types/index.js'
-import { isAsyncIterable, isIterable } from 'src/utils.js'
+import { IterableException, isAsyncIterable, isIterable } from 'src/utils.js'
 import { each } from './each.js'
 
 function sync<A extends Iterable<unknown>>(iterable: A) {
@@ -33,7 +33,7 @@ function size<A extends UniversalIterable>(iterable: A): IterableReturnValue<A, 
     return async(iterable) as any
   }
 
-  throw new TypeError('"iterable" must be type of Iterable or AsyncIterable')
+  throw new IterableException()
 }
 
 export { size }
