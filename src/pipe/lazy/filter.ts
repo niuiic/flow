@@ -17,7 +17,7 @@ import {
 import { Concurrent, concurrent as concurrentFn, isConcurrent } from './concurrent.js'
 
 async function* asyncSequential<A>(
-  fn: (args: A) => MaybePromise<boolean>,
+  fn: (args: A) => MaybePromise<unknown>,
   iterable: AsyncIterable<A>
 ): AsyncIterableIterator<A> {
   for await (const v of iterable) {
@@ -27,7 +27,7 @@ async function* asyncSequential<A>(
   }
 }
 
-function asyncConcurrent<A>(iterable: AsyncIterable<[boolean, A]>): AsyncIterableIterator<A> {
+function asyncConcurrent<A>(iterable: AsyncIterable<[unknown, A]>): AsyncIterableIterator<A> {
   const iterator = iterable[Symbol.asyncIterator]()
   const taskResults: A[] = []
   let prevItem = Promise.resolve()
@@ -104,7 +104,7 @@ function asyncConcurrent<A>(iterable: AsyncIterable<[boolean, A]>): AsyncIterabl
 function toFilterIterator<A>(
   fn: (args: A) => unknown,
   iterable: AsyncIterable<A>
-): AsyncIterableIterator<[boolean, A]> {
+): AsyncIterableIterator<[unknown, A]> {
   const iterator = iterable[Symbol.asyncIterator]()
   return {
     [Symbol.asyncIterator]() {
@@ -126,13 +126,13 @@ function toFilterIterator<A>(
           ({
             done,
             value: [Boolean(args), value]
-          } as IteratorYieldResult<[boolean, A]>)
+          } as IteratorYieldResult<[unknown, A]>)
       )
     }
   }
 }
 
-function async<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterable<A>): AsyncIterableIterator<A> {
+function async<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): AsyncIterableIterator<A> {
   let iterator: AsyncIterator<A>
 
   return {
@@ -152,7 +152,7 @@ function async<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterabl
   }
 }
 
-function* sync<A>(fn: (data: A) => boolean, iterable: Iterable<A>) {
+function* sync<A>(fn: (data: A) => unknown, iterable: Iterable<A>) {
   for (const v of iterable) {
     const res = fn(v)
 
@@ -180,20 +180,20 @@ function* sync<A>(fn: (data: A) => boolean, iterable: Iterable<A>) {
  * {@link #Repo/tests/pipe/lazy/filter.spec.ts | More examples}
  */
 function filter<A, B extends A>(fn: (args: A) => args is B, iterable: Iterable<A>): IterableIterator<B>
-function filter<A>(fn: (args: A) => boolean, iterable: Iterable<A>): IterableIterator<A>
+function filter<A>(fn: (args: A) => unknown, iterable: Iterable<A>): IterableIterator<A>
 
 function filter<A, B extends A>(fn: (args: A) => args is B, iterable: AsyncIterable<A>): AsyncIterableIterator<B>
-function filter<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
+function filter<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
 
 function filter<A extends UniversalIterable, B extends UniversalIterableItem<A>>(
   fn: (args: UniversalIterableItem<A>) => args is B
 ): (iterable: A) => IteratorReturnValue<A, B>
 function filter<A, B extends UniversalIterable<A>>(
-  fn: (args: A) => B extends AsyncIterable<A> ? MaybePromise<boolean> : boolean
+  fn: (args: A) => B extends AsyncIterable<A> ? MaybePromise<unknown> : unknown
 ): (iterable: B) => IteratorReturnValue<B, A>
 
 function filter<A, B extends UniversalIterable<A>>(
-  fn: (args: A) => MaybePromise<boolean>,
+  fn: (args: A) => MaybePromise<unknown>,
   iterable?: B
 ): IteratorReturnValue<B, A> | ((iterable: B) => IteratorReturnValue<B, A>) {
   if (iterable === undefined) {

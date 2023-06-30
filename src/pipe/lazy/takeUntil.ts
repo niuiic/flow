@@ -2,7 +2,7 @@ import { IteratorReturnValue, MaybePromise, UniversalIterable, UniversalIterable
 import { IterableAsyncFnException, IterableTypeException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
 import { concurrent as concurrentFn, isConcurrent } from './concurrent.js'
 
-function* sync<A>(fn: (args: A) => boolean, iterable: Iterable<A>) {
+function* sync<A>(fn: (args: A) => unknown, iterable: Iterable<A>) {
   for (const item of iterable) {
     const res = fn(item)
     if (isPromise(res)) {
@@ -17,7 +17,7 @@ function* sync<A>(fn: (args: A) => boolean, iterable: Iterable<A>) {
 }
 
 function asyncSequential<A>(
-  fn: (args: A) => MaybePromise<boolean>,
+  fn: (args: A) => MaybePromise<unknown>,
   iterable: AsyncIterable<A>
 ): AsyncIterableIterator<A> {
   const iterator = iterable[Symbol.asyncIterator]()
@@ -48,7 +48,7 @@ function asyncSequential<A>(
   }
 }
 
-function async<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterable<A>): AsyncIterableIterator<A> {
+function async<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): AsyncIterableIterator<A> {
   let iterator: AsyncIterableIterator<A>
   return {
     [Symbol.asyncIterator]() {
@@ -79,14 +79,14 @@ function async<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterabl
  *
  * {@link #Repo/tests/pipe/lazy/takeUntil.spec.ts | More examples}
  */
-function takeUntil<A>(fn: (args: A) => boolean, iterable: Iterable<A>): IterableIterator<A>
-function takeUntil<A>(fn: (args: A) => MaybePromise<boolean>, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
+function takeUntil<A>(fn: (args: A) => unknown, iterable: Iterable<A>): IterableIterator<A>
+function takeUntil<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
 function takeUntil<A extends UniversalIterable>(
-  fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<boolean> : boolean
+  fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown
 ): (iterable: A) => IteratorReturnValue<A>
 
 function takeUntil<A extends UniversalIterable>(
-  fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<boolean> : boolean,
+  fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown,
   iterable?: A
 ): ((iterable: A) => IteratorReturnValue<A>) | IteratorReturnValue<A> {
   if (iterable === undefined) {
