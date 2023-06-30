@@ -32,8 +32,14 @@ export function call<A, F extends (args: Awaited<A>) => any>(
   return isPromise(args) ? args.then(fn as any) : fn(args as any)
 }
 
-export class IterableException extends Error {
+export class IterableTypeException extends Error {
   constructor() {
     super('"iterable" must be type of Iterable or AsyncIterable')
+  }
+}
+
+export class IterableAsyncFnException extends Error {
+  constructor() {
+    super('Iterable cannot work with async function')
   }
 }
