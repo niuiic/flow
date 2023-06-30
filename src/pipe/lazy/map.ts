@@ -1,5 +1,5 @@
-import { IteratorReturnValue, UniversalIterable } from 'src/types/index.js'
-import { IterableTypeException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
+import { IteratorReturnValue, UniversalIterable, UniversalIterableItem } from 'src/types/index.js'
+import { IterableAsyncFnException, IterableTypeException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
 
 function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R> {
   const iterator = iterable[Symbol.iterator]()
@@ -16,7 +16,7 @@ function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator
 
       const res = fn(value)
       if (isPromise(res)) {
-        throw new TypeError('Iterable cannot work with async function')
+        throw new IterableAsyncFnException()
       }
 
       return {
@@ -68,7 +68,9 @@ function async<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncItera
  */
 function map<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R>
 function map<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncIterableIterator<Awaited<R>>
-function map<A, R>(fn: (args: A) => R): (iterable: UniversalIterable<A>) => IteratorReturnValue<UniversalIterable<R>>
+function map<A extends UniversalIterable<unknown>, R>(
+  fn: (args: UniversalIterableItem<A>) => R
+): (iterable: A) => IteratorReturnValue<A, R>
 
 function map<A, R>(
   fn: (args: A) => R,
