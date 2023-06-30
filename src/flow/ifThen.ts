@@ -14,21 +14,30 @@ import { Result, err, ok } from './result.js'
  *
  * {@link #Repo/tests/flow/ifThen.spec.ts | More examples}
  */
-function ifThen<T>(
-  condition: (data: T) => boolean,
-  fn: (data: T) => unknown,
-  result: Result<T>
-): MaybePromise<Result<T>>
-function ifThen<T>(
-  condition: (data: T) => boolean,
-  fn: (data: T) => unknown
-): (result: Result<T>) => MaybePromise<Result<T>>
+function ifThen<A, B extends A>(
+  condition: (data: A) => data is B,
+  fn: (data: B) => unknown,
+  result: Result<A>
+): MaybePromise<Result<A>>
+function ifThen<A>(
+  condition: (data: A) => boolean,
+  fn: (data: A) => unknown,
+  result: Result<A>
+): MaybePromise<Result<A>>
+function ifThen<A, B extends A>(
+  condition: (data: A) => data is B,
+  fn: (data: B) => unknown
+): (result: Result<A>) => MaybePromise<Result<A>>
+function ifThen<A>(
+  condition: (data: A) => boolean,
+  fn: (data: A) => unknown
+): (result: Result<A>) => MaybePromise<Result<A>>
 
-function ifThen<T>(
-  condition: (data: T) => boolean,
-  fn: (data: T) => unknown,
-  result?: Result<T>
-): MaybePromise<Result<T>> | ((result: Result<T>) => MaybePromise<Result<T>>) {
+function ifThen<A>(
+  condition: (data: A) => boolean,
+  fn: (data: A) => unknown,
+  result?: Result<A>
+): MaybePromise<Result<A>> | ((result: Result<A>) => MaybePromise<Result<A>>) {
   if (result === undefined) {
     return (result) => ifThen(condition, fn, result)
   }
