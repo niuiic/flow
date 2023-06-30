@@ -9,7 +9,7 @@ describe('peek', () => {
         peek((v) => {
           sum = sum + v
         }),
-        consume(Infinity)
+        consume
       )
       expect(sum).toEqual(10)
     })
@@ -24,7 +24,7 @@ describe('peek', () => {
         peek((v) => {
           sum = sum + v
         }),
-        consume(Infinity)
+        consume
       ).then(() => {
         expect(sum).toEqual(10)
       })

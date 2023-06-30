@@ -31,17 +31,9 @@ async function async<T>(iterable: AsyncIterable<T>, length: number) {
  *
  * {@link #Repo/tests/pipe/strict/consume.spec.ts | More examples}
  */
-function consume<A extends UniversalIterable>(length: number, iterable: A): IterableReturnValue<A, void>
-function consume<A extends UniversalIterable>(length: number): (iterable: A) => IterableReturnValue<A, void>
+function consume<A extends UniversalIterable>(iterable: A, length?: number): IterableReturnValue<A, void>
 
-function consume<A extends UniversalIterable>(
-  length: number,
-  iterable?: A
-): IterableReturnValue<A, void> | ((iterable: A) => IterableReturnValue<A, void>) {
-  if (iterable === undefined) {
-    return (iterable: A) => consume(length, iterable)
-  }
-
+function consume<A extends UniversalIterable>(iterable: A, length = Infinity): IterableReturnValue<A, void> {
   if (isIterable(iterable)) {
     return sync(iterable, length) as IterableReturnValue<A, void>
   }
