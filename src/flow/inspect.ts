@@ -1,5 +1,5 @@
 import { MaybePromise } from 'src/types/index.js'
-import { isPromise } from 'util/types'
+import { isPromise } from 'src/utils.js'
 import { Result, err, ok } from './result.js'
 
 /**

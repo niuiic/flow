@@ -1,4 +1,4 @@
-import { MaybePromise } from 'src/index.js'
+import { MaybePromise } from 'src/types/index.js'
 import { Result } from './result.js'
 
 /**
