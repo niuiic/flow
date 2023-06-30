@@ -15,7 +15,7 @@
   "scripts": {
     "build": "pnpm tsc",
     "package": "pnpm rollup -c rollup.config.mjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
-    "release": "release-it",
+    "release": "pnpm package && release-it",
     "call": "pnpm esrun cli",
     "test": "pnpm jest",
     "test:coverage": "pnpm jest --coverage",
