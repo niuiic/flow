@@ -13,7 +13,7 @@ This library provides an `Immutable` tool type, tries to make this restriction w
 ```typescript
 // `Immutable` will expand the input type.
 // `File` is a builtin type, and expaned `File` is not equal to unexpaned `File`.
-// You need to ignore `File` during `Immutable`'s work, or it cannot satisfies another `File`.
+// You may need to ignore `File`, or it cannot satisfies another `File`.
 type Res = Immutable<
   {
     file: File
