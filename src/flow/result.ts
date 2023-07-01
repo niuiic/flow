@@ -85,8 +85,8 @@ class Result<T> {
 
   /**
    * Wait for `data`
-   * Result<Promise<T>> -> Promise<Result<T>>
-   * Result<T> -> Promise<Result<T>>
+   * - Result<Promise<T>> -> Promise<Result<T>>
+   * - Result<T> -> Promise<Result<T>>
    */
   public async wait(): Promise<Result<Awaited<T>>> {
     if (this.success) {
