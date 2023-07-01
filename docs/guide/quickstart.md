@@ -1,8 +1,14 @@
 # Quickstart
 
+## Introduction
+
+This library is an exploration of the application of functional programming to practical.
+
+It's aim to improve the readability and maintainability of the program and improve the experience of writing code.
+
 ## Installation
 
-### NPM
+### Npm
 
 ```sh
 npm install @niuiic/flow
@@ -75,14 +81,15 @@ const notify = (msg: string) => {
   console.log(msg)
 }
 
-const defaultUser = () => new User('0', 'user', 'passwd')
+const defaultUser = new User('0', 'user', 'passwd')
 
 let userId = '1'
+// Find target user, and return the user info. `notify` would be skipped.
 const userInfo = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrap()
-// Return User3
+
 userId = '4'
-const userInfo = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrapOrElse(defaultUser)
-// No user found in user list, then call `notify` and return default user.
+// No user found, then call `notify` and return `defaultUser`.
+const userInfo2 = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUser)
 ```
 
 ### pipe
@@ -102,5 +109,6 @@ const uploadChunk = (file: File) => {
   return delay(1000, file)
 }
 
+// Upload file chunks concurrently and skip uploaded chunks.
 pipe(fileChunks, toAsync, filter(hasUploaded), concurrent(3), each(uploadChunk))
 ```

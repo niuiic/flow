@@ -42,7 +42,10 @@ export default defineConfig({
     sidebar: [
       {
         text: 'Guide',
-        items: [{ text: 'Quickstart', link: '/guide/quickstart' }]
+        items: [
+          { text: 'quickstart', link: '/guide/quickstart' },
+          { text: 'debug', link: '/guide/debug' }
+        ]
       },
       {
         text: 'API',
