@@ -44,7 +44,8 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'quickstart', link: '/guide/quickstart' },
-          { text: 'debug', link: '/guide/debug' }
+          { text: 'debug', link: '/guide/debug' },
+          { text: 'pure function', link: '/guide/pureFunc' }
         ]
       },
       {
