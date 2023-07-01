@@ -1,3 +1,5 @@
+import { isPromise } from 'src/utils.js'
+
 /**
  * To describe a result of program.
  *
@@ -79,6 +81,23 @@ class Result<T> {
       return new Result({ data: fn2(this.err!) })
     }
     return new Result({ data: fn(this.data!) })
+  }
+
+  /**
+   * Wait for `data`
+   * Result<Promise<T>> -> Promise<Result<T>>
+   * Result<T> -> Promise<Result<T>>
+   */
+  public async wait(): Promise<Result<Awaited<T>>> {
+    if (this.success) {
+      if (isPromise(this.data)) {
+        const data = await this.data
+        return new Result<Awaited<T>>({ data: data as Awaited<T> })
+      }
+      return new Result<Awaited<T>>({ data: this.data! as Awaited<T> })
+    } else {
+      return new Result<Awaited<T>>({ err: this.err! })
+    }
   }
 
   /** Check if result is success */

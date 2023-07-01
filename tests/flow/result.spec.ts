@@ -26,6 +26,12 @@ describe('result', () => {
     expect(new Result({ err: 'err' }).unwrapOrElse((err) => err)).toEqual('err')
   })
 
+  it('should return a promise when call "unwrapPromise"', () => {
+    new Result({ data: Promise.resolve(1) }).wait().then((res) => {
+      expect(res.unwrap()).toEqual(1)
+    })
+  })
+
   it('should return "err" if fail when call "error"', () => {
     expect(new Result({ err: 'err' }).error()).toEqual('err')
   })
