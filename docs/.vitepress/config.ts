@@ -56,7 +56,15 @@ export default defineConfig({
       }
     ],
     outline: 'deep',
-    socialLinks: [{ icon: 'github', link: 'https://github.com/niuiic/flow' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/niuiic/flow' }],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2023-present niuiic'
+    },
+    search: {
+      provider: 'local'
+    }
   },
-  ignoreDeadLinks: true
+  ignoreDeadLinks: true,
+  lastUpdated: true
 })

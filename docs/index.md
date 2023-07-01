@@ -15,10 +15,11 @@ hero:
     - theme: alt
       text: View on Github
       link: https://github.com/niuiic/flow
-
 features:
-  - title: Examples
-    details: All code examples are located at `tests` of this repo.
-  - title: Copyright
-    details: Follow MIT License.
+  - title: Lazy Evaluation
+    details: Only consume "Iterable/asyncIterable" when it needs to be evaluated.
+  - title: Type Inference
+    details: Has a complete typescript type definition.
+  - title: Well Tested
+    details: Test coverage over 90%.
 ---
