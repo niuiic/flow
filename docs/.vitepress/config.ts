@@ -49,7 +49,7 @@ export default defineConfig({
         items: fixedItems(apiSidebarItems as unknown as DefaultTheme.SidebarItem[])
       }
     ],
-
+    outline: 'deep',
     socialLinks: [{ icon: 'github', link: 'https://github.com/niuiic/flow' }]
   },
   ignoreDeadLinks: true
