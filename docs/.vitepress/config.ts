@@ -44,9 +44,10 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'quickstart', link: '/guide/quickstart' },
-          { text: 'debug', link: '/guide/debug' },
+          { text: 'lazy evaluation', link: '/guide/lazyEvaluation' },
           { text: 'pure function', link: '/guide/pureFunc' },
-          { text: 'curry', link: '/guide/curry' }
+          { text: 'curry', link: '/guide/curry' },
+          { text: 'debug', link: '/guide/debug' }
         ]
       },
       {

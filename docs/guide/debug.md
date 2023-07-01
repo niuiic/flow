@@ -1,13 +1,13 @@
 # Debug
 
-Debugging in chain is difficult, so some functions are provided to help.
+Debugging in chain is difficult, fortunately there are some functions provided to help.
 
 ## flow
 
 `inspect` can inject an inspector without an effect.
 
 ::: warning
-Do not modify `data` by `data.xxx = newVal`, or subsequent steps will be affected.
+Do not modify `data`, or subsequent steps will be affected.
 :::
 
 ```typescript

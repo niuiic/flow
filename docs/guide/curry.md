@@ -41,6 +41,8 @@ const bookName = 'book1'
 const book = (
   await flow(
     ok(userId),
+    // Another argument needed here, use `into` to capture the argument from environment.
+    // `into` would be skipped if result of the previous step is error.
     into((userId) => {
       return {
         userId,
