@@ -4,7 +4,7 @@
 
 This library is an exploration of the application of functional programming to practical.
 
-It's aim to improve the readability and maintainability of the program and improve the experience of writing code.
+It's aim to improve the readability and maintainability of the program and the experience of writing code.
 
 ## Installation
 
