@@ -32,7 +32,7 @@ function async<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIter
  * Returns IterableIterator/AsyncIterableIterator that take `length` values from iterable
  *
  * @example
- * ```ts
+ * ```typescript
  * for (const v of take(2, [1, 2, 3, 4])) {
  *   console.log(v)
  * }

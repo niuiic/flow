@@ -5,7 +5,7 @@ import { Result, err } from './result.js'
  * Call `fn` if `result` is success.
  *
  * @example
- * ```ts
+ * ```typescript
  * const userInfo = (await andThen(queryUserInfo, ok(userId))).unwrap()
  * // with flow
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo))).unwrap()

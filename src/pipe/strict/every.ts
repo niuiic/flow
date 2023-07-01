@@ -16,7 +16,7 @@ import { reduce } from './reduce.js'
  * Returns true if all values in Iterable/AsyncIterable pass the `fn` truth test.
  *
  * @example
- * ```ts
+ * ```typescript
  * every((a) => a % 2 === 0, [2, 4, 6, 8, 10])
  * // true
  *

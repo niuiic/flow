@@ -5,7 +5,7 @@ import { isNil } from './isNil.js'
  * Check whether `args` is empty.
  *
  * @example
- * ```ts
+ * ```typescript
  * isEmpty({}) // true
  * isEmpty([]) // true
  * isEmpty(null) // true

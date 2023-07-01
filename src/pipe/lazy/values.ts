@@ -3,7 +3,7 @@
  * Returns an iterator of the own enumerable string keyed property values of object.
  *
  * @example
- * ```ts
+ * ```typescript
  * [...values({ a: 1, b: "2", c: true })]
  * // [1, "2", true]
  * ```

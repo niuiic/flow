@@ -2,7 +2,7 @@
  * Return a function that returns the given value.
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(filter([1, 2, 3, 4], always(true))) // [1, 2, 3, 4]
  * ```
  *

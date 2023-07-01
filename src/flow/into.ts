@@ -4,7 +4,7 @@ import { Result, err, ok } from './result.js'
  * Convert data of `result`.
  *
  * @example
- * ```ts
+ * ```typescript
  * const userInfo = (await ifThen((userId) => userId > 1, queryUserInfo, into(injectUserId, ok()))).unwrap()
  * // with flow
  * const userInfo = (await flow(ok(userId), into(injectUserName), andThen(queryUserInfo), ifThen(isNotAdmin, printUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)

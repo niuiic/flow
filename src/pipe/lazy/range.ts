@@ -2,7 +2,7 @@
  * Retures IterableIterator of numbers progressing from `start` to `end`(not included).
  *
  * @example
- * ```ts
+ * ```typescript
  * for (const v of range(4)) {
  *   console.log(v) // 0, 1, 2, 3
  * }

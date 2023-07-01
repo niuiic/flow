@@ -6,7 +6,7 @@ import { reduce } from './reduce.js'
  * Compose functions from left to right.
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(pipe([1, 2, 3], take(2), max)) // 2
  * ```
  *

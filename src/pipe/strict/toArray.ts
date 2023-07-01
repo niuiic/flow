@@ -13,7 +13,7 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
  * Convert iterable/asyncIterable to an array.
  *
  * @example
- * ```ts
+ * ```typescript
  * pipe(
  *   [1, 2, 3, 4, 5],
  *   map((a) => a + 10),

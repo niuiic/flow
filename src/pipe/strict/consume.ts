@@ -25,7 +25,7 @@ async function async<T>(iterable: AsyncIterable<T>, length: number) {
  * Consumes the given `length` of Iterable/AsyncIterable.
  *
  * @example
- * ```ts
+ * ```typescript
  * pipe(userList, toAsync, peek(queryUserInfo), consume(Infinity))
  * ```
  *

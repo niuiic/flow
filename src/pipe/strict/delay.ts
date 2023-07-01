@@ -5,7 +5,7 @@ import { isPromise } from 'src/utils.js'
  * Delay the `value` by `wait` time.
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(await delay(1000, 'hello')) // print hello after 1s
  * ```
  *

@@ -22,7 +22,7 @@ export function isConcurrent(concurrent: unknown): concurrent is Concurrent {
  * Concurrent is used to balance the load of multiple asynchronous requests.
  *
  * @example
- * ```ts
+ * ```typescript
  * await pipe(
  *   [1, 2, 3, 4, 5, 6],
  *   toAsync,

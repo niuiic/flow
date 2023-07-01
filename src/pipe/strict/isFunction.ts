@@ -4,7 +4,7 @@ import { AnyFunction, Include } from 'src/types/index.js'
  * Check whether `args` is a function.
  *
  * @example
- * ```ts
+ * ```typescript
  * isFunction(() => {}); // true
  * isFunction(2); // false
  * ```

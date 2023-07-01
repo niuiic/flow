@@ -6,7 +6,7 @@ import { Result, err, ok } from './result.js'
  * Call `fn` if `result` is failure.
  *
  * @example
- * ```ts
+ * ```typescript
  * const userInfo = (await errThen(queryUserInfo, err(userId))).unwrap() // throw an error
  * // with flow
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)

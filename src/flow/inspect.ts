@@ -6,7 +6,7 @@ import { Result, err, ok } from './result.js'
  * Inject a function to check the progress.
  *
  * @example
- * ```ts
+ * ```typescript
  * // with flow
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(isQuerySuccess), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```

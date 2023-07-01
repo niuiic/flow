@@ -9,7 +9,7 @@ type FnReturnType = MaybePromise<Result<unknown>>
  * Compose steps from left to right.
  *
  * @example
- * ```ts
+ * ```typescript
  * const data = (await flow(ok(filePath), andThen(readFileToStr), expect('file should exists'))).unwrap()
  * ```
  *

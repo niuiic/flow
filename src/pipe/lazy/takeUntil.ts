@@ -73,7 +73,7 @@ function async<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterabl
  * Take values from iterable/AsyncIterable until `fn` returns true
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterator =  filter((v) => v > 2, [1, 3, 4])
  * iterator.next().value = 1
  * iterator.next().value = 3

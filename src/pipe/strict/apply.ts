@@ -4,7 +4,7 @@ import { AnyFunction } from 'src/types/index.js'
  * Apply function `fn` to the arguments list `args`.
  *
  * @example
- * ```ts
+ * ```typescript
  * apply(Math.max, [1, 2, 3, 4, 5]); // 5
  * ```
  *

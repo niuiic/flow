@@ -4,7 +4,7 @@ import { Include } from 'src/types/index.js'
  * Check whether `args` is a string.
  *
  * @example
- * ```ts
+ * ```typescript
  * isString("a"); // true
  * isString(2); // false
  * ```

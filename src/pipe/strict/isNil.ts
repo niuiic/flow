@@ -6,7 +6,7 @@ import { isUndefined } from './isUndefined.js'
  * Check whether `args` is null or undefined.
  *
  * @example
- * ```ts
+ * ```typescript
  * isArray([1, 2, 3]); // false
  * isArray(null); // true
  * isArray(undefined); // true

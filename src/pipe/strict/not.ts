@@ -2,7 +2,7 @@
  * Returns the opposite value of `args`
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(not(undefined)) // true
  * ```
  *

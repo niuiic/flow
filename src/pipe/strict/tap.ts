@@ -5,7 +5,7 @@ import { isPromise } from 'src/utils.js'
  * Invokes an interceptor and return the original value.
  *
  * @example
- * ```ts
+ * ```typescript
  * const res = tap(console.log, { a: 'a' })
  * // log {a: 'a'}
  * // res = {a: 'a'}

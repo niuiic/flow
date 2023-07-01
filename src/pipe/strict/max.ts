@@ -31,7 +31,7 @@ async function async(iterable: AsyncIterable<number>) {
  * Return the largest item of the iterable/asyncIterable
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(max([1, 2, 3])) // 3
  * ```
  *

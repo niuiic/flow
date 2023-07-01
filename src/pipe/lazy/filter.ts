@@ -170,7 +170,7 @@ function* sync<A>(fn: (data: A) => unknown, iterable: Iterable<A>) {
  * Filter `iterable` with `fn`.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterator =  filter((v) => v > 2, [1, 3, 4])
  * iterator.next().value = 3
  * iterator.next().value = 4

@@ -5,7 +5,7 @@ import { Result } from './result.js'
  * Call `fn` anyway.
  *
  * @example
- * ```ts
+ * ```typescript
  * const userInfo = (await anyway(queryUserInfo, err(userId))).unwrap() // throw an error
  * // with flow
  * const data = (await flow(ok(filePath), andThen(readFileToStr), anyway(closeIO))).unwrap()

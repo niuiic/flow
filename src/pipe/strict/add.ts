@@ -30,7 +30,7 @@ async function async(a: Promise<number | string>, b: Promise<number | string>) {
  * Retures the sum of `a` and `b`
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(add(1, 2)) // 3
  * ```
  *

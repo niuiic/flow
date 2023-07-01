@@ -7,7 +7,7 @@ import { map } from './map.js'
  * Call `fn` for each item in the iterable/asyncIterable and return the original iterable/asyncIterable.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterator = peek(console.log, [1, 2, 3])
  *
  * for (const v of iterator) {

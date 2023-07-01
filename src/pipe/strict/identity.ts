@@ -2,7 +2,7 @@
  * Return the same value as the given argument.
  *
  * @example
- * ```ts
+ * ```typescript
  * identity(5); // 5
  * ```
  *

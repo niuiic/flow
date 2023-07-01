@@ -37,7 +37,7 @@ async function async<A, R>(
  * 'reduce' boils down a list of values into a single value.
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(reduce((a, b) => a + b, [1, 2, 3, 4])) // 10
  * ```
  *

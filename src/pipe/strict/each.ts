@@ -20,7 +20,7 @@ async function async<A, R = unknown>(fn: (args: A) => R, iterable: AsyncIterable
  * Iterates over Iterable/AsyncIterable, applying each in turn to `fn`.
  *
  * @example
- * ```ts
+ * ```typescript
  * each(console.log, [1, 2, 3]); // log 1, 2, 3
  * ```
  *

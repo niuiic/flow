@@ -2,7 +2,7 @@
  * Is `a` greater than `b`
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(gt(5, 1)) // true
  * ```
  *

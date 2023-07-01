@@ -56,7 +56,7 @@ function async<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncItera
  * Returns Iterable/AsyncIterable of values mapped by `fn`.
  *
  * @example
- * ```ts
+ * ```typescript
  * pipe(
  *  [1, 2, 3, 4],
  *  map(a => a + 10),

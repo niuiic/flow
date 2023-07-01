@@ -2,7 +2,7 @@
  * To describe a result of program.
  *
  * @example
- * ```ts
+ * ```typescript
  * new Result({ data: 1 }).unwrapOr(2) // 1
  * new Result({ err: '' }).unwrapOr(2) // 2
  * ````

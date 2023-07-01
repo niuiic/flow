@@ -4,7 +4,7 @@ import { Include } from 'src/types/index.js'
  * Check whether `args` is an object.
  *
  * @example
- * ```ts
+ * ```typescript
  * isObject({}); // true
  * isObject([1, 2, 3]); // true
  * isObject(() => {}); // true

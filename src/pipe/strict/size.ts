@@ -18,7 +18,7 @@ async function async<A extends AsyncIterable<unknown>>(asyncIterable: A) {
  * Returns size of iterable/asyncIterable
  *
  * @example
- * ```ts
+ * ```typescript
  * console.log(size([1, 2, 3])) // 3
  * ```
  *

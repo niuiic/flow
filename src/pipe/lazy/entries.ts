@@ -4,7 +4,7 @@ import { AnyObject, Entries } from 'src/types/index.js'
  * Convert object to iterator.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterator =  entries({a: 1, b: 2})
  * iterator.next().value = ['a', 1]
  * iterator.next().value = ['b', 2]

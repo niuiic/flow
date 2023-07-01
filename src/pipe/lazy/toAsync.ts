@@ -4,7 +4,7 @@ import { isPromise } from 'src/utils.js'
  * Returns AsyncIterable, it is used when you want to handle Promise values inside Iterable.
  *
  * @example
- * ```ts
+ * ```typescript
  * let res = 0
  * for await (const v of toAsync([Promise.resolve(1), Promise.resolve(2), 3])) {
  *   res += v

@@ -16,7 +16,7 @@ import { reduce } from './reduce.js'
  * Returns true if any of the values in Iterable/AsyncIterable pass the `fn` truth test.
  *
  * @example
- * ```ts
+ * ```typescript
  * some((a) => a % 2 !== 0, [2, 4, 6, 8, 10])
  * // false
  *

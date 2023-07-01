@@ -3,7 +3,7 @@
  * Returns an iterator of the own enumerable property names of object.
  *
  * @example
- * ```ts
+ * ```typescript
  * [...keys({ a: 1, b: "2", c: true })]
  * // ["a", "b", "c"]
  * ```

@@ -4,7 +4,7 @@ import { Include } from 'src/types/index.js'
  * Check whether `args` is undefined.
  *
  * @example
- * ```ts
+ * ```typescript
  * isArray([1, 2, 3]); // false
  * isArray(undefined); // true
  * isArray(null); // false
