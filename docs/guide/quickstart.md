@@ -99,14 +99,14 @@ const userInfo2 = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify
 :::
 
 ```typescript
-type File = number
+type FileChunk = number
 
-const fileChunks: File[] = [1, 2, 3, 4, 5]
+const fileChunks: FileChunk[] = [1, 2, 3, 4, 5]
 
-const hasUploaded = (file: File) => file === 1
+const hasUploaded = (chunk: FileChunk) => chunk === 1
 
-const uploadChunk = (file: File) => {
-  return delay(1000, file)
+const uploadChunk = (chunk: FileChunk) => {
+  return delay(1000, chunk)
 }
 
 // Upload file chunks concurrently and skip uploaded chunks.
