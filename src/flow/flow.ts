@@ -1,9 +1,14 @@
-import { reduce } from 'src/pipe/strict/reduce.js'
-import { FlowReturnValue, MaybePromise } from 'src/types/index.js'
-import { call } from 'src/utils.js'
+import { AnyFunction, FlowReturnValue, MaybePromise } from 'src/types/index.js'
+import { isPromise } from 'src/utils.js'
 import { Result } from './result.js'
 
 type FnReturnType = MaybePromise<Result<unknown>>
+
+export class FlowExitException extends Error {
+  public constructor() {
+    super('exit flow')
+  }
+}
 
 /**
  * Compose steps from left to right.
@@ -578,7 +583,43 @@ function flow<
 
 function flow(...args: any[]) {
   const [initialValue, ...fns] = args
-  return reduce(call, initialValue, fns)
+  let result: FnReturnType = initialValue
+
+  const call = (fns: AnyFunction[]): FnReturnType => {
+    if (fns.length === 0) {
+      return result
+    }
+    const fn = fns[0]
+    if (isPromise(result)) {
+      return result.then((result2) => {
+        try {
+          const res: FnReturnType = fn(result2)
+          result = res
+          return call(fns.slice(1))
+        } catch (err) {
+          if (err instanceof FlowExitException) {
+            return result
+          } else {
+            throw err
+          }
+        }
+      })
+    } else {
+      try {
+        const res = fn(result)
+        result = res
+        return call(fns.slice(1))
+      } catch (err) {
+        if (err instanceof FlowExitException) {
+          return result
+        } else {
+          throw err
+        }
+      }
+    }
+  }
+
+  return call(fns)
 }
 
 export { flow }
