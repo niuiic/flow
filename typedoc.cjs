@@ -5,6 +5,7 @@ module.exports = {
     './src/pipe/lazy/index.ts',
     './src/pipe/strict/index.ts',
     './src/flow/index.ts',
+    './src/utils.ts',
     './src/types/index.ts'
   ],
   plugin: [
