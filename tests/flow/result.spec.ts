@@ -58,6 +58,7 @@ describe('result', () => {
 
   it('should return a result which is success when call ok', () => {
     expect(ok(1).isSuccess()).toEqual(true)
+    expect(ok().unwrap()).toEqual(undefined)
   })
 
   it('should return a result which is fail when call err', () => {
