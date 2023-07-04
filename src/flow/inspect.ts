@@ -11,7 +11,7 @@ import { Result, err, ok } from './result.js'
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(isQuerySuccess), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
- * {@link #Repo/tests/flow/into.spec.ts | More examples}
+ * {@link #Repo/tests/flow/inspect.spec.ts | More examples}
  */
 function inspect<A>(
   fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<unknown>,
