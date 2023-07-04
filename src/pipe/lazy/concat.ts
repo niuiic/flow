@@ -48,7 +48,7 @@ function async<A>(iterable1: AsyncIterable<A>, iterable2: AsyncIterable<A>): Asy
  * Return the result of concatenating the given iterable.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iter = concat([1, 2], [3, 4]);
  * iter.next() // {done:false, value: 1}
  * iter.next() // {done:false, value: 2}
