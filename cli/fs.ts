@@ -17,7 +17,13 @@ export const fileSuffix = (path: string) => {
 export const fileName = (path: string) => {
   const after = path.lastIndexOf('.')
   const before = path.lastIndexOf('/')
-  return before !== -1 && after !== -1 ? path.slice(before + 1, after) : undefined
+  if (before === -1) {
+    return after !== -1 ? path.slice(0, after) : undefined
+  }
+  if (after === -1) {
+    return undefined
+  }
+  return path.slice(before + 1, after)
 }
 
 export const getRootPath = () => {
