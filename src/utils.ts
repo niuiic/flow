@@ -43,3 +43,5 @@ export class IterableAsyncFnException extends Error {
     super('Iterable cannot work with async function')
   }
 }
+
+export function* empty() {}

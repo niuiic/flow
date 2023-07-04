@@ -1,6 +1,7 @@
 export * from './array.js'
 export * from './basic.js'
 export * from './concat.js'
+export * from './flat/index.js'
 export * from './flow.js'
 export * from './function.js'
 export * from './immutable.js'
