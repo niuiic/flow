@@ -1,6 +1,6 @@
 import { UniversalIterable, UniversalIterableItem } from './iterable.js'
 
-export type ConcatReturnType<
+export type ConcatReturnValue<
   A extends UniversalIterable,
   B extends UniversalIterable
 > = A extends AsyncIterable<unknown>

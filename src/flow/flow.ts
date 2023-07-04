@@ -2,7 +2,7 @@ import { AnyFunction, FlowReturnValue, MaybePromise } from 'src/types/index.js'
 import { isPromise } from 'src/utils.js'
 import { Result } from './result.js'
 
-type FnReturnType = MaybePromise<Result<unknown>>
+type FnReturnValue = MaybePromise<Result<unknown>>
 
 export class FlowExitException extends Error {
   public constructor() {
@@ -20,15 +20,15 @@ export class FlowExitException extends Error {
  *
  * {@link #Repo/tests/flow/flow.spec.ts | More examples}
  */
-function flow<A1 extends FnReturnType, R extends FnReturnType>(
+function flow<A1 extends FnReturnValue, R extends FnReturnValue>(
   ...args: [initialValue: A1, fn1: (args: Awaited<A1>) => R]
 ): FlowReturnValue<[A1, R]>
 
-function flow<A1 extends FnReturnType, A2 extends FnReturnType, R extends FnReturnType>(
+function flow<A1 extends FnReturnValue, A2 extends FnReturnValue, R extends FnReturnValue>(
   ...args: [initialValue: A1, fn1: (args: Awaited<A1>) => A2, fn2: (args: Awaited<A2>) => R]
 ): FlowReturnValue<[A1, A2, R]>
 
-function flow<A1 extends FnReturnType, A2 extends FnReturnType, A3 extends FnReturnType, R extends FnReturnType>(
+function flow<A1 extends FnReturnValue, A2 extends FnReturnValue, A3 extends FnReturnValue, R extends FnReturnValue>(
   ...args: [
     initialValue: A1,
     fn1: (args: Awaited<A1>) => A2,
@@ -38,11 +38,11 @@ function flow<A1 extends FnReturnType, A2 extends FnReturnType, A3 extends FnRet
 ): FlowReturnValue<[A1, A2, A3, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -54,12 +54,12 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -72,13 +72,13 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -92,14 +92,14 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -114,15 +114,15 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -138,16 +138,16 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -164,17 +164,17 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -192,18 +192,18 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -222,19 +222,19 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -254,20 +254,20 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -288,21 +288,21 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -324,22 +324,22 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  A15 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  A15 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -362,23 +362,23 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  A15 extends FnReturnType,
-  A16 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  A15 extends FnReturnValue,
+  A16 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -402,24 +402,24 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  A15 extends FnReturnType,
-  A16 extends FnReturnType,
-  A17 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  A15 extends FnReturnValue,
+  A16 extends FnReturnValue,
+  A17 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -444,25 +444,25 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  A15 extends FnReturnType,
-  A16 extends FnReturnType,
-  A17 extends FnReturnType,
-  A18 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  A15 extends FnReturnValue,
+  A16 extends FnReturnValue,
+  A17 extends FnReturnValue,
+  A18 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -488,26 +488,26 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  A15 extends FnReturnType,
-  A16 extends FnReturnType,
-  A17 extends FnReturnType,
-  A18 extends FnReturnType,
-  A19 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  A15 extends FnReturnValue,
+  A16 extends FnReturnValue,
+  A17 extends FnReturnValue,
+  A18 extends FnReturnValue,
+  A19 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -534,27 +534,27 @@ function flow<
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, R]>
 
 function flow<
-  A1 extends FnReturnType,
-  A2 extends FnReturnType,
-  A3 extends FnReturnType,
-  A4 extends FnReturnType,
-  A5 extends FnReturnType,
-  A6 extends FnReturnType,
-  A7 extends FnReturnType,
-  A8 extends FnReturnType,
-  A9 extends FnReturnType,
-  A10 extends FnReturnType,
-  A11 extends FnReturnType,
-  A12 extends FnReturnType,
-  A13 extends FnReturnType,
-  A14 extends FnReturnType,
-  A15 extends FnReturnType,
-  A16 extends FnReturnType,
-  A17 extends FnReturnType,
-  A18 extends FnReturnType,
-  A19 extends FnReturnType,
-  A20 extends FnReturnType,
-  R extends FnReturnType
+  A1 extends FnReturnValue,
+  A2 extends FnReturnValue,
+  A3 extends FnReturnValue,
+  A4 extends FnReturnValue,
+  A5 extends FnReturnValue,
+  A6 extends FnReturnValue,
+  A7 extends FnReturnValue,
+  A8 extends FnReturnValue,
+  A9 extends FnReturnValue,
+  A10 extends FnReturnValue,
+  A11 extends FnReturnValue,
+  A12 extends FnReturnValue,
+  A13 extends FnReturnValue,
+  A14 extends FnReturnValue,
+  A15 extends FnReturnValue,
+  A16 extends FnReturnValue,
+  A17 extends FnReturnValue,
+  A18 extends FnReturnValue,
+  A19 extends FnReturnValue,
+  A20 extends FnReturnValue,
+  R extends FnReturnValue
 >(
   ...args: [
     initialValue: A1,
@@ -583,9 +583,9 @@ function flow<
 
 function flow(...args: any[]) {
   const [initialValue, ...fns] = args
-  let result: FnReturnType = initialValue
+  let result: FnReturnValue = initialValue
 
-  const call = (fns: AnyFunction[]): FnReturnType => {
+  const call = (fns: AnyFunction[]): FnReturnValue => {
     if (fns.length === 0) {
       return result
     }
@@ -593,7 +593,7 @@ function flow(...args: any[]) {
     if (isPromise(result)) {
       return result.then((result2) => {
         try {
-          const res: FnReturnType = fn(result2)
+          const res: FnReturnValue = fn(result2)
           result = res
           return call(fns.slice(1))
         } catch (err) {

@@ -1,4 +1,4 @@
-import { ArrayReturnType, UniversalIterable } from 'src/types/index.js'
+import { ArrayReturnValue, UniversalIterable } from 'src/types/index.js'
 import { IterableTypeException, isAsyncIterable, isIterable } from 'src/utils.js'
 
 async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
@@ -24,7 +24,7 @@ async function async<A>(iterable: AsyncIterable<A>): Promise<A[]> {
  *
  * {@link #Repo/tests/pipe/strict/toArray.spec.ts | More examples}
  */
-function toArray<A extends UniversalIterable>(iterable: A): ArrayReturnType<A>
+function toArray<A extends UniversalIterable>(iterable: A): ArrayReturnValue<A>
 
 function toArray<A>(iterable: UniversalIterable<A>) {
   if (isAsyncIterable(iterable)) {

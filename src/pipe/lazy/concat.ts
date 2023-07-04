@@ -1,4 +1,4 @@
-import { ConcatReturnType } from 'src/types/concat.js'
+import { ConcatReturnValue } from 'src/types/concat.js'
 import { UniversalIterable } from 'src/types/index.js'
 import { IterableTypeException, isAsyncIterable, isIterable } from 'src/utils.js'
 
@@ -62,26 +62,26 @@ function async<A>(iterable1: AsyncIterable<A>, iterable2: AsyncIterable<A>): Asy
 function concat<A extends UniversalIterable, B extends UniversalIterable>(
   iterable1: A,
   iterable2: B
-): ConcatReturnType<A, B>
+): ConcatReturnValue<A, B>
 
 function concat<A extends UniversalIterable, B extends UniversalIterable>(
   iterable1: A
-): (iterable2: B) => ConcatReturnType<A, B>
+): (iterable2: B) => ConcatReturnValue<A, B>
 
 function concat<A extends UniversalIterable, B extends UniversalIterable>(
   iterable1: A,
   iterable2?: B
-): ((iterable2: B) => ConcatReturnType<A, B>) | ConcatReturnType<A, B> {
+): ((iterable2: B) => ConcatReturnValue<A, B>) | ConcatReturnValue<A, B> {
   if (iterable2 === undefined) {
     return (iterable2) => concat(iterable1, iterable2)
   }
 
   if (isAsyncIterable(iterable1) || isAsyncIterable(iterable2)) {
-    return async(toAsyncIterable(iterable1), toAsyncIterable(iterable2)) as ConcatReturnType<A, B>
+    return async(toAsyncIterable(iterable1), toAsyncIterable(iterable2)) as ConcatReturnValue<A, B>
   }
 
   if (isIterable(iterable1) && isIterable(iterable2)) {
-    return sync(iterable1, iterable2) as ConcatReturnType<A, B>
+    return sync(iterable1, iterable2) as ConcatReturnValue<A, B>
   }
 
   throw new IterableTypeException()

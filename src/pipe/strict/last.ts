@@ -4,7 +4,7 @@ import { isArray } from './isArray.js'
 import { isString } from './isString.js'
 import { reduce } from './reduce.js'
 
-type LastReturnType<T> = T extends readonly [...rest: any, last: infer Last]
+type LastReturnValue<T> = T extends readonly [...rest: any, last: infer Last]
   ? Last
   : T extends readonly never[]
   ? undefined
@@ -42,7 +42,7 @@ type LastReturnType<T> = T extends readonly [...rest: any, last: infer Last]
  *
  * {@link #Repo/tests/pipe/strict/last.spec.ts | More examples}
  */
-function last<A extends UniversalIterable>(iterable: A): LastReturnType<A>
+function last<A extends UniversalIterable>(iterable: A): LastReturnValue<A>
 
 function last<A>(iterable: UniversalIterable<A> | A[]) {
   if (isArray(iterable) || isString(iterable)) {
