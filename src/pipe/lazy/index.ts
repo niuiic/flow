@@ -1,3 +1,4 @@
+export * from './append.js'
 export * from './concat.js'
 export * from './concurrent.js'
 export * from './entries.js'
