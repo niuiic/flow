@@ -1,5 +1,5 @@
 import { FixedPromise, IteratorReturnValue, UniversalIterable } from 'src/types/index.js'
-import { IterableTypeException, isAsyncIterable, isPromise } from 'src/utils.js'
+import { IterableTypeException, isAsyncIterable, isIterable, isPromise } from 'src/utils.js'
 import { concurrent as concurrentFn, isConcurrent } from './concurrent.js'
 
 function* sync<A>(args: A, iterable: Iterable<A>) {
@@ -54,7 +54,7 @@ function async<A>(args: FixedPromise<A>, iterable: AsyncIterable<A>): AsyncItera
  * Return Iterable/AsyncIterable containing the contents of the given iterable, followed by the given element.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iter = append(4, [1,2,3]);
  * iter.next() // {done: false, value: 1}
  * iter.next() // {done: false, value: 2}
@@ -82,7 +82,7 @@ function append<A, B extends UniversalIterable<A>>(
     return async(isPromise(args) ? args : Promise.resolve(args), iterable) as IteratorReturnValue<B, A>
   }
 
-  if (isAsyncIterable(iterable)) {
+  if (isIterable(iterable)) {
     return sync(args, iterable) as IteratorReturnValue<B, A>
   }
 

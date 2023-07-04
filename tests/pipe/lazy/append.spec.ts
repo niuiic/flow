@@ -3,7 +3,7 @@ import { append, concurrent, delay, map, pipe, toArray, toAsync } from 'src/inde
 describe('append', () => {
   describe('sync', () => {
     it('should work for sync iterable', () => {
-      expect(Array.from(append(1, [4, 5, 6]))).toEqual([1, 4, 5, 6])
+      expect(Array.from(append(1, [4, 5, 6]))).toEqual([4, 5, 6, 1])
     })
 
     it('should return a function if "iterable" not passed', () => {
@@ -14,7 +14,7 @@ describe('append', () => {
   describe('async', () => {
     it('should work for async iterable', () => {
       toArray(append(1, toAsync([4, 5, 6]))).then((res) => {
-        expect(res).toEqual([1, 4, 5, 6])
+        expect(res).toEqual([4, 5, 6, 1])
       })
     })
 
