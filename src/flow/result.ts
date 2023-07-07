@@ -59,7 +59,7 @@ class Result<T> {
     }
   }
 
-  /** Return the result of `fn`, if result is success */
+  /** Return a result whose data is the result of `fn`, if result is success */
   public map<R>(fn: (data: T) => R): Result<R> {
     if (!this.success) {
       return new Result({ err: this.err! })
@@ -67,7 +67,7 @@ class Result<T> {
     return new Result({ data: fn(this.data!) })
   }
 
-  /** Return the result of `fn`, if result is success, or `data` */
+  /** Return a result whose data is the result of `fn`, if result is success, or `data` */
   public mapOr<R>(fn: (data: T) => R, data: R): Result<R> {
     if (!this.success) {
       return new Result({ data })
@@ -75,12 +75,21 @@ class Result<T> {
     return new Result({ data: fn(this.data!) })
   }
 
-  /** Return the result of `fn`, if result is success, or the result of `fn2` */
+  /** Return a result whose data is the result of `fn`, if result is success, or the result of `fn2` */
   public mapOrElse<R>(fn: (data: T) => R, fn2: (err: string) => R): Result<R> {
     if (!this.success) {
       return new Result({ data: fn2(this.err!) })
     }
     return new Result({ data: fn(this.data!) })
+  }
+
+  /** Return a result with the same data of the original one if result is success or return a result with `err` */
+  public mapErr(err: string): Result<T> {
+    if (this.success) {
+      return new Result({ data: this.data! })
+    } else {
+      return new Result({ err })
+    }
   }
 
   /**

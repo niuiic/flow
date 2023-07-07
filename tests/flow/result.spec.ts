@@ -65,23 +65,23 @@ describe('result', () => {
     expect(err('').isSuccess()).toEqual(false)
   })
 
-  it('should return the result of "fn" if success when call "map"', () => {
+  it('should return a result whose data is the result of "fn" if success when call "map"', () => {
     expect(new Result({ data: 1 }).map((data) => data + 1).unwrap()).toEqual(2)
   })
 
-  it('should return "err" if fail when call "map"', () => {
+  it('should return the same result if fail when call "map"', () => {
     expect(new Result<number>({ err: 'err' }).map((data) => data + 1).error()).toEqual('err')
   })
 
-  it('should return the result of "fn" if success when call "mapOr"', () => {
+  it('should a result whose data is the result of "fn" if success when call "mapOr"', () => {
     expect(new Result({ data: 1 }).mapOr((data) => data + 1, 3).unwrap()).toEqual(2)
   })
 
-  it('should return the second argument if fail when call "mapOr"', () => {
+  it('should return a result whose data is the second argument if fail when call "mapOr"', () => {
     expect(new Result<number>({ err: '' }).mapOr((data) => data + 1, 3).unwrap()).toEqual(3)
   })
 
-  it('should return the result of "fn" if success when call "mapOrElse"', () => {
+  it('should return a result whose data is the result of "fn" if success when call "mapOrElse"', () => {
     expect(
       new Result({ data: 'data' })
         .mapOrElse(
@@ -92,7 +92,7 @@ describe('result', () => {
     ).toEqual('datamap')
   })
 
-  it('should return the result of "fn2" if fail when call "mapOrElse"', () => {
+  it('should return a result whose data is the result of "fn2" if fail when call "mapOrElse"', () => {
     expect(
       new Result<string>({ err: 'err' })
         .mapOrElse(
@@ -101,5 +101,13 @@ describe('result', () => {
         )
         .unwrap()
     ).toEqual('err')
+  })
+
+  it('should return "err" if fail when call "mapErr"', () => {
+    expect(new Result<number>({ err: 'err' }).mapErr('newErr').error()).toEqual('newErr')
+  })
+
+  it('should return the same result if success when call "mapErr"', () => {
+    expect(new Result({ data: 1 }).mapErr('newErr')).toEqual(new Result({ data: 1 }))
   })
 })
