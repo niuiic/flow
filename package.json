@@ -50,6 +50,7 @@
     "eslint": "^8.44.0",
     "husky": "^8.0.3",
     "jest": "^29.6.1",
+    "prettier": "2",
     "prettier-plugin-organize-imports": "^3.2.2",
     "release-it": "^16.0.0",
     "rollup": "^3.26.2",
