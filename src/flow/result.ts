@@ -31,7 +31,7 @@ class Result<T> {
   /** Return data of result if result is success, or throw an error */
   public unwrap(): T {
     if (this.success) {
-      return this.data!
+      return this.data as T
     }
     throw new Error('Result is failure')
   }
@@ -39,7 +39,7 @@ class Result<T> {
   /** Return data of result if result is success, or return `data` */
   public unwrapOr(data: T) {
     if (this.success) {
-      return this.data!
+      return this.data as T
     }
     return data
   }
@@ -47,7 +47,7 @@ class Result<T> {
   /** Return data of result if result is success, or return the result of `fn` */
   public unwrapOrElse(fn: (err: string) => T): T {
     if (this.success) {
-      return this.data!
+      return this.data as T
     }
     return fn(this.err!)
   }
@@ -64,7 +64,7 @@ class Result<T> {
     if (!this.success) {
       return new Result({ err: this.err! })
     }
-    return new Result({ data: fn(this.data!) })
+    return new Result({ data: fn(this.data as T) })
   }
 
   /** Return a result whose data is the result of `fn`, if result is success, or `data` */
@@ -72,7 +72,7 @@ class Result<T> {
     if (!this.success) {
       return new Result({ data })
     }
-    return new Result({ data: fn(this.data!) })
+    return new Result({ data: fn(this.data as T) })
   }
 
   /** Return a result whose data is the result of `fn`, if result is success, or the result of `fn2` */
@@ -80,13 +80,13 @@ class Result<T> {
     if (!this.success) {
       return new Result({ data: fn2(this.err!) })
     }
-    return new Result({ data: fn(this.data!) })
+    return new Result({ data: fn(this.data as T) })
   }
 
   /** Return a result with the same data of the original one if result is success or return a result with `err` */
   public mapErr(err: string): Result<T> {
     if (this.success) {
-      return new Result({ data: this.data! })
+      return new Result({ data: this.data as T })
     } else {
       return new Result({ err })
     }
@@ -103,7 +103,7 @@ class Result<T> {
         const data = await this.data
         return new Result<Awaited<T>>({ data: data as Awaited<T> })
       }
-      return new Result<Awaited<T>>({ data: this.data! as Awaited<T> })
+      return new Result<Awaited<T>>({ data: this.data as Awaited<T> })
     } else {
       return new Result<Awaited<T>>({ err: this.err! })
     }
