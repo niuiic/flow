@@ -1,11 +1,12 @@
-import { AnyFunction, FlowReturnValue, MaybePromise } from 'src/types/index.js'
+import { AnyFunction, AnyObject, FlowReturnValue, MaybePromise } from 'src/types/index.js'
 import { isPromise } from 'src/utils.js'
 import { Result } from './result.js'
 
 type FnReturnValue = MaybePromise<Result<unknown>>
 
-interface FlowState {
+export interface FlowState {
   done: boolean
+  log: 'NONE' | 'INFO' | 'ERROR'
 }
 
 export type Modifier = (flowState: Partial<FlowState>) => void
@@ -588,30 +589,35 @@ function flow<
 function flow(...args: any[]) {
   const [initialValue, ...fns] = args
   const flowState: FlowState = {
-    done: false
+    done: false,
+    log: 'NONE'
   }
   const modifier: Modifier = (args) => {
     type Key = keyof FlowState
     for (const key in args) {
       if (args[key as Key] !== undefined && Object.hasOwn(flowState, key)) {
-        flowState[key as Key] = (args as FlowState)[key as Key]
+        (flowState as AnyObject)[key] = args[key as Key]
       }
     }
   }
   let result: FnReturnValue = initialValue
+  let step = -1
 
   const call = (fns: AnyFunction[]): FnReturnValue => {
     if (flowState.done || fns.length === 0) {
       return result
     }
+    step = step + 1
     const fn = fns[0]
     if (isPromise(result)) {
       return result.then((result2) => {
+        log(result2, step, flowState.log)
         const res: FnReturnValue = fn(result2, modifier)
         result = res
         return call(fns.slice(1))
       })
     } else {
+      log(result, step, flowState.log)
       const res = fn(result, modifier)
       result = res
       return call(fns.slice(1))
@@ -619,6 +625,24 @@ function flow(...args: any[]) {
   }
 
   return call(fns)
+}
+
+function log(result: Result<unknown>, step: number, method: FlowState['log']) {
+  if (method === 'NONE') {
+    return
+  }
+  if (method === 'ERROR' && result.isError()) {
+    console.error(`Step ${step} failed, the error is ${result.error()!}`)
+    return
+  }
+  if (method === 'INFO') {
+    if (result.isSuccess()) {
+      console.info(`Step ${step} success, the result is ${result.unwrap()}`)
+    } else {
+      console.error(`Step ${step} failed, the error is ${result.error()!}`)
+    }
+    return
+  }
 }
 
 export { flow }
