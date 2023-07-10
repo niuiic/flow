@@ -18,6 +18,12 @@ const inspector = <T>(args: { success: true; data: T } | { success: false; err: 
 const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(inspector), errThen(notify))).unwrap()
 ```
 
+`log` can output result of each step in flow.
+
+```typescript
+flow(ok(userId), log('INFO'), andThen(queryUserInfo), errThen(notify))
+```
+
 ## pipe
 
 `tap` can inject an inspector for the result of the previous operation, and `peek` can apply an function to each item in iterable.
