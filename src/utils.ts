@@ -44,4 +44,10 @@ export class IterableAsyncFnException extends Error {
   }
 }
 
+export class FlowMissModifierException extends Error {
+  constructor() {
+    super('"modifier" is required')
+  }
+}
+
 export function* empty() {}

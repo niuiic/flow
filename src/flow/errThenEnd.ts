@@ -1,7 +1,7 @@
 import { MaybePromise } from 'src/types/index.js'
-import { isPromise } from 'src/utils.js'
-import { FlowExitException } from './flow.js'
-import { Result, ok } from './result.js'
+import { FlowMissModifierException, isPromise } from 'src/utils.js'
+import { Modifier } from './flow.js'
+import { Result, err, ok } from './result.js'
 
 /**
  * Call `fn` if `result` is failure, then exit flow.
@@ -13,25 +13,37 @@ import { Result, ok } from './result.js'
  *
  * {@link #Repo/tests/flow/errThenEnd.spec.ts | More examples}
  */
-function errThenEnd<A>(fn: (err: string) => Promise<unknown>, result: Result<A>): MaybePromise<Result<A>>
-function errThenEnd<A>(fn: (err: string) => Promise<unknown>): (result: Result<A>) => MaybePromise<Result<A>>
-function errThenEnd<A>(fn: (err: string) => unknown, result: Result<A>): Result<A>
-function errThenEnd<A>(fn: (err: string) => unknown): (result: Result<A>) => Result<A>
+function errThenEnd<A>(
+  fn: (err: string) => Promise<unknown>,
+  result: Result<A>,
+  modifier: Modifier
+): MaybePromise<Result<A>>
+function errThenEnd<A>(
+  fn: (err: string) => Promise<unknown>
+): (result: Result<A>, modifier: Modifier) => MaybePromise<Result<A>>
+function errThenEnd<A>(fn: (err: string) => unknown, result: Result<A>, modifier: Modifier): Result<A>
+function errThenEnd<A>(fn: (err: string) => unknown): (result: Result<A>, modifier: Modifier) => Result<A>
 
 function errThenEnd<A>(
   fn: (err: string) => MaybePromise<unknown>,
-  result?: Result<A>
-): MaybePromise<Result<A>> | ((result: Result<A>) => MaybePromise<Result<A>>) {
+  result?: Result<A>,
+  modifier?: Modifier
+): MaybePromise<Result<A>> | ((result: Result<A>, modifier: Modifier) => MaybePromise<Result<A>>) {
   if (result === undefined) {
-    return (result) => errThenEnd(fn, result)
+    return (result: Result<A>, modifier: Modifier) => errThenEnd(fn, result, modifier)
+  }
+
+  if (modifier === undefined) {
+    throw new FlowMissModifierException()
   }
 
   if (result.isError()) {
+    modifier({ done: true })
     const res = fn(result.error()!)
     if (isPromise(res)) {
-      res.then(() => {})
+      return res.then(() => err(result.error()!))
     }
-    throw new FlowExitException()
+    return err(result.error()!)
   }
 
   return ok(result.unwrap())

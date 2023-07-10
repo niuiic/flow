@@ -3,14 +3,14 @@ import { andThen, anyway, err, errThenEnd, flow, ok } from 'src/index.js'
 describe('errThenEnd', () => {
   it('should not call "fn" if "result" is success', () => {
     const fn = jest.fn()
-    errThenEnd(fn, ok(1))
+    flow(ok(1), errThenEnd(fn))
     expect(fn).not.toBeCalled()
   })
 
   it('should call "fn" if "result" is failure', () => {
     const fn = jest.fn()
     try {
-      errThenEnd(fn, err(''))
+      flow(err(''), errThenEnd(fn))
     } catch {
       expect(fn).toBeCalled()
     }
@@ -23,7 +23,7 @@ describe('errThenEnd', () => {
     const error = (
       await flow(
         ok(1),
-        andThen(() => err<number>('error')),
+        andThen(() => err('error')),
         errThenEnd(async () => {
           fn2()
         }),

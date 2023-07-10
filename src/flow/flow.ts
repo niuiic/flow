@@ -4,11 +4,11 @@ import { Result } from './result.js'
 
 type FnReturnValue = MaybePromise<Result<unknown>>
 
-export class FlowExitException extends Error {
-  public constructor() {
-    super('exit flow')
-  }
+interface FlowState {
+  done: boolean
 }
+
+export type Modifier = (flowState: Partial<FlowState>) => void
 
 /**
  * Compose steps from left to right.
@@ -21,19 +21,23 @@ export class FlowExitException extends Error {
  * {@link #Repo/tests/flow/flow.spec.ts | More examples}
  */
 function flow<A1 extends FnReturnValue, R extends FnReturnValue>(
-  ...args: [initialValue: A1, fn1: (args: Awaited<A1>) => R]
+  ...args: [initialValue: A1, fn1: (args: Awaited<A1>, modifier: Modifier) => R]
 ): FlowReturnValue<[A1, R]>
 
 function flow<A1 extends FnReturnValue, A2 extends FnReturnValue, R extends FnReturnValue>(
-  ...args: [initialValue: A1, fn1: (args: Awaited<A1>) => A2, fn2: (args: Awaited<A2>) => R]
+  ...args: [
+    initialValue: A1,
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => R
+  ]
 ): FlowReturnValue<[A1, A2, R]>
 
 function flow<A1 extends FnReturnValue, A2 extends FnReturnValue, A3 extends FnReturnValue, R extends FnReturnValue>(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, R]>
 
@@ -46,10 +50,10 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, R]>
 
@@ -63,11 +67,11 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, R]>
 
@@ -82,12 +86,12 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, R]>
 
@@ -103,13 +107,13 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, R]>
 
@@ -126,14 +130,14 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, R]>
 
@@ -151,15 +155,15 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, R]>
 
@@ -178,16 +182,16 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, R]>
 
@@ -207,17 +211,17 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R]>
 
@@ -238,18 +242,18 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R]>
 
@@ -271,19 +275,19 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R]>
 
@@ -306,20 +310,20 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R]>
 
@@ -343,21 +347,21 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => A15,
-    fn15: (args: Awaited<A15>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => A15,
+    fn15: (args: Awaited<A15>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, R]>
 
@@ -382,22 +386,22 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => A15,
-    fn15: (args: Awaited<A15>) => A16,
-    fn16: (args: Awaited<A16>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => A15,
+    fn15: (args: Awaited<A15>, modifier: Modifier) => A16,
+    fn16: (args: Awaited<A16>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, R]>
 
@@ -423,23 +427,23 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => A15,
-    fn15: (args: Awaited<A15>) => A16,
-    fn16: (args: Awaited<A16>) => A17,
-    fn17: (args: Awaited<A17>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => A15,
+    fn15: (args: Awaited<A15>, modifier: Modifier) => A16,
+    fn16: (args: Awaited<A16>, modifier: Modifier) => A17,
+    fn17: (args: Awaited<A17>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, R]>
 
@@ -466,24 +470,24 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => A15,
-    fn15: (args: Awaited<A15>) => A16,
-    fn16: (args: Awaited<A16>) => A17,
-    fn17: (args: Awaited<A17>) => A18,
-    fn18: (args: Awaited<A18>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => A15,
+    fn15: (args: Awaited<A15>, modifier: Modifier) => A16,
+    fn16: (args: Awaited<A16>, modifier: Modifier) => A17,
+    fn17: (args: Awaited<A17>, modifier: Modifier) => A18,
+    fn18: (args: Awaited<A18>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, R]>
 
@@ -511,25 +515,25 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => A15,
-    fn15: (args: Awaited<A15>) => A16,
-    fn16: (args: Awaited<A16>) => A17,
-    fn17: (args: Awaited<A17>) => A18,
-    fn18: (args: Awaited<A18>) => A19,
-    fn19: (args: Awaited<A19>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => A15,
+    fn15: (args: Awaited<A15>, modifier: Modifier) => A16,
+    fn16: (args: Awaited<A16>, modifier: Modifier) => A17,
+    fn17: (args: Awaited<A17>, modifier: Modifier) => A18,
+    fn18: (args: Awaited<A18>, modifier: Modifier) => A19,
+    fn19: (args: Awaited<A19>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, R]>
 
@@ -558,64 +562,59 @@ function flow<
 >(
   ...args: [
     initialValue: A1,
-    fn1: (args: Awaited<A1>) => A2,
-    fn2: (args: Awaited<A2>) => A3,
-    fn3: (args: Awaited<A3>) => A4,
-    fn4: (args: Awaited<A4>) => A5,
-    fn5: (args: Awaited<A5>) => A6,
-    fn6: (args: Awaited<A6>) => A7,
-    fn7: (args: Awaited<A7>) => A8,
-    fn8: (args: Awaited<A8>) => A9,
-    fn9: (args: Awaited<A9>) => A10,
-    fn10: (args: Awaited<A10>) => A11,
-    fn11: (args: Awaited<A11>) => A12,
-    fn12: (args: Awaited<A12>) => A13,
-    fn13: (args: Awaited<A13>) => A14,
-    fn14: (args: Awaited<A14>) => A15,
-    fn15: (args: Awaited<A15>) => A16,
-    fn16: (args: Awaited<A16>) => A17,
-    fn17: (args: Awaited<A17>) => A18,
-    fn18: (args: Awaited<A18>) => A19,
-    fn19: (args: Awaited<A19>) => A20,
-    fn20: (args: Awaited<A20>) => R
+    fn1: (args: Awaited<A1>, modifier: Modifier) => A2,
+    fn2: (args: Awaited<A2>, modifier: Modifier) => A3,
+    fn3: (args: Awaited<A3>, modifier: Modifier) => A4,
+    fn4: (args: Awaited<A4>, modifier: Modifier) => A5,
+    fn5: (args: Awaited<A5>, modifier: Modifier) => A6,
+    fn6: (args: Awaited<A6>, modifier: Modifier) => A7,
+    fn7: (args: Awaited<A7>, modifier: Modifier) => A8,
+    fn8: (args: Awaited<A8>, modifier: Modifier) => A9,
+    fn9: (args: Awaited<A9>, modifier: Modifier) => A10,
+    fn10: (args: Awaited<A10>, modifier: Modifier) => A11,
+    fn11: (args: Awaited<A11>, modifier: Modifier) => A12,
+    fn12: (args: Awaited<A12>, modifier: Modifier) => A13,
+    fn13: (args: Awaited<A13>, modifier: Modifier) => A14,
+    fn14: (args: Awaited<A14>, modifier: Modifier) => A15,
+    fn15: (args: Awaited<A15>, modifier: Modifier) => A16,
+    fn16: (args: Awaited<A16>, modifier: Modifier) => A17,
+    fn17: (args: Awaited<A17>, modifier: Modifier) => A18,
+    fn18: (args: Awaited<A18>, modifier: Modifier) => A19,
+    fn19: (args: Awaited<A19>, modifier: Modifier) => A20,
+    fn20: (args: Awaited<A20>, modifier: Modifier) => R
   ]
 ): FlowReturnValue<[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, R]>
 
 function flow(...args: any[]) {
   const [initialValue, ...fns] = args
+  const flowState: FlowState = {
+    done: false
+  }
+  const modifier: Modifier = (args) => {
+    type Key = keyof FlowState
+    for (const key in args) {
+      if (args[key as Key] !== undefined && Object.hasOwn(flowState, key)) {
+        flowState[key as Key] = (args as FlowState)[key as Key]
+      }
+    }
+  }
   let result: FnReturnValue = initialValue
 
   const call = (fns: AnyFunction[]): FnReturnValue => {
-    if (fns.length === 0) {
+    if (flowState.done || fns.length === 0) {
       return result
     }
     const fn = fns[0]
     if (isPromise(result)) {
       return result.then((result2) => {
-        try {
-          const res: FnReturnValue = fn(result2)
-          result = res
-          return call(fns.slice(1))
-        } catch (err) {
-          if (err instanceof FlowExitException) {
-            return result
-          } else {
-            throw err
-          }
-        }
-      })
-    } else {
-      try {
-        const res = fn(result)
+        const res: FnReturnValue = fn(result2, modifier)
         result = res
         return call(fns.slice(1))
-      } catch (err) {
-        if (err instanceof FlowExitException) {
-          return result
-        } else {
-          throw err
-        }
-      }
+      })
+    } else {
+      const res = fn(result, modifier)
+      result = res
+      return call(fns.slice(1))
     }
   }
 
