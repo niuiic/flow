@@ -637,9 +637,9 @@ function log(result: Result<unknown>, step: number, method: FlowState['log']) {
   }
   if (method === 'INFO') {
     if (result.isSuccess()) {
-      console.info(`Step ${step} success, the result is ${result.unwrap()}`)
+      console.info(`Step ${step} success, the result is`, result.unwrap())
     } else {
-      console.error(`Step ${step} failed, the error is ${result.error()!}`)
+      console.error(`Step ${step} failed, the error is`, result.error())
     }
     return
   }
