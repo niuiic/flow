@@ -3,7 +3,10 @@ import { anyway, err, ok } from 'src/index.js'
 describe('anyway', () => {
   it('should call "fn" if "result" is success', () => {
     const fn = jest.fn()
-    anyway(fn, ok(1))
+    anyway(() => {
+      fn()
+      return ok()
+    }, ok(1))
     expect(fn).toBeCalled()
   })
 

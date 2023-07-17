@@ -1,4 +1,5 @@
-import { MaybePromise } from 'src/types/index.js'
+import { MaybePromise, ResultReturnValue } from 'src/types/index.js'
+import { isPromise } from 'src/utils.js'
 import { Result } from './result.js'
 
 /**
@@ -13,40 +14,47 @@ import { Result } from './result.js'
  *
  * {@link #Repo/tests/flow/anyway.spec.ts | More examples}
  */
-function anyway<A, R>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => Result<R>,
+function anyway<A, R extends MaybePromise<Result<unknown>>>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => R,
   result: Result<A>
-): Result<R>
-function anyway<A, R>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => Result<R>
-): (result: Result<A>) => Result<R>
-function anyway<A, R>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<Result<R>>,
-  result: Result<A>
-): MaybePromise<Result<R>>
-function anyway<A, R>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<Result<R>>
-): (result: Result<A>) => MaybePromise<Result<R>>
+): ResultReturnValue<R>
+function anyway<A, R extends MaybePromise<Result<unknown>>>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => R
+): (result: Result<A>) => ResultReturnValue<R>
 
-function anyway<A, R>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => MaybePromise<Result<R>>,
+function anyway<A, R extends MaybePromise<Result<unknown>>>(
+  fn: (args: { success: true; data: A } | { success: false; err: string }) => R,
   result?: Result<A>
-): MaybePromise<Result<R>> | ((result: Result<A>) => MaybePromise<Result<R>>) {
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+): ((result: Result<A>) => ResultReturnValue<R>) | ResultReturnValue<R> {
   if (result === undefined) {
     return (result) => anyway(fn as () => any, result)
   }
 
   if (result.isSuccess()) {
-    return fn({
+    const res = fn({
       success: true,
       data: result.unwrap()
     })
+    if (isPromise(res)) {
+      return res.then((result) => {
+        if (result.isPromise()) {
+          return result.wait()
+        }
+        return result
+      }) as ResultReturnValue<R>
+    } else {
+      if (res.isPromise()) {
+        return res.wait() as ResultReturnValue<R>
+      }
+      return res as ResultReturnValue<R>
+    }
   }
 
   return fn({
     success: false,
     err: result.error()!
-  })
+  }) as ResultReturnValue<R>
 }
 
 export { anyway }

@@ -1,4 +1,5 @@
-import { MaybePromise } from 'src/types/index.js'
+import { MaybePromise, ResultReturnValue } from 'src/types/index.js'
+import { isPromise } from 'src/utils.js'
 import { Result, err } from './result.js'
 
 /**
@@ -13,24 +14,40 @@ import { Result, err } from './result.js'
  *
  * {@link #Repo/tests/flow/andThen.spec.ts | More examples}
  */
-function andThen<A, R extends Result<unknown>>(fn: (data: A) => R, result: Result<A>): R
-function andThen<A, R extends Result<unknown>>(fn: (data: A) => R): (result: Result<A>) => R
-function andThen<A, R extends Result<unknown>>(fn: (data: A) => MaybePromise<R>, result: Result<A>): MaybePromise<R>
-function andThen<A, R extends Result<unknown>>(fn: (data: A) => MaybePromise<R>): (result: Result<A>) => MaybePromise<R>
+function andThen<A, R extends MaybePromise<Result<unknown>>>(
+  fn: (data: A) => R,
+  result: Result<A>
+): ResultReturnValue<R>
+function andThen<A, R extends MaybePromise<Result<unknown>>>(
+  fn: (data: A) => R
+): (result: Result<A>) => ResultReturnValue<R>
 
-function andThen<A, R extends Result<unknown>>(
-  fn: (data: A) => MaybePromise<R>,
+function andThen<A, R extends MaybePromise<Result<unknown>>>(
+  fn: (data: A) => R,
   result?: Result<A>
-): MaybePromise<R> | ((result: Result<A>) => MaybePromise<R>) {
+): ResultReturnValue<R> | ((result: Result<A>) => ResultReturnValue<R>) {
   if (result === undefined) {
     return (result) => andThen(fn, result)
   }
 
   if (result.isSuccess()) {
-    return fn(result.unwrap())
+    const res = fn(result.unwrap())
+    if (isPromise(res)) {
+      return res.then((result) => {
+        if (result.isPromise()) {
+          return result.wait()
+        }
+        return result
+      }) as ResultReturnValue<R>
+    } else {
+      if (res.isPromise()) {
+        return res.wait() as ResultReturnValue<R>
+      }
+      return res as ResultReturnValue<R>
+    }
   }
 
-  return err(result.error()!) as R
+  return err(result.error()!) as ResultReturnValue<R>
 }
 
 export { andThen }

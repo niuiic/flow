@@ -12,12 +12,20 @@ describe('flow', () => {
   it('should be able to catch error', () => {
     flow(
       ok(''),
-      andThen((data) => {
-        throw 'error'
-        return ok(data + 'data')
+      andThen(() => {
+        return ok(
+          (async () => {
+            throw 'error'
+            return ''
+          })()
+        )
       }),
       errThen((e) => {
         expect(e).toEqual('error')
+      }),
+      andThen(() => {
+        expect(1).toEqual(2)
+        return ok('')
       })
     )
   })

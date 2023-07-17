@@ -118,6 +118,11 @@ class Result<T> {
   public isError() {
     return !this.success
   }
+
+  // Check if data is a promise
+  public isPromise() {
+    return this.success && isPromise(this.data)
+  }
 }
 
 /** Generate a fail result */

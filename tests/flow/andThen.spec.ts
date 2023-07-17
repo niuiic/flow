@@ -3,7 +3,10 @@ import { andThen, err, ok } from 'src/index.js'
 describe('andThen', () => {
   it('should call "fn" if "result" is success', () => {
     const fn = jest.fn()
-    andThen(fn, ok(1))
+    andThen(() => {
+      fn()
+      return ok()
+    }, ok(1))
     expect(fn).toBeCalled()
   })
 
