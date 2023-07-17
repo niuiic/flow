@@ -1,4 +1,4 @@
-import { FixedPromise, Iter } from 'src/types/index.js'
+import { FixedPromise } from 'src/types/index.js'
 
 export function isPromise<A>(args: unknown): args is FixedPromise<A> {
   if (args instanceof Promise) {
@@ -17,11 +17,11 @@ export function isPromise<A>(args: unknown): args is FixedPromise<A> {
   return false
 }
 
-export function isIterable<T = unknown>(args: Iter<T> | unknown): args is Iterable<T> {
+export function isIterable<T = unknown>(args: unknown): args is Iterable<T> {
   return typeof (args as any)?.[Symbol.iterator] === 'function'
 }
 
-export function isAsyncIterable<T = unknown>(args: Iter<T> | unknown): args is AsyncIterable<T> {
+export function isAsyncIterable<T = unknown>(args: unknown): args is AsyncIterable<T> {
   return typeof (args as any)?.[Symbol.asyncIterator] === 'function'
 }
 
