@@ -28,7 +28,7 @@ function anyway<A, R extends MaybePromise<Result<unknown>>>(
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 ): ((result: Result<A>) => ResultReturnValue<R>) | ResultReturnValue<R> {
   if (result === undefined) {
-    return (result) => anyway(fn as () => any, result)
+    return (result) => anyway(fn, result)
   }
 
   if (result.isSuccess()) {
