@@ -1,4 +1,4 @@
-import { andThen, delay, errThen, flow, ok } from 'src/index.js'
+import { andThen, anyway, delay, errThen, flow, ok } from 'src/index.js'
 
 describe('flow', () => {
   it('should be able to compose steps', () => {
@@ -10,6 +10,7 @@ describe('flow', () => {
   })
 
   it('should be able to catch error', () => {
+    const fn = jest.fn()
     flow(
       ok(''),
       andThen(() => {
@@ -21,11 +22,16 @@ describe('flow', () => {
         )
       }),
       errThen((e) => {
+        fn()
         expect(e).toEqual('error')
       }),
       andThen(() => {
         expect(1).toEqual(2)
         return ok('')
+      }),
+      anyway(() => {
+        expect(fn).toBeCalled()
+        return ok()
       })
     )
   })

@@ -607,28 +607,43 @@ function flow(...args: any[]) {
     if (flowState.done || fns.length === 0) {
       return result
     }
+
     step = step + 1
     const fn = fns[0]
+
     if (isPromise(result)) {
       return result
-        .then((result2) => {
-          log(result2, step, flowState.log)
-          const res: FnReturnValue = fn(result2, modifier)
-          result = res
+        .then((_result) => {
+          log(_result, step, flowState.log)
+          result = fn(_result, modifier)
           return call(fns.slice(1))
         })
         .catch((e) => {
-          return err(JSON.stringify(e))
+          result = err(JSON.stringify(e))
+          return call(fns.slice(1))
         })
     } else {
       log(result, step, flowState.log)
       try {
         const res = fn(result, modifier)
-        result = res
+        if (isPromise(res)) {
+          return res
+            .then((res) => {
+              result = res as any
+              return call(fns.slice(1))
+            })
+            .catch((e) => {
+              result = err(JSON.stringify(e))
+              return call(fns.slice(1))
+            })
+        } else {
+          result = res
+          return call(fns.slice(1))
+        }
       } catch (e) {
         result = err(JSON.stringify(e))
+        return call(fns.slice(1))
       }
-      return call(fns.slice(1))
     }
   }
 
