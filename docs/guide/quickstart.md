@@ -58,7 +58,11 @@ const { flow, pipe } = require('niuiic/flow')
 
 ```typescript
 class User {
-  constructor(public id: string, public name: string, public password: string) {}
+  constructor(
+    public id: string,
+    public name: string,
+    public password: string
+  ) {}
 }
 
 const queryUserInfo = (userId: string) => {
@@ -91,6 +95,8 @@ userId = '4'
 // No user found, then call `notify` and return `defaultUser`.
 const userInfo2 = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUser)
 ```
+
+> `flow` will automatically catch error and convert it into `Result`.
 
 ### pipe
 
