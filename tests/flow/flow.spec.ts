@@ -9,6 +9,19 @@ describe('flow', () => {
     )
   })
 
+  it('should be able to catch error', () => {
+    flow(
+      ok(''),
+      andThen((data) => {
+        throw 'error'
+        return ok(data + 'data')
+      }),
+      errThen((e) => {
+        expect(e).toEqual('error')
+      })
+    )
+  })
+
   it('should wait for async functions', () => {
     const fn = jest.fn()
     flow(

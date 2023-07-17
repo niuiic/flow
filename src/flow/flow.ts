@@ -1,6 +1,6 @@
 import { AnyFunction, AnyObject, FlowReturnValue, MaybePromise } from 'src/types/index.js'
 import { isPromise } from 'src/utils.js'
-import { Result } from './result.js'
+import { Result, err } from './result.js'
 
 type FnReturnValue = MaybePromise<Result<unknown>>
 
@@ -596,7 +596,7 @@ function flow(...args: any[]) {
     type Key = keyof FlowState
     for (const key in args) {
       if (args[key as Key] !== undefined && Object.hasOwn(flowState, key)) {
-        (flowState as AnyObject)[key] = args[key as Key]
+        ;(flowState as AnyObject)[key] = args[key as Key]
       }
     }
   }
@@ -610,16 +610,24 @@ function flow(...args: any[]) {
     step = step + 1
     const fn = fns[0]
     if (isPromise(result)) {
-      return result.then((result2) => {
-        log(result2, step, flowState.log)
-        const res: FnReturnValue = fn(result2, modifier)
-        result = res
-        return call(fns.slice(1))
-      })
+      return result
+        .then((result2) => {
+          log(result2, step, flowState.log)
+          const res: FnReturnValue = fn(result2, modifier)
+          result = res
+          return call(fns.slice(1))
+        })
+        .catch((e) => {
+          return err(JSON.stringify(e))
+        })
     } else {
       log(result, step, flowState.log)
-      const res = fn(result, modifier)
-      result = res
+      try {
+        const res = fn(result, modifier)
+        result = res
+      } catch (e) {
+        result = err(JSON.stringify(e))
+      }
       return call(fns.slice(1))
     }
   }
