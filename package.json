@@ -6,23 +6,21 @@
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "engines": {
     "node": ">=16"
   },
   "scripts": {
-    "build": "pnpm tsc",
-    "package": "pnpm rollup -c rollup.config.mjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
+    "build": "tsc",
+    "package": "rollup -c rollup.config.mjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
     "release": "pnpm package && release-it",
-    "call": "pnpm esrun cli",
-    "test": "pnpm jest",
-    "test:coverage": "pnpm jest --coverage",
+    "call": "esrun cli",
+    "test": "jest",
+    "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "pnpm call lint",
-    "docs:dev": "pnpm vitepress dev docs",
-    "docs:build": "pnpm typedoc && pnpm call cleanDoc && pnpm vitepress build docs",
-    "docs:preview": "pnpm vitepress preview docs"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "typedoc && pnpm call cleanDoc && vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "author": "niuiic",
   "homepage": "https://flow.niuiic.com",
@@ -31,11 +29,7 @@
     "type": "git",
     "url": "https://github.com/niuiic/flow.git"
   },
-  "keywords": [
-    "fp",
-    "lazy",
-    "concurrency"
-  ],
+  "keywords": ["fp", "lazy", "concurrency"],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
