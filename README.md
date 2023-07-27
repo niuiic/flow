@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://flow.niuiic.com" target="_blank" rel="noopener noreferrer">
-    <img id="flow-logo" width="220" height="220" src="./docs/public/logo.svg" alt="Flow logo">
+    <img id="flow-logo" width="320" height="220" src="./docs/public/logo.jpeg" alt="Flow logo">
   </a>
 </p>
 
