@@ -2,18 +2,7 @@
 
 <p align="center">
   <a href="https://flow.niuiic.com" target="_blank" rel="noopener noreferrer">
-  <svg fill="none" viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
-    <foreignObject width="100%" height="100%">
-      <div xmlns="http://www.w3.org/1999/xhtml">
-        <style>
-          #flow-logo {
-              border-radius: 50%;
-          }
-        </style>
-        <img id="flow-logo" width="280" height="220" src="./docs/public/logo.jpeg" alt="Flow logo">
-      </div>
-    </foreignObject>
-  </svg>
+    <img id="flow-logo" width="220" height="220" src="./docs/public/logo.svg" alt="Flow logo">
   </a>
 </p>
 
