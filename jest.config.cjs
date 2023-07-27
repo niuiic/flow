@@ -15,5 +15,6 @@ module.exports = {
         useESM: true
       }
     ]
-  }
+  },
+  coverageReporters: ['json-summary', 'text', 'lcov']
 }
