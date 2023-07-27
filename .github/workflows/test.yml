@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: pnpm i --frozen-lockfile
-      - run: pnpm test
+      - run: pnpm test:coverage
       - uses: jaywcjlove/coverage-badges-cli@main
         with:
           style: flat

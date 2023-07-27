@@ -16,7 +16,7 @@
     "release": "pnpm package && release-it",
     "call": "esrun cli",
     "test": "jest",
-    "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test:coverage": "jest --coverage",
     "lint": "pnpm call lint",
     "docs:dev": "vitepress dev docs",
     "docs:build": "typedoc && pnpm call cleanDoc && vitepress build docs",
