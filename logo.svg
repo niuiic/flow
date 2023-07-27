@@ -6,7 +6,7 @@
             border-radius: 50%;
         }
       </style>
-      <img id="flow-logo" width="280" height="220" src="./logo.jpeg" alt="Flow logo">
+      <img id="flow-logo" width="280" height="220" src="./logo.jpeg" alt="Flow logo" />
     </div>
   </foreignObject>
 </svg>
