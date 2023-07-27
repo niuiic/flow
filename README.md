@@ -19,8 +19,10 @@
 
 > Functional library for TypeScript/JavaScript.
 
+- Streaming programming
+- Graceful error handling and asynchronous programming
 - Lazy evaluation
-- Pure function type restrictions
+- TypeScript support
 
 [Read the Docs to Learn More](https://flow.niuiic.com).
 
