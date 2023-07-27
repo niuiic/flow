@@ -1,8 +1,12 @@
+<br/>
+
 <p align="center">
   <a href="https://flow.niuiic.com" target="_blank" rel="noopener noreferrer">
-    <img width="180" src="./docs/public/logo.jpeg" alt="Flow logo">
+    <img width="200" src="./docs/public/logo.jpeg" alt="Flow logo">
   </a>
 </p>
+
+<br/>
 
 <p align="center">
   <a href="https://npmjs.com/package/vite"><img src="https://img.shields.io/npm/v/@niuiic/flow.svg" alt="npm package"></a>
@@ -17,16 +21,6 @@
 
 - Lazy evaluation
 - Pure function type restrictions
-
-## Conventions
-
-- Surround variable/function with \`\` in comments.
-- Surround variable/function with \"\" in code(such as the content of Error).
-- Fix wrong nested `Promise` type for user.
-- Check type/range errors which may only occurs in js or is not type-constrained.
-- Any sentence in code or comment should start with an upper letter or variable/function.
-- Add `Immutable` type restriction for parameters of some callback.
-- AsyncIterable should be iterated by `for await`.
 
 [Read the Docs to Learn More](https://flow.niuiic.com).
 
