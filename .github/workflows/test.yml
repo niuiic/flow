@@ -22,11 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: pnpm i --frozen-lockfile
       - run: pnpm test:coverage
-      - uses: jaywcjlove/coverage-badges-cli@main
-        with:
-          style: flat
-          source: coverage/coverage-final.json
-          output: coverage/badges.svg
+      - run: pnpm add -D jest-coverage-badges-ng
+      - run: pnpm jest-coverage-badges-ng
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
