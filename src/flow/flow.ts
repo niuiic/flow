@@ -11,6 +11,8 @@ export interface FlowState {
 
 export type Modifier = (flowState: Partial<FlowState>) => void
 
+const toStr = (err: unknown) => JSON.stringify(err, Object.getOwnPropertyNames(err), 1)
+
 /**
  * Compose steps from left to right.
  *
@@ -619,7 +621,7 @@ function flow(...args: any[]) {
           return call(fns.slice(1))
         })
         .catch((e) => {
-          result = err(JSON.stringify(e))
+          result = err(toStr(e))
           return call(fns.slice(1))
         })
     } else {
@@ -633,7 +635,7 @@ function flow(...args: any[]) {
               return call(fns.slice(1))
             })
             .catch((e) => {
-              result = err(JSON.stringify(e))
+              result = err(toStr(e))
               return call(fns.slice(1))
             })
         } else {
@@ -641,7 +643,7 @@ function flow(...args: any[]) {
           return call(fns.slice(1))
         }
       } catch (e) {
-        result = err(JSON.stringify(e))
+        result = err(toStr(e))
         return call(fns.slice(1))
       }
     }

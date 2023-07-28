@@ -17,7 +17,6 @@ describe('flow', () => {
         return ok(
           (async () => {
             throw 'error'
-            return ''
           })()
         )
       }),
