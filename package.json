@@ -1,12 +1,14 @@
 {
   "name": "@niuiic/flow",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "A functional library for TypeScript/JavaScript",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=16"
   },
@@ -29,7 +31,11 @@
     "type": "git",
     "url": "https://github.com/niuiic/flow.git"
   },
-  "keywords": ["fp", "lazy", "concurrency"],
+  "keywords": [
+    "fp",
+    "lazy",
+    "concurrency"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
