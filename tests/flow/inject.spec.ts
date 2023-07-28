@@ -1,4 +1,4 @@
-import { err, inject, ok } from 'src/index.js'
+import { err, flow, inject, ok } from 'src/index.js'
 
 describe('inject', () => {
   it('should return a function if "result" is not passwd', () => {
@@ -18,5 +18,15 @@ describe('inject', () => {
     inject(fn2, err(''))
     expect(fn1).toBeCalled()
     expect(fn2).toBeCalled()
+  })
+
+  it('should work for async functions', async () => {
+    const fn = jest.fn()
+    flow(
+      Promise.resolve(ok(1)),
+      inject(async () => fn())
+    ).then(() => {
+      expect(fn).toBeCalled()
+    })
   })
 })

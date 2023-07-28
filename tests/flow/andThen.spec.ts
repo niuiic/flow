@@ -1,4 +1,4 @@
-import { andThen, err, ok } from 'src/index.js'
+import { andThen, err, flow, ok } from 'src/index.js'
 
 describe('andThen', () => {
   it('should call "fn" if "result" is success', () => {
@@ -26,5 +26,14 @@ describe('andThen', () => {
   it('should return a function if "result" is not passwd', () => {
     const fn = () => ok(1)
     expect(typeof andThen(fn)).toEqual('function')
+  })
+
+  it('should work for async functions', async () => {
+    expect(
+      await flow(
+        ok(1),
+        andThen(async () => ok(2))
+      )
+    ).toEqual(ok(2))
   })
 })

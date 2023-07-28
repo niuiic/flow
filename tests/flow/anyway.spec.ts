@@ -1,4 +1,4 @@
-import { anyway, err, ok } from 'src/index.js'
+import { anyway, err, flow, ok } from 'src/index.js'
 
 describe('anyway', () => {
   it('should call "fn" if "result" is success', () => {
@@ -28,5 +28,16 @@ describe('anyway', () => {
   it('should return a function if "result" is not passwd', () => {
     const fn = () => ok(1)
     expect(typeof anyway(fn)).toEqual('function')
+  })
+
+  it('should work for async functions', async () => {
+    expect(
+      await flow(
+        Promise.resolve(ok('')),
+        anyway(async () => {
+          return ok(2)
+        })
+      )
+    ).toEqual(ok(2))
   })
 })
