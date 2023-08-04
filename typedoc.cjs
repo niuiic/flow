@@ -17,10 +17,6 @@ module.exports = {
   replaceText: {
     replacements: [
       {
-        pattern: '#Repo',
-        replace: 'https://github.com/niuiic/flow/blob/main'
-      },
-      {
         pattern: '<(.*)>',
         replace: '&lt;$1&gt;'
       },

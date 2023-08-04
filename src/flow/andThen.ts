@@ -12,7 +12,7 @@ import { Result, err } from './result.js'
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo))).unwrap()
  * ```
  *
- * {@link #Repo/tests/flow/andThen.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/andThen.spec.ts | More examples}
  */
 function andThen<A, R extends MaybePromise<Result<unknown>>>(
   fn: (data: A) => R,

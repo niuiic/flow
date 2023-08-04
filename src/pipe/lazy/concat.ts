@@ -57,7 +57,7 @@ function async<A>(iterable1: AsyncIterable<A>, iterable2: AsyncIterable<A>): Asy
  * iter.next() // {done:true, value: undefined}
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/concat.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/concat.spec.ts | More examples}
  */
 function concat<A extends UniversalIterable, B extends UniversalIterable>(
   iterable1: A,

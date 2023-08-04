@@ -24,7 +24,7 @@ import { reduce } from './reduce.js'
  * // false
  * ```
  *
- * {@link #Repo/tests/pipe/strict/every.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/every.spec.ts | More examples}
  */
 function every<A extends readonly []>(fn: (args: IterableItem<A>) => unknown, iterable: A): true
 

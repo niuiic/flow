@@ -61,8 +61,9 @@ function async<A>(args: FixedPromise<A>, iterable: AsyncIterable<A>): AsyncItera
  * iter.next() // {done: false, value: 3}
  * iter.next() // {done: false, value: 4}
  * iter.next() // {done: true, value: undefined}
+ * ```
  *
- * {@link #Repo/tests/pipe/lazy/append.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/append.spec.ts | More examples}
  */
 function append<A, B extends UniversalIterable<Awaited<A>>>(
   args: A

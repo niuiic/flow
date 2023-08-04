@@ -22,7 +22,7 @@ async function async<A extends AsyncIterable<unknown>>(asyncIterable: A) {
  * console.log(size([1, 2, 3])) // 3
  * ```
  *
- * {@link #Repo/tests/pipe/strict/size.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/size.spec.ts | More examples}
  */
 function size<A extends UniversalIterable>(iterable: A): IterableReturnValue<A, number> {
   if (isIterable(iterable)) {

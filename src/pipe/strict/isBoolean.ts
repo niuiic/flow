@@ -9,7 +9,7 @@ import { Include } from 'src/types/index.js'
  * isArray(false); // true
  * ```
  *
- * {@link #Repo/tests/pipe/strict/isBoolean.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/isBoolean.spec.ts | More examples}
  */
 function isBoolean<A>(args: A): args is Include<A, boolean> {
   return typeof args === 'boolean'

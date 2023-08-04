@@ -19,7 +19,7 @@ import { isNil } from './isNil.js'
  * isEmpty(new Date()) // false
  * ```
  *
- * {@link #Repo/tests/pipe/strict/isEmpty.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/isEmpty.spec.ts | More examples}
  */
 function isEmpty<A>(args: A): boolean {
   if (isNil(args)) return true

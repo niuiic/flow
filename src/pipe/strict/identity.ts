@@ -6,7 +6,7 @@
  * identity(5); // 5
  * ```
  *
- * {@link #Repo/tests/pipe/strict/identity.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/identity.spec.ts | More examples}
  */
 function identity<A>(args: A) {
   return args

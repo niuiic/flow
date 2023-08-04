@@ -34,7 +34,7 @@ async function async(a: Promise<number | string>, b: Promise<number | string>) {
  * console.log(add(1, 2)) // 3
  * ```
  *
- * {@link #Repo/tests/pipe/strict/add.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/add.spec.ts | More examples}
  */
 function add<A extends MaybePromise<number>, B extends MaybePromise<number>>(
   a: A,

@@ -80,7 +80,7 @@ function async<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterabl
  * iterator.next().done = true
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/takeUntil.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/takeUntil.spec.ts | More examples}
  */
 function takeUntil<A>(fn: (args: A) => unknown, iterable: Iterable<A>): IterableIterator<A>
 function takeUntil<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): AsyncIterableIterator<A>

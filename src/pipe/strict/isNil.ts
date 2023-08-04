@@ -12,7 +12,7 @@ import { isUndefined } from './isUndefined.js'
  * isArray(undefined); // true
  * ```
  *
- * {@link #Repo/tests/pipe/strict/isNil.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/isNil.spec.ts | More examples}
  */
 function isNil<A>(args: A): args is Include<A, boolean> {
   return isNull(args) || isUndefined(args)

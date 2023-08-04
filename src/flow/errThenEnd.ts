@@ -11,7 +11,7 @@ import { Result, err, ok } from './result.js'
  * const userInfo = (await flow(ok(filePath), andThen(readFileToStr), errThenEnd(notify), andThen(calcLineCount))).unwrapOr(0)
  * ```
  *
- * {@link #Repo/tests/flow/errThenEnd.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/errThenEnd.spec.ts | More examples}
  */
 function errThenEnd<A>(
   fn: (err: string) => Promise<unknown>,

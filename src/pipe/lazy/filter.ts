@@ -177,7 +177,7 @@ function* sync<A>(fn: (data: A) => unknown, iterable: Iterable<A>) {
  * iterator.next().done = true
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/filter.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/filter.spec.ts | More examples}
  */
 function filter<A, B extends A>(fn: (args: A) => args is B, iterable: Iterable<A>): IterableIterator<B>
 function filter<A>(fn: (args: A) => unknown, iterable: Iterable<A>): IterableIterator<A>

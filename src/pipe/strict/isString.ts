@@ -9,7 +9,7 @@ import { Include } from 'src/types/index.js'
  * isString(2); // false
  * ```
  *
- * {@link #Repo/tests/pipe/strict/isString.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/isString.spec.ts | More examples}
  */
 function isString<A>(args: A): args is Include<A, string> {
   return typeof args === 'string'

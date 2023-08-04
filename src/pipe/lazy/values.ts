@@ -8,7 +8,7 @@
  * // [1, "2", true]
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/values.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/values.spec.ts | More examples}
  */
 
 function* values<A extends Record<string, unknown>>(args: A) {

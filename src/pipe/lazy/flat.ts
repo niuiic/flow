@@ -192,7 +192,7 @@ function sync<A>(iterable: Iterable<A>, depth: number): IterableIterator<A> {
  * ); // [1, 2, 3, [4, 5]]
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/flat.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/flat.spec.ts | More examples}
  */
 function flat<A extends UniversalIterable, B extends number = 1>(iterable: A, depth?: B): FlatReturnValue<A, B>
 

@@ -24,7 +24,7 @@ import { reduce } from './reduce.js'
  * // true
  * ```
  *
- * {@link #Repo/tests/pipe/strict/some.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/some.spec.ts | More examples}
  */
 function some<A extends readonly []>(fn: (args: IterableItem<A>) => boolean, iterable: A): false
 

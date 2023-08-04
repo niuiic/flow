@@ -40,7 +40,7 @@ type LastReturnValue<T> = T extends readonly [...rest: any, last: infer Last]
  * ); // 3
  * ```
  *
- * {@link #Repo/tests/pipe/strict/last.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/last.spec.ts | More examples}
  */
 function last<A extends UniversalIterable>(iterable: A): LastReturnValue<A>
 

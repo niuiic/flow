@@ -13,7 +13,7 @@ import { some } from './some.js'
  * includes(5, [1, 2, 3, 4]); // false
  * ```
  *
- * {@link #Repo/tests/pipe/strict/includes.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/includes.spec.ts | More examples}
  */
 function includes<A extends readonly []>(value: unknown, iterable: A): false
 

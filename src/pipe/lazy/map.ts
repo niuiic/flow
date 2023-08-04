@@ -64,7 +64,7 @@ function async<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncItera
  * ); // [11, 12, 13, 14]
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/map.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/map.spec.ts | More examples}
  */
 function map<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator<R>
 function map<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncIterableIterator<Awaited<R>>

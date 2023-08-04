@@ -41,7 +41,7 @@ export function isConcurrent(concurrent: unknown): concurrent is Concurrent {
  * // Tasks start sequentially, each task starts after the previous one finished.
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/concurrent.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/concurrent.spec.ts | More examples}
  */
 function concurrent<A>(length: number, iterable: AsyncIterable<A>): AsyncIterableIterator<A>
 

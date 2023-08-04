@@ -12,7 +12,7 @@ import { Result, err, ok } from './result.js'
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), ifThen(isNotAdmin, printUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
- * {@link #Repo/tests/flow/ifThen.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/ifThen.spec.ts | More examples}
  */
 function ifThen<A, B extends A>(
   condition: (data: A) => data is B,

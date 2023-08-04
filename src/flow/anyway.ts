@@ -12,7 +12,7 @@ import { Result } from './result.js'
  * const data = (await flow(ok(filePath), andThen(readFileToStr), anyway(closeIO))).unwrap()
  * ```
  *
- * {@link #Repo/tests/flow/anyway.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/anyway.spec.ts | More examples}
  */
 function anyway<A, R extends MaybePromise<Result<unknown>>>(
   fn: (args: { success: true; data: A } | { success: false; err: string }) => R,

@@ -35,7 +35,7 @@ async function async(iterable: AsyncIterable<number>) {
  * console.log(max([1, 2, 3])) // 3
  * ```
  *
- * {@link #Repo/tests/pipe/strict/max.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/max.spec.ts | More examples}
  */
 function max<A extends Iterable<number> | AsyncIterable<number>>(iterator: A): IterableReturnValue<A>
 

@@ -21,7 +21,7 @@ const toStr = (err: unknown) => JSON.stringify(err, Object.getOwnPropertyNames(e
  * const data = (await flow(ok(filePath), andThen(readFileToStr), expect('file should exists'))).unwrap()
  * ```
  *
- * {@link #Repo/tests/flow/flow.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/flow.spec.ts | More examples}
  */
 function flow<A1 extends FnReturnValue, R extends FnReturnValue>(
   ...args: [initialValue: A1, fn1: (args: Awaited<A1>, modifier: Modifier) => R]

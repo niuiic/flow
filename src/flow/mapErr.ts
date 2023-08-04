@@ -10,7 +10,7 @@ import { Result, err, ok } from './result.js'
  * const queryUserInfo = () => flow(ok(userId), andThen(queryUserInfo), mapErr((err) => 'failed to query user info'))
  * ```
  *
- * {@link #Repo/tests/flow/mapErr.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/mapErr.spec.ts | More examples}
  */
 type ReturnValue<A, R extends MaybePromise<string>> = R extends Promise<string> ? MaybePromise<Result<A>> : Result<A>
 

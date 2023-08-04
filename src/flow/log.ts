@@ -12,7 +12,7 @@ type Method = Exclude<FlowState['log'], 'NONE'>
  * flow(ok(filePath), log('INFO'), andThen(readFileToStr), expect('file should exists'))
  * ```
  *
- * {@link #Repo/tests/flow/log.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/log.spec.ts | More examples}
  */
 function log<A>(method: Method, result: Result<A>, modifier: Modifier): Result<A>
 function log<A>(method: Method): (result: Result<A>, modifier: Modifier) => Result<A>

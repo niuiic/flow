@@ -14,7 +14,7 @@ type ReturnValue<T> = T extends Promise<infer R> ? MaybePromise<Result<R>> : Res
  * const userInfo = (await flow(ok(userId), into(injectUserName), andThen(queryUserInfo), ifThen(isNotAdmin, printUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
- * {@link #Repo/tests/flow/into.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/into.spec.ts | More examples}
  */
 function into<A, R>(fn: (data: A) => R, result: Result<A>): ReturnValue<R>
 function into<A, R>(fn: (data: A) => R): (result: Result<A>) => ReturnValue<R>

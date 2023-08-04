@@ -11,7 +11,7 @@ import { Result } from './result.js'
  * const userInfo = (await flow(ok(userId), inject(doSometingElse), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
- * {@link #Repo/tests/flow/inject.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/inject.spec.ts | More examples}
  */
 function inject<A>(fn: () => Promise<unknown>, result: Result<A>): Promise<Result<A>>
 function inject<A>(fn: () => Promise<unknown>): (result: Result<A>) => Promise<Result<A>>

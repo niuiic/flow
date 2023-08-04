@@ -29,7 +29,7 @@ async function async<T>(iterable: AsyncIterable<T>, length: number) {
  * pipe(userList, toAsync, peek(queryUserInfo), consume(Infinity))
  * ```
  *
- * {@link #Repo/tests/pipe/strict/consume.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/consume.spec.ts | More examples}
  */
 function consume<A extends UniversalIterable>(iterable: A, length?: number): IterableReturnValue<A, void>
 

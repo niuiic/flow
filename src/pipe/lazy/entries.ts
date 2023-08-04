@@ -11,7 +11,7 @@ import { AnyObject, Entries } from 'src/types/index.js'
  * iterator.next().done = true
  * ```
  *
- * {@link #Repo/tests/pipe/lazy/entries.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/lazy/entries.spec.ts | More examples}
  */
 function* entries<A extends AnyObject>(args: A): Generator<Entries<A>, void> {
   for (const k in args) {

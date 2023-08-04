@@ -12,7 +12,7 @@ import { Result, err, ok } from './result.js'
  * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
- * {@link #Repo/tests/flow/errThen.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/errThen.spec.ts | More examples}
  */
 function errThen<A>(fn: (err: string) => Promise<unknown>, result: Result<A>): MaybePromise<Result<A>>
 function errThen<A>(fn: (err: string) => Promise<unknown>): (result: Result<A>) => MaybePromise<Result<A>>

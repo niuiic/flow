@@ -7,9 +7,9 @@ import { isPromise } from 'src/utils.js'
  * ```typescript
  * new Result({ data: 1 }).unwrapOr(2) // 1
  * new Result({ err: '' }).unwrapOr(2) // 2
- * ````
+ * ```
  *
- * {@link #Repo/tests/flow/result.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/flow/result.spec.ts | More examples}
  */
 class Result<T> {
   private success: boolean

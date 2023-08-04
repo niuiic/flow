@@ -10,7 +10,7 @@ import { Include } from 'src/types/index.js'
  * isArray(null); // true
  * ```
  *
- * {@link #Repo/tests/pipe/strict/isNull.spec.ts | More examples}
+ * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/isNull.spec.ts | More examples}
  */
 function isNull<A>(args: A): args is Include<A, null> {
   return args === null
