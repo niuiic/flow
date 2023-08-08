@@ -17,10 +17,11 @@
 
 # Flow <img width="32" src="./docs/public/flow.svg"/>
 
-> Functional library for TypeScript/JavaScript.
+> Functional library for TypeScript/JavaScript
 
 - Streaming programming
-- Graceful error handling and asynchronous programming
+- Graceful error handling
+- Better asynchronous programming
 - Lazy evaluation
 - TypeScript support
 
