@@ -16,7 +16,7 @@
     "build": "tsc",
     "package": "rollup -c rollup.config.mjs && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
     "release": "pnpm package && release-it",
-    "call": "esrun cli",
+    "call": "tsx cli",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "pnpm call lint",
@@ -41,7 +41,6 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@digitak/esrun": "^3.2.24",
     "@rollup/plugin-typescript": "^11.1.2",
     "@types/jest": "^29.5.3",
     "@types/node": "^20.4.8",
@@ -57,6 +56,7 @@
     "rollup-plugin-dts": "^5.3.1",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.1",
+    "tsx": "^3.12.7",
     "typedoc": "0.24.8",
     "typedoc-plugin-markdown": "4.0.0-next.17",
     "typedoc-plugin-missing-exports": "^2.0.1",

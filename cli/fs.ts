@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, rmSync, rmdirSync, statSync } from 'fs'
 import { join } from 'path'
+import { fileURLToPath } from 'url'
 
 export const getParentPath = (path: string) => {
   const index = path.lastIndexOf(process.platform.includes('win') ? '\\' : '/')
@@ -27,7 +28,7 @@ export const fileName = (path: string) => {
 }
 
 export const getRootPath = () => {
-  let curDir: string | undefined = __dirname
+  let curDir: string | undefined = fileURLToPath(import.meta.url).replace(/[^/]+\.[^/]+$/, '')
   while (curDir !== undefined) {
     const fileOrDirList = readdirSync(curDir)
     if (fileOrDirList.includes('.git')) {
