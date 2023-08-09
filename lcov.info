@@ -1971,8 +1971,8 @@ SF:src/pipe/strict/isString.ts
 FN:14,isString
 FNF:1
 FNH:1
-FNDA:6,isString
-DA:15,6
+FNDA:8,isString
+DA:15,8
 DA:18,55
 LF:2
 LH:2
