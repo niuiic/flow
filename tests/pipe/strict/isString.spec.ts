@@ -1,4 +1,8 @@
 import { isString } from 'src/index.js'
+import { expectType } from 'tsd'
+
+expectType<boolean>(isString(''))
+expectType<boolean>(isString(undefined))
 
 describe('isString', () => {
   it('should return false if type of "args" is not a string', () => {
