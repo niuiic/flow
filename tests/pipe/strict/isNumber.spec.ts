@@ -1,4 +1,7 @@
-import { isNumber } from 'src/index.js'
+import { expectType, isNumber } from 'src/index.js'
+
+expectType<boolean>(isNumber(1))
+expectType<boolean>(isNumber(undefined))
 
 describe('isNumber', () => {
   it('should return false if type of "args" is not a number', () => {
