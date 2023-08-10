@@ -1,3 +1,4 @@
+import { getBabelOutputPlugin } from '@rollup/plugin-babel'
 import typescript from '@rollup/plugin-typescript'
 import path from 'path'
 import { defineConfig } from 'rollup'
@@ -39,6 +40,27 @@ export default defineConfig([
       typescript({
         outDir: path.dirname(pkg.main),
         exclude: ['./tests/**/*.spec.ts', './cli/**/*.ts']
+      })
+    ]
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      dir: 'dist/es5',
+      name: pkg.name,
+      format: 'es',
+      sourcemap: true,
+      exports: 'named',
+      preserveModules: true,
+      preserveModulesRoot: 'src'
+    },
+    plugins: [
+      typescript({
+        outDir: 'dist/es5',
+        exclude: ['./tests/**/*.spec.ts', './cli/**/*.ts']
+      }),
+      getBabelOutputPlugin({
+        presets: ['@babel/preset-env']
       })
     ]
   },
