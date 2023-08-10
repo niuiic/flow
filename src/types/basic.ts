@@ -42,3 +42,7 @@ export type Prepend<T extends unknown[], U> = [U, ...T]
 export type Include<A, B> = A extends B ? A : never
 
 export type Entries<T extends AnyObject, K extends keyof T = keyof T> = K extends K ? [K, T[K]] : never
+
+export type Expect<T extends true> = T
+
+export type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false
