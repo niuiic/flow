@@ -51,3 +51,5 @@ export class FlowMissModifierException extends Error {
 }
 
 export function* empty() {}
+
+export function expectType<T>(_: T) {}

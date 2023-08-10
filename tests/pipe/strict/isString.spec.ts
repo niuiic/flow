@@ -1,5 +1,4 @@
-import { isString } from 'src/index.js'
-import { expectType } from 'tsd'
+import { expectType, isString } from 'src/index.js'
 
 expectType<boolean>(isString(''))
 expectType<boolean>(isString(undefined))
