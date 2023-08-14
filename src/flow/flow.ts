@@ -1,15 +1,6 @@
-import { AnyFunction, AnyObject, FlowReturnValue, MaybePromise } from 'src/types/index.js'
+import { AnyFunction, AnyObject, FlowReturnValue, FlowState, FnReturnValue, Modifier } from 'src/types/index.js'
 import { isPromise } from 'src/utils.js'
 import { Result, err } from './result.js'
-
-type FnReturnValue = MaybePromise<Result<unknown>>
-
-export interface FlowState {
-  done: boolean
-  log: 'NONE' | 'INFO' | 'ERROR'
-}
-
-export type Modifier = (flowState: Partial<FlowState>) => void
 
 const toStr = (err: unknown) => JSON.stringify(err, Object.getOwnPropertyNames(err), 1)
 
@@ -18,7 +9,7 @@ const toStr = (err: unknown) => JSON.stringify(err, Object.getOwnPropertyNames(e
  *
  * @example
  * ```typescript
- * const data = (await flow(ok(filePath), andThen(readFileToStr), expect('file should exists'))).unwrap()
+ * const data = (await flow(ok(filePath), andThen(readFileToStr))).unwrap()
  * ```
  *
  * {@link https://github.com/niuiic/flow/blob/main/tests/flow/flow.spec.ts | More examples}
