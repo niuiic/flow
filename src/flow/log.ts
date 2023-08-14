@@ -1,5 +1,5 @@
+import { FlowState, Modifier } from 'src/types/index.js'
 import { FlowMissModifierException } from 'src/utils.js'
-import { FlowState, Modifier } from './flow.js'
 import { Result } from './result.js'
 
 type Method = Exclude<FlowState['log'], 'NONE'>

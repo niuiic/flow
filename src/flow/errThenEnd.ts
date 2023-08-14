@@ -1,6 +1,5 @@
-import { MaybePromise } from 'src/types/index.js'
+import { MaybePromise, Modifier } from 'src/types/index.js'
 import { FlowMissModifierException, isPromise } from 'src/utils.js'
-import { Modifier } from './flow.js'
 import { Result, err, ok } from './result.js'
 
 /**
