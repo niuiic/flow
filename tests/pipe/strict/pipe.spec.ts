@@ -1,4 +1,8 @@
-import { pipe, reduce, take, toAsync } from 'src/index.js'
+import { expectType, max, pipe, reduce, take, toAsync } from 'src/index.js'
+
+expectType<Promise<AsyncIterable<number>>>(pipe([1, 2, 3], toAsync, take(1)))
+expectType<number>(pipe([1, 2, 3], take(2), max))
+expectType<Promise<number>>(pipe([1, 2, 3], toAsync, take(1), max))
 
 describe('pipe', () => {
   describe('sync', () => {

@@ -1,4 +1,7 @@
-import { concurrent, delay, toAsync } from 'src/index.js'
+import { concurrent, delay, expectType, toAsync } from 'src/index.js'
+
+expectType<AsyncIterable<number>>(concurrent(2, toAsync([1, 2, 3])))
+expectType<(iterable: AsyncIterable<number>) => AsyncIterable<number>>(concurrent(2))
 
 describe('concurrent', () => {
   it('should be consumed "AsyncIterable" concurrently', async () => {

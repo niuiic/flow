@@ -1,4 +1,6 @@
-import { add } from 'src/index.js'
+import { add, expectType } from 'src/index.js'
+
+expectType<number>(add(1, 1))
 
 describe('add', () => {
   describe('sync', () => {

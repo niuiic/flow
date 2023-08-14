@@ -1,4 +1,6 @@
-import { isEmpty } from 'src/index.js'
+import { expectType, isEmpty } from 'src/index.js'
+
+expectType<boolean>(isEmpty([1, 2, 3]))
 
 describe('isEmpty', () => {
   it('should return true if "args" is empty', () => {

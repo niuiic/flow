@@ -1,4 +1,6 @@
-import { concurrent, delay, filter, flat, map, pipe, take, toArray, toAsync } from 'src/index.js'
+import { concurrent, delay, expectType, filter, flat, map, pipe, take, toArray, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(flat([1, [1, [1, [1, [1, [1]]]]]], Infinity))
 
 describe('flat', () => {
   describe('sync', () => {

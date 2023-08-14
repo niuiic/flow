@@ -1,4 +1,6 @@
-import { apply } from 'src/index.js'
+import { apply, expectType } from 'src/index.js'
+
+expectType<number>(apply(Math.max, [1, 2, 3]))
 
 describe('apply', () => {
   it('should return a function if "args" is not passed', () => {

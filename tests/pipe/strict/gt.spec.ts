@@ -1,4 +1,6 @@
-import { gt } from 'src/index.js'
+import { expectType, gt } from 'src/index.js'
+
+expectType<boolean>(gt(1, 2))
 
 describe('gt', () => {
   it('should be able to compare numbers', () => {

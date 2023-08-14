@@ -1,4 +1,6 @@
-import { each, toAsync } from 'src/index.js'
+import { each, expectType, toAsync } from 'src/index.js'
+
+expectType<void>(each(() => {}, [1, 2, 3]))
 
 describe('each', () => {
   describe('sync', () => {
@@ -17,18 +19,24 @@ describe('each', () => {
   describe('async', () => {
     it('should work for async iterable', () => {
       let res = 0
-      each((v) => {
-        res += v
-      }, toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])).then(() => {
+      each(
+        (v) => {
+          res += v
+        },
+        toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])
+      ).then(() => {
         expect(res).toEqual(6)
       })
     })
 
     it('should wait for async functions', () => {
       let res = 0
-      each(async (v) => {
-        res += v
-      }, toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])).then(() => {
+      each(
+        async (v) => {
+          res += v
+        },
+        toAsync([Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)])
+      ).then(() => {
         expect(res).toEqual(6)
       })
     })

@@ -1,4 +1,7 @@
-import { map, toArray, toAsync } from 'src/index.js'
+import { expectType, map, toArray, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(map((v) => v + 1, [1]))
+expectType<(iterable: Iterable<number>) => Iterable<number>>(map((v) => v + 1))
 
 describe('map', () => {
   describe('sync', () => {

@@ -1,4 +1,7 @@
-import { tap } from 'src/index.js'
+import { expectType, tap, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(tap(() => {}, [1, 2, 3]))
+expectType<AsyncIterable<number>>(tap(() => {}, toAsync([1, 2, 3])))
 
 describe('tap', () => {
   describe('sync', () => {

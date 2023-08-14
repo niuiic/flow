@@ -1,4 +1,7 @@
-import { take, toAsync } from 'src/index.js'
+import { expectType, take, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(take(1, [1]))
+expectType<AsyncIterable<number>>(take(1, toAsync([1])))
 
 describe('take', () => {
   it('should work for iterable', () => {

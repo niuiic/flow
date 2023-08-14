@@ -1,4 +1,6 @@
-import { isArray } from 'src/index.js'
+import { expectType, isArray } from 'src/index.js'
+
+expectType<boolean>(isArray([1, 2, 3]))
 
 describe('isArray', () => {
   it('should return false if type of "args" is not an array', () => {

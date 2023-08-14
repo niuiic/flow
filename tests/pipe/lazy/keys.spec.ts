@@ -1,4 +1,6 @@
-import { keys } from 'src/index.js'
+import { expectType, keys } from 'src/index.js'
+
+expectType<Iterable<1 | '2'>>(keys({ 1: '', '2': '' }))
 
 describe('keys', () => {
   it('should return an iterator of the own enumerable property names of object', () => {

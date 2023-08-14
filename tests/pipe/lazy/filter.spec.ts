@@ -1,4 +1,8 @@
-import { concurrent, delay, each, filter, map, max, pipe, toAsync } from 'src/index.js'
+import { concurrent, delay, each, expectType, filter, map, max, pipe, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(filter((v): v is number => v !== undefined, [1, 2, undefined]))
+expectType<Iterable<number | undefined>>(filter((v) => v !== undefined, [1, 2, undefined]))
+expectType<AsyncIterable<number>>(filter((v): v is number => v !== undefined, toAsync([1, 2, undefined])))
 
 describe('filter', () => {
   describe('sync', () => {

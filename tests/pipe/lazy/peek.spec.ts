@@ -1,4 +1,7 @@
-import { consume, peek, pipe, toAsync } from 'src/index.js'
+import { IteratorReturnValue, UniversalIterable, consume, expectType, peek, pipe, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(peek((v) => v + 1, [1]))
+expectType<(iterable: UniversalIterable<number>) => IteratorReturnValue<UniversalIterable<number>>>(peek((v) => v + 1))
 
 describe('peek', () => {
   describe('sync', () => {

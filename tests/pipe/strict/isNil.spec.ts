@@ -1,4 +1,6 @@
-import { isNil } from 'src/index.js'
+import { expectType, isNil } from 'src/index.js'
+
+expectType<boolean>(isNil([1, 2, 3]))
 
 describe('isNil', () => {
   it('should return false if type of "args" is not undefined or null', () => {

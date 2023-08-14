@@ -1,4 +1,7 @@
-import { concurrent, delay, each, map, pipe, takeUntil, toArray, toAsync } from 'src/index.js'
+import { concurrent, delay, each, expectType, map, pipe, takeUntil, toArray, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(takeUntil(() => true, [1]))
+expectType<AsyncIterable<number>>(takeUntil(() => true, toAsync([1])))
 
 describe('takeUntil', () => {
   describe('sync', () => {

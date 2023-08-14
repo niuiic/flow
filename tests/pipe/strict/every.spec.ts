@@ -1,4 +1,6 @@
-import { every, toAsync } from 'src/index.js'
+import { every, expectType, toAsync } from 'src/index.js'
+
+expectType<boolean>(every((v) => v > 1, [1, 2, 3]))
 
 describe('every', () => {
   describe('sync', () => {

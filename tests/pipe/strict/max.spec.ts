@@ -1,4 +1,6 @@
-import { max, toAsync } from 'src/index.js'
+import { expectType, max, toAsync } from 'src/index.js'
+
+expectType<number>(max([1, 2, 3]))
 
 describe('max', () => {
   describe('sync', () => {

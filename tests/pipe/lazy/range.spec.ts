@@ -1,4 +1,6 @@
-import { range } from 'src/index.js'
+import { expectType, range } from 'src/index.js'
+
+expectType<Iterable<number>>(range(1))
 
 describe('range', () => {
   it('should start from 0 if only length is specified', () => {

@@ -1,4 +1,6 @@
-import { isFunction } from 'src/index.js'
+import { expectType, isFunction } from 'src/index.js'
+
+expectType<boolean>(isFunction([1, 2, 3]))
 
 describe('isFunction', () => {
   it('should return false if type of "args" is not a function', () => {

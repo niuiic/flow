@@ -1,4 +1,7 @@
-import { last, range, toAsync } from 'src/index.js'
+import { expectType, last, range, toAsync } from 'src/index.js'
+
+expectType<number | undefined>(last([1, 2, 3]))
+expectType<number>(last([1, 2, 3] as const))
 
 describe('last', () => {
   describe('sync', () => {

@@ -1,4 +1,6 @@
-import { entries } from 'src/index.js'
+import { entries, expectType } from 'src/index.js'
+
+expectType<Iterable<[1, string] | ['2', string]>>(entries({ 1: '', '2': '' }))
 
 describe('entries', () => {
   it('should return an iterator which iterates entries of the given object', () => {

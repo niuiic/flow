@@ -1,4 +1,6 @@
-import { toAsync } from 'src/index.js'
+import { expectType, toAsync } from 'src/index.js'
+
+expectType<AsyncIterable<number>>(toAsync([1]))
 
 describe('toAsync', () => {
   it('should work for mixed iterable and asyncIterable', async () => {

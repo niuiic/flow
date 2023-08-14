@@ -1,4 +1,6 @@
-import { always } from 'src/index.js'
+import { always, expectType } from 'src/index.js'
+
+expectType<() => true>(always(true))
 
 describe('always', () => {
   it('should return a function that returns the given value', () => {

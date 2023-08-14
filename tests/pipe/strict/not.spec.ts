@@ -1,4 +1,6 @@
-import { not } from 'src/index.js'
+import { expectType, not } from 'src/index.js'
+
+expectType<boolean>(not(true))
 
 describe('not', () => {
   it('should return true if input is undefined or null or NaN or 0 or ""', () => {

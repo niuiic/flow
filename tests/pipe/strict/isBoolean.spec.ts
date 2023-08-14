@@ -1,4 +1,6 @@
-import { isBoolean } from 'src/index.js'
+import { expectType, isBoolean } from 'src/index.js'
+
+expectType<boolean>(isBoolean([1, 2, 3]))
 
 describe('isBoolean', () => {
   it('should return false if type of "args" is not boolean', () => {

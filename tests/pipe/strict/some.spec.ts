@@ -1,4 +1,7 @@
-import { some, toAsync } from 'src/index.js'
+import { expectType, gt, pipe, some, toAsync } from 'src/index.js'
+
+expectType<boolean>(some((v: number) => v > 1, [1, 2, 3]))
+expectType<boolean>(pipe([1, 2, 3], some(gt(1))))
 
 describe('some', () => {
   describe('sync', () => {

@@ -1,4 +1,6 @@
-import { delay } from 'src/index.js'
+import { delay, expectType } from 'src/index.js'
+
+expectType<Promise<string>>(delay(1, ''))
 
 describe('delay', () => {
   it('should delay "value" by "wait" time', () => {

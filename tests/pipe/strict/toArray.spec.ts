@@ -1,4 +1,7 @@
-import { toArray, toAsync } from 'src/index.js'
+import { expectType, toArray, toAsync } from 'src/index.js'
+
+expectType<number[]>(toArray([1, 2, 3, 3]))
+expectType<Promise<number[]>>(toArray(toAsync([1, 2, 3, 3])))
 
 describe('toAsync', () => {
   describe('sync', () => {

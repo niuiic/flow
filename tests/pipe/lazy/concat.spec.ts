@@ -1,4 +1,8 @@
-import { concat, concurrent, delay, map, pipe, toArray, toAsync } from 'src/index.js'
+import { concat, concurrent, delay, expectType, map, pipe, toArray, toAsync } from 'src/index.js'
+
+expectType<Iterable<number>>(concat([1], []))
+expectType<(iterable: Iterable<number>) => Iterable<number>>(concat([1]))
+expectType<(iterable: AsyncIterable<number>) => AsyncIterable<number>>(concat([1]))
 
 describe('concat', () => {
   describe('sync', () => {

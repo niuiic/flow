@@ -1,4 +1,6 @@
-import { consume, peek, pipe, toAsync } from 'src/index.js'
+import { consume, expectType, peek, pipe, toAsync } from 'src/index.js'
+
+expectType<void>(consume([1, 2, 3], Infinity))
 
 describe('consume', () => {
   describe('sync', () => {

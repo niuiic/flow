@@ -1,4 +1,6 @@
-import { isUndefined } from 'src/index.js'
+import { expectType, isUndefined } from 'src/index.js'
+
+expectType<boolean>(isUndefined(''))
 
 describe('isUndefined', () => {
   it('should return false if type of "args" is not undefined', () => {

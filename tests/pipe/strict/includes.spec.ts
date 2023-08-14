@@ -1,4 +1,7 @@
-import { includes, pipe, toAsync } from 'src/index.js'
+import { expectType, includes, pipe, toAsync } from 'src/index.js'
+
+expectType<boolean>(includes(1, [2, 1, 3]))
+expectType<Promise<boolean>>(includes(1, toAsync([2, 1, 3])))
 
 describe('includes', () => {
   describe('sync', () => {
