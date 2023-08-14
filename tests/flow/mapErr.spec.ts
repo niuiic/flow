@@ -1,4 +1,18 @@
-import { err, mapErr, ok } from 'src/index.js'
+import { Result, err, expectType, flow, mapErr, ok } from 'src/index.js'
+
+expectType<(result: Result<unknown>) => Result<unknown>>(mapErr(() => 'INFO'))
+expectType<Result<number>>(
+  flow(
+    ok(1),
+    mapErr(() => 'INFO')
+  )
+)
+expectType<Result<number>>(
+  flow(
+    err<number>(''),
+    mapErr(() => 'ERROR')
+  )
+)
 
 describe('mapErr', () => {
   it('should convert the error of the "result" if it is failure', () => {

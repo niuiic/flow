@@ -1,4 +1,17 @@
-import { err, flow, inject, ok } from 'src/index.js'
+import { MaybePromise, Result, err, expectType, flow, inject, ok } from 'src/index.js'
+
+expectType<Result<number>>(
+  flow(
+    ok(1),
+    inject(() => {})
+  )
+)
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    inject(async () => {})
+  )
+)
 
 describe('inject', () => {
   it('should return a function if "result" is not passwd', () => {

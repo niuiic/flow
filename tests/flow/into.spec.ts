@@ -1,4 +1,17 @@
-import { err, into, ok } from 'src/index.js'
+import { MaybePromise, Result, err, expectType, flow, into, ok } from 'src/index.js'
+
+expectType<Result<string>>(
+  flow(
+    ok(1),
+    into(() => '')
+  )
+)
+expectType<MaybePromise<Result<string>>>(
+  flow(
+    ok(1),
+    into(async () => '')
+  )
+)
 
 describe('into', () => {
   it('should convert the data of the "result" if it is success', () => {

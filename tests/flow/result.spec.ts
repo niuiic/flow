@@ -1,4 +1,13 @@
-import { Result, err, ok } from 'src/index.js'
+import { Result, err, expectType, ok } from 'src/index.js'
+
+expectType<number>(ok(1).unwrapOr(2))
+expectType<Promise<Result<number>>>(ok(1).wait())
+expectType<Result<number>>(ok(1).mapOr(() => 2, 2))
+expectType<number>(ok(1).unwrap())
+expectType<string | undefined>(ok(1).error())
+expectType<boolean>(ok(1).isError())
+expectType<boolean>(ok(1).isSuccess())
+expectType<Result<number>>(ok(1).mapErr(''))
 
 describe('result', () => {
   it('should return "data" if success when call "unwrap"', () => {

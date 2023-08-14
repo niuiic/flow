@@ -1,4 +1,17 @@
-import { err, inspect, ok } from 'src/index.js'
+import { MaybePromise, Result, err, expectType, flow, inspect, ok } from 'src/index.js'
+
+expectType<Result<number>>(
+  flow(
+    ok(1),
+    inspect(() => {})
+  )
+)
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    inspect(async () => {})
+  )
+)
 
 describe('inspect', () => {
   it('should call "fn"', () => {
