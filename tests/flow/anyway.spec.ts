@@ -1,4 +1,9 @@
-import { anyway, err, flow, ok } from 'src/index.js'
+import { MaybePromise, Result, anyway, err, expectType, flow, ok } from 'src/index.js'
+
+expectType<(result: Result<unknown>) => Result<number>>(anyway(() => ok(1)))
+expectType<Result<number>>(anyway(() => ok(1), ok(1)))
+expectType<Result<number>>(anyway(() => ok(1), err('')))
+expectType<MaybePromise<Result<number>>>(anyway(async () => ok(1), ok(1)))
 
 describe('anyway', () => {
   it('should call "fn" if "result" is success', () => {

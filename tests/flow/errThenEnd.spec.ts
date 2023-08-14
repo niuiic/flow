@@ -1,4 +1,23 @@
-import { andThen, anyway, err, errThenEnd, flow, ok } from 'src/index.js'
+import { MaybePromise, Result, andThen, anyway, err, errThenEnd, expectType, flow, ok } from 'src/index.js'
+
+expectType<Result<number>>(
+  flow(
+    err<number>(''),
+    errThenEnd(() => {})
+  )
+)
+expectType<Result<number>>(
+  flow(
+    ok(1),
+    errThenEnd(() => {})
+  )
+)
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    errThenEnd(async () => {})
+  )
+)
 
 describe('errThenEnd', () => {
   it('should not call "fn" if "result" is success', () => {
