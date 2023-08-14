@@ -123,7 +123,8 @@
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">55x</span>
 <span class="cline-any cline-yes">55x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,31 +162,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">55x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { MaybePromise } from 'src/types/index.js'
 import { isPromise } from 'src/utils.js'
 import { Result, err, ok } from './result.js'
+&nbsp;
+type IfThenReturnValue&lt;A, R&gt; = R extends Promise&lt;unknown&gt; ? MaybePromise&lt;Result&lt;A&gt;&gt; : Result&lt;A&gt;
 &nbsp;
 /**
  * Call `fn` if `result` is success and `condition` is satisfied.
@@ -200,38 +204,37 @@ import { Result, err, ok } from './result.js'
  * {@link https://github.com/niuiic/flow/blob/main/tests/flow/ifThen.spec.ts | More examples}
  */
 function ifThen&lt;A, B extends A&gt;(
-  condition: (data: A) =&gt; data is B,
-  fn: (data: B) =&gt; unknown,
+  guard: (data: A) =&gt; data is B,
+  fn: (data: B) =&gt; Promise&lt;unknown&gt;,
   result: Result&lt;A&gt;
 ): MaybePromise&lt;Result&lt;A&gt;&gt;
+function ifThen&lt;A, B extends A&gt;(guard: (data: A) =&gt; data is B, fn: (data: B) =&gt; unknown, result: Result&lt;A&gt;): Result&lt;A&gt;
 function ifThen&lt;A&gt;(
-  condition: (data: A) =&gt; boolean,
-  fn: (data: A) =&gt; unknown,
+  guard: (data: A) =&gt; boolean,
+  fn: (data: A) =&gt; Promise&lt;unknown&gt;,
   result: Result&lt;A&gt;
 ): MaybePromise&lt;Result&lt;A&gt;&gt;
-function ifThen&lt;A, B extends A&gt;(
-  condition: (data: A) =&gt; data is B,
-  fn: (data: B) =&gt; unknown
-): (result: Result&lt;A&gt;) =&gt; MaybePromise&lt;Result&lt;A&gt;&gt;
-function ifThen&lt;A&gt;(
-  condition: (data: A) =&gt; boolean,
-  fn: (data: A) =&gt; unknown
-): (result: Result&lt;A&gt;) =&gt; MaybePromise&lt;Result&lt;A&gt;&gt;
+function ifThen&lt;A&gt;(guard: (data: A) =&gt; boolean, fn: (data: A) =&gt; unknown, result: Result&lt;A&gt;): Result&lt;A&gt;
+function ifThen&lt;A, B extends A, R&gt;(
+  guard: (data: A) =&gt; data is B,
+  fn: (data: B) =&gt; R
+): (result: Result&lt;A&gt;) =&gt; IfThenReturnValue&lt;A, R&gt;
+function ifThen&lt;A, R&gt;(guard: (data: A) =&gt; boolean, fn: (data: A) =&gt; R): (result: Result&lt;A&gt;) =&gt; IfThenReturnValue&lt;A, R&gt;
 &nbsp;
 function ifThen&lt;A&gt;(
-  condition: (data: A) =&gt; boolean,
+  guard: (data: A) =&gt; boolean,
   fn: (data: A) =&gt; unknown,
   result?: Result&lt;A&gt;
 ): MaybePromise&lt;Result&lt;A&gt;&gt; | ((result: Result&lt;A&gt;) =&gt; MaybePromise&lt;Result&lt;A&gt;&gt;) {
   if (result === undefined) {
-    return <span class="fstat-no" title="function not covered" >(r</span>esult) =&gt; <span class="cstat-no" title="statement not covered" >ifThen(condition, fn, result)</span>
+    return <span class="fstat-no" title="function not covered" >(r</span>esult) =&gt; <span class="cstat-no" title="statement not covered" >ifThen(guard, fn, result)</span>
   }
 &nbsp;
   if (result.isError()) {
     return err(result.error()!)
   }
 &nbsp;
-  if (condition(result.unwrap())) {
+  if (guard(result.unwrap())) {
     const res = fn(result.unwrap())
     <span class="missing-if-branch" title="if path not taken" >I</span>if (isPromise(res)) {
 <span class="cstat-no" title="statement not covered" >      return res.then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >ok(result.unwrap()))</span></span>
@@ -250,7 +253,7 @@ export { ifThen }
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-14T01:30:09.161Z
+                at 2023-08-14T02:14:56.557Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
