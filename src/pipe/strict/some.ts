@@ -26,14 +26,14 @@ import { reduce } from './reduce.js'
  *
  * {@link https://github.com/niuiic/flow/blob/main/tests/pipe/strict/some.spec.ts | More examples}
  */
+function some<A extends UniversalIterable>(
+  fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown
+): (iterable: A) => IterableReturnValue<A, boolean>
+
 function some<A extends readonly []>(fn: (args: IterableItem<A>) => boolean, iterable: A): false
 
 function some<A>(fn: (args: A) => unknown, iterable: Iterable<A>): boolean
 function some<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterable<A>): Promise<boolean>
-
-function some<A extends UniversalIterable>(
-  fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown
-): (iterable: A) => IterableReturnValue<A, boolean>
 
 function some<A extends UniversalIterable>(
   fn: (args: UniversalIterableItem<A>) => A extends AsyncIterable<unknown> ? MaybePromise<unknown> : unknown,
