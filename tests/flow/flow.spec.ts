@@ -18,6 +18,12 @@ expectType<MaybePromise<Result<number>>>(
     andThen(() => ok(1).wait())
   )
 )
+expectType<Promise<Result<number>>>(
+  flow(
+    Promise.resolve(ok(1)),
+    andThen(() => ok(1).wait())
+  )
+)
 expectType<MaybePromise<Result<Promise<number>>>>(
   flow(
     ok(Promise.resolve(1)),
