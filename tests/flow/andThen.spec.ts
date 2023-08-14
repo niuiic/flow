@@ -4,6 +4,12 @@ expectType<(result: Result<unknown>) => Result<number>>(andThen(() => ok(1)))
 expectType<Result<number>>(andThen(() => ok(1), ok(1)))
 expectType<Result<number>>(andThen(() => ok(1), err('')))
 expectType<MaybePromise<Result<number>>>(andThen(async () => ok(1), ok(1)))
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    andThen(() => ok(Promise.resolve(1)))
+  )
+)
 
 describe('andThen', () => {
   it('should call "fn" if "result" is success', () => {

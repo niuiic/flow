@@ -1,4 +1,29 @@
-import { andThen, anyway, delay, errThen, flow, ok } from 'src/index.js'
+import { MaybePromise, Result, andThen, anyway, delay, errThen, errThenEnd, expectType, flow, ok } from 'src/index.js'
+
+expectType<Result<number>>(
+  flow(
+    ok(1),
+    errThenEnd(() => {})
+  )
+)
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    errThenEnd(async () => {})
+  )
+)
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    andThen(() => ok(1).wait())
+  )
+)
+expectType<MaybePromise<Result<Promise<number>>>>(
+  flow(
+    ok(Promise.resolve(1)),
+    errThenEnd(() => {})
+  )
+)
 
 describe('flow', () => {
   it('should be able to compose steps', () => {

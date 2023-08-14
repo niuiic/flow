@@ -4,6 +4,12 @@ expectType<(result: Result<unknown>) => Result<number>>(anyway(() => ok(1)))
 expectType<Result<number>>(anyway(() => ok(1), ok(1)))
 expectType<Result<number>>(anyway(() => ok(1), err('')))
 expectType<MaybePromise<Result<number>>>(anyway(async () => ok(1), ok(1)))
+expectType<MaybePromise<Result<number>>>(
+  flow(
+    ok(1),
+    anyway(() => ok(Promise.resolve(1)))
+  )
+)
 
 describe('anyway', () => {
   it('should call "fn" if "result" is success', () => {
