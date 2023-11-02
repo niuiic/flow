@@ -5,17 +5,6 @@ local overseer = require("overseer")
 local scriptPath = core.file.root_path() .. "/.nvim/task/task.sh"
 
 overseer.register_template({
-	name = "run",
-	builder = function()
-		return {
-			cmd = { scriptPath },
-			args = { "run" },
-			components = { "on_exit_set_status" },
-		}
-	end,
-})
-
-overseer.register_template({
 	name = "build",
 	builder = function()
 		return {
@@ -82,22 +71,11 @@ overseer.register_template({
 })
 
 overseer.register_template({
-	name = "package",
+	name = "release",
 	builder = function()
 		return {
 			cmd = { scriptPath },
-			args = { "package" },
-			components = { "on_exit_set_status", "on_complete_notify" },
-		}
-	end,
-})
-
-overseer.register_template({
-	name = "clean",
-	builder = function()
-		return {
-			cmd = { scriptPath },
-			args = { "clean" },
+			args = { "release" },
 			components = { "on_exit_set_status", "on_complete_notify" },
 		}
 	end,

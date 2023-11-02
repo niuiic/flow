@@ -1,0 +1,19 @@
+{
+  "name": "doc",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "typedoc && cli cleanDoc && vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "cli": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typedoc": "0.25.3",
+    "typedoc-plugin-markdown": "4.0.0-next.27",
+    "typedoc-plugin-missing-exports": "^2.1.0",
+    "typedoc-plugin-replace-text": "^3.2.0",
+    "typedoc-vitepress-theme": "1.0.0-next.3",
+    "vitepress": "1.0.0-rc.25"
+  }
+}

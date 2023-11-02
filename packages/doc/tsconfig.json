@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../core",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "lib": ["ESNext"]
+  },
+  "extends": "tsconfig/esm.json",
+  "include": ["../core/src/**/*.ts"]
+}

@@ -19,19 +19,20 @@ jobs:
           version: 8
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - uses: hecrj/setup-rust-action@v2
 
-      - name: Install Dependencies
-        run: pnpm i --frozen-lockfile
+      - name: Init
+        run: pnpm initialize
 
       - name: Build Doc
-        run: pnpm docs:build
+        run: pnpm build --filter doc
 
       - name: Config
-        run: echo 'flow.niuiic.com' > docs/.vitepress/dist/CNAME
+        run: echo 'fx-flow.niuiic.com' > packages/doc/docs/.vitepress/dist/CNAME
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/.vitepress/dist
+          publish_dir: ./packages/doc/docs/.vitepress/dist
           publish_branch: doc

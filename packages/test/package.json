@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage && cli fixCoverage",
+    "lint": "eslint -f unix --ext .ts ."
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.8",
+    "eslint-config-custom": "workspace:*",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "tsconfig": "workspace:*",
+    "cli": "workspace:*"
+  }
+}

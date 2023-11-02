@@ -1,0 +1,30 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "../core/src/pipe/lazy/index.ts",
+    "../core/src/pipe/strict/index.ts",
+    "../core/src/flow/index.ts",
+    "../core/src/utils.ts",
+    "../core/src/types/index.ts"
+  ],
+  "out": "docs/api",
+  "plugin": [
+    "typedoc-plugin-markdown",
+    "typedoc-vitepress-theme",
+    "typedoc-plugin-missing-exports",
+    "typedoc-plugin-replace-text"
+  ],
+  "replaceText": {
+    "replacements": [
+      {
+        "pattern": "<(.*)>",
+        "replace": "&lt;$1&gt;"
+      },
+      {
+        "pattern": "&lt;a(.*)&gt;(.*)&lt;\\/a&gt;",
+        "replace": "<a$1>$2</a>"
+      }
+    ]
+  },
+  "includeVersion": true
+}

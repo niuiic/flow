@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "extends": "tsconfig/esm.json",
+  "include": ["src/**/*.ts"]
+}

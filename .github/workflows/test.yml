@@ -17,8 +17,9 @@ jobs:
         with:
           version: 8
       - uses: actions/checkout@v3
+      - uses: hecrj/setup-rust-action@v2
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pnpm i --frozen-lockfile
+      - run: pnpm initialize
       - run: pnpm test

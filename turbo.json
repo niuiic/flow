@@ -1,0 +1,16 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "fx-flow#build": {},
+    "fx-flow#lint": {},
+    "cli#build": {},
+    "doc#build": {
+      "dependsOn": ["cli#build"]
+    },
+    "test#test": {},
+    "test#test:coverage": {
+      "dependsOn": ["cli#build"]
+    },
+    "test#lint": {}
+  }
+}

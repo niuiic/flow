@@ -1,0 +1,25 @@
+{
+  "preset": "ts-jest/presets/default-esm",
+  "testEnvironment": "node",
+  "rootDir": "../",
+  "roots": ["<rootDir>/test", "<rootDir>/core"],
+  "testMatch": ["<rootDir>/test/src/**/*.spec.ts"],
+  "extensionsToTreatAsEsm": [".ts"],
+  "modulePaths": ["<rootDir>/test/node_modules", "<rootDir>/test/src"],
+  "moduleNameMapper": {
+    "#/(.*)": "<rootDir>/test/src/$1",
+    "fx-flow": "<rootDir>/core/src",
+    "@/(.*)": "<rootDir>/core/src/$1"
+  },
+  "transform": {
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        "useESM": true,
+        "tsconfig": "<rootDir>/test/tsconfig.json"
+      }
+    ]
+  },
+  "coverageReporters": ["json-summary", "text", "lcov"],
+  "coverageDirectory": "<rootDir>/test/coverage"
+}

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "#/*": ["./src/*"],
+      "@/*": ["../core/src/*"],
+      "fx-flow": ["../core/src"]
+    }
+  },
+  "extends": "tsconfig/esm.json",
+  "include": ["src/**/*.ts", "declare/**/*.d.ts", "../core/src/**/*.ts"]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "fx-flow",
+  "version": "0.3.11",
+  "description": "A functional library for TypeScript/JavaScript",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.mjs",
+    "require": "./dist/cjs/index.cjs"
+  },
+  "scripts": {
+    "build": "farm build && farm build -c farm.config.cjs.ts",
+    "lint": "tsc --noEmit && eslint -f unix --ext .ts .",
+    "lint:test": "cli lint",
+    "release": "release-it"
+  },
+  "author": "niuiic",
+  "homepage": "https://fx-flow.niuiic.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niuiic/fx-flow.git"
+  },
+  "keywords": ["functional programming", "stream programming", "lazy evaluation", "concurrency"],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "@farmfe/cli": "^0.5.8",
+    "@farmfe/core": "^0.13.21",
+    "@farmfe/js-plugin-dts": "^0.2.1",
+    "cli": "workspace:*",
+    "eslint-config-custom": "workspace:*",
+    "release-it": "^16.2.1",
+    "tsconfig": "workspace:*"
+  }
+}
