@@ -38,17 +38,6 @@ overseer.register_template({
 })
 
 overseer.register_template({
-	name = "export",
-	builder = function()
-		return {
-			cmd = { scriptPath },
-			args = { "export" },
-			components = { "on_exit_set_status", "on_complete_notify" },
-		}
-	end,
-})
-
-overseer.register_template({
 	name = "lint",
 	builder = function()
 		return {

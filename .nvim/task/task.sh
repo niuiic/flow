@@ -9,8 +9,6 @@ elif [ "$1" = "test-coverage" ]; then
 	pnpm test:coverage
 elif [ "$1" = "doc" ]; then
 	pnpm build --filter doc
-elif [ "$1" = "export" ]; then
-	pnpm call export src/pipe/lazy src/pipe/strict src/types src/flow
 elif [ "$1" = "lint" ]; then
 	pnpm lint
 elif [ "$1" = "release" ]; then
