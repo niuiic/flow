@@ -7,7 +7,7 @@
     "doc": "turbo build --filter doc",
     "lint": "turbo lint",
     "release": "pnpm build --force && pnpm test && cd packages/core && pnpm release",
-    "initialize": "(cd packages/cli && cargo build --release) && pnpm i --frozen-lockfile && lefthook install"
+    "initialize": "(cd packages/cli && pnpm build) && pnpm i --frozen-lockfile && lefthook install"
   },
   "packageManager": "pnpm",
   "devDependencies": {
