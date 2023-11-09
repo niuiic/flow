@@ -15,6 +15,10 @@ pub fn check_test(src_dir: &str, test_dir: &str, modules: Vec<String>) -> Result
                 return false;
             }
 
+            if let Some(_) = module.find("types") {
+                return false;
+            }
+
             if let Ok(metadata) = fs::metadata(module_test_path(module)) {
                 if metadata.is_file() {
                     return false;

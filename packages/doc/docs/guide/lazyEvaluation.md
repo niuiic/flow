@@ -1,28 +1,28 @@
 # Lazy Evaluation
 
-All functions defined under `pipe/lazy` have lazy evaluation feature. This feature greatly improves the running performance.
+All functions defined under `pipe/lazy` have lazy evaluation feature.
 
 ```typescript
-import { map, pipe, reduce, take } from 'fx-flow'
+import { map, pipe, reduce } from 'fx-flow'
 
 const arr = new Array(10000000).fill(1)
 
 console.time('builtin methods')
 arr
-  .map((v) => v + 1)
-  .slice(0, 10)
-  .reduce((a, b) => a + b)
+  .map((x) => x + 1)
+  .map((x) => x + 1)
+  .reduce((x, y) => x + y)
 console.timeEnd('builtin methods')
 
 console.time('methods with lazy evaluation')
 pipe(
   arr,
-  map((v) => v + 1),
-  take(10),
-  reduce((a, b) => a + b)
+  map((x) => x + 1),
+  map((x) => x + 1),
+  reduce((x, y) => x + y)
 )
 console.timeEnd('methods with lazy evaluation')
 ```
 
-- builtin methods: 97.567ms
-- methods with lazy evaluation: 0.272ms
+- builtin methods: 254.418ms
+- methods with lazy evaluation: 204.438ms

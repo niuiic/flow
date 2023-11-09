@@ -7,7 +7,7 @@ This library provides a tool type named `Immutable`, tries to make this restrict
 ![immutable showcase](/immutable.png)
 
 ::: tip
-`Immutable` has the second parameters to specify types to ignore.
+`Immutable` has the second parameter to specify types to ignore.
 :::
 
 ```typescript

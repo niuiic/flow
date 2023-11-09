@@ -6,7 +6,7 @@ import { err, ok } from './result'
 type IfThenReturnValue<A, R> = R extends Promise<unknown> ? MaybePromise<Result<A>> : Result<A>
 
 /**
- * Call `fn` if `result` is success and `condition` is satisfied.
+ * Call `fn` if `result` is success and `condition` is satisfied. Result of `fn` would not be passed on in the flow.
  *
  * @example
  * ```typescript

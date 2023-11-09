@@ -133,9 +133,11 @@ function err<T>(err: string): Result<T> {
 }
 
 /** Generate a success result */
-function ok<T = undefined>(data?: T): Result<T> {
+function ok(data?: undefined): Result<undefined>
+function ok<T>(data: T): Result<T>
+function ok<T = undefined>(data: T): Result<T> {
   return new Result<T>({
-    data: data as any
+    data
   })
 }
 
