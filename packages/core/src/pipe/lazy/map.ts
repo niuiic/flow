@@ -8,10 +8,7 @@ function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator
     next() {
       const { done, value } = iterator.next()
       if (done) {
-        return {
-          done: true,
-          value: undefined
-        }
+        return { done, value }
       }
 
       const res = fn(value)
@@ -20,7 +17,7 @@ function sync<A, R>(fn: (args: A) => R, iterable: Iterable<A>): IterableIterator
       }
 
       return {
-        done: false,
+        done,
         value: res
       }
     },
@@ -42,7 +39,7 @@ function async<A, R>(fn: (args: A) => R, iterable: AsyncIterable<A>): AsyncItera
       const res = fn(value)
 
       return {
-        done: false,
+        done,
         value: (isPromise(res) ? await res : res) as Awaited<R>
       }
     },
