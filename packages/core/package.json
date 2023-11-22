@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@farmfe/cli": "^0.5.9",
-    "@farmfe/core": "^0.14.2",
+    "@farmfe/core": "^0.14.3",
     "@farmfe/js-plugin-dts": "^0.3.0",
     "cli": "workspace:*",
     "eslint-config-custom": "workspace:*",

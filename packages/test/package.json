@@ -7,11 +7,11 @@
     "lint": "eslint -f unix --ext .ts ."
   },
   "devDependencies": {
-    "@types/jest": "^29.5.8",
+    "@types/jest": "^29.5.10",
+    "cli": "workspace:*",
     "eslint-config-custom": "workspace:*",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
-    "tsconfig": "workspace:*",
-    "cli": "workspace:*"
+    "tsconfig": "workspace:*"
   }
 }
