@@ -9,11 +9,11 @@
   "devDependencies": {
     "cli": "workspace:*",
     "tsconfig": "workspace:*",
-    "typedoc": "0.25.3",
-    "typedoc-plugin-markdown": "4.0.0-next.30",
+    "typedoc": "0.25.4",
+    "typedoc-plugin-markdown": "4.0.0-next.36",
     "typedoc-plugin-missing-exports": "^2.1.0",
     "typedoc-plugin-replace-text": "^3.2.0",
     "typedoc-vitepress-theme": "1.0.0-next.3",
-    "vitepress": "1.0.0-rc.29"
+    "vitepress": "1.0.0-rc.31"
   }
 }
