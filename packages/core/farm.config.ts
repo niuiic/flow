@@ -62,7 +62,7 @@ const config: UserConfig = {
   },
   plugins: [
     dts({
-      tsConfigPath: './tsconfig.json'
+      tsConfigPath: join(process.cwd(), 'tsconfig.json')
     })
   ]
 }

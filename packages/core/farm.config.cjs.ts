@@ -1,5 +1,4 @@
 import type { UserConfig } from '@farmfe/core'
-import dts from '@farmfe/js-plugin-dts'
 import path from 'node:path'
 
 const config: UserConfig = {
@@ -28,12 +27,7 @@ const config: UserConfig = {
     minify: true,
     sourcemap: true,
     presetEnv: false
-  },
-  plugins: [
-    dts({
-      tsConfigPath: './tsconfig.json'
-    })
-  ]
+  }
 }
 
 export default config
