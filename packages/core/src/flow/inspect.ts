@@ -38,7 +38,7 @@ function inspect<A>(
   }
 
   let res
-  if (result.isSuccess()) {
+  if (result.isOk()) {
     res = fn({
       success: true,
       data: result.unwrap()
@@ -51,10 +51,10 @@ function inspect<A>(
   }
 
   if (isPromise(res)) {
-    return res.then(() => (result.isSuccess() ? ok(result.unwrap()) : err(result.error()!)))
+    return res.then(() => (result.isOk() ? ok(result.unwrap()) : err(result.error()!)))
   }
 
-  return result.isSuccess() ? ok(result.unwrap()) : err(result.error()!)
+  return result.isOk() ? ok(result.unwrap()) : err(result.error()!)
 }
 
 export { inspect }

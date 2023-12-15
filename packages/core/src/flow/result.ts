@@ -110,12 +110,12 @@ class Result<T> {
   }
 
   /** Check if result is success */
-  public isSuccess() {
+  public isOk() {
     return this.success
   }
 
   /** Check if result is failure */
-  public isError() {
+  public isErr() {
     return !this.success
   }
 

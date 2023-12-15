@@ -31,7 +31,7 @@ function anyway<A, R extends MaybePromise<Result<unknown>>>(
     return (result) => anyway(fn, result)
   }
 
-  if (result.isSuccess()) {
+  if (result.isOk()) {
     const res = fn({
       success: true,
       data: result.unwrap()

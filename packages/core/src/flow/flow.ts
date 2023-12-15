@@ -649,12 +649,12 @@ function log(result: Result<unknown>, step: number, method: FlowState['log']) {
   if (method === 'NONE') {
     return
   }
-  if (method === 'ERROR' && result.isError()) {
+  if (method === 'ERROR' && result.isErr()) {
     console.error(`Step ${step} failed, the error is ${result.error()!}`)
     return
   }
   if (method === 'INFO') {
-    if (result.isSuccess()) {
+    if (result.isOk()) {
       console.info(`Step ${step} success, the result is`, result.unwrap())
     } else {
       console.error(`Step ${step} failed, the error is`, result.error())

@@ -28,7 +28,7 @@ function errThen<A>(
     return (result) => errThen(fn, result)
   }
 
-  if (result.isError()) {
+  if (result.isErr()) {
     const res = fn(result.error()!)
     if (isPromise(res)) {
       return res.then<Result<A>>(() => err(result.error()!))

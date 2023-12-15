@@ -37,7 +37,7 @@ function errThenEnd<A>(
     throw new FlowMissModifierException()
   }
 
-  if (result.isError()) {
+  if (result.isErr()) {
     modifier({ done: true })
     const res = fn(result.error()!)
     if (isPromise(res)) {
