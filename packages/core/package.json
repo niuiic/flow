@@ -3,12 +3,10 @@
   "version": "0.4.4",
   "description": "A functional library for TypeScript/JavaScript",
   "type": "module",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.mjs",
-  "types": "./dist/esm/index.d.ts",
+  "types": "./dist/esm/types/index.d.ts",
   "exports": {
     "import": "./dist/esm/index.mjs",
     "require": "./dist/cjs/index.cjs"
@@ -26,12 +24,7 @@
     "type": "git",
     "url": "https://github.com/niuiic/fx-flow.git"
   },
-  "keywords": [
-    "functional programming",
-    "stream programming",
-    "lazy evaluation",
-    "concurrency"
-  ],
+  "keywords": ["functional programming", "stream programming", "lazy evaluation", "concurrency"],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
