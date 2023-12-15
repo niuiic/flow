@@ -26,7 +26,7 @@ function mapErr<A, R extends MaybePromise<string>>(
     return (result) => mapErr(fn, result)
   }
 
-  if (result.isError()) {
+  if (result.isErr()) {
     const res = fn(result.error()!)
     if (isPromise(res)) {
       return res.then((res) => err<A>(res)) as ReturnValue<A, R>

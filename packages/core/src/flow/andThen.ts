@@ -31,7 +31,7 @@ function andThen<A, R extends MaybePromise<Result<unknown>>>(
     return (result) => andThen(fn, result)
   }
 
-  if (result.isSuccess()) {
+  if (result.isOk()) {
     const res = fn(result.unwrap())
     if (isPromise(res)) {
       return res.then((result) => {

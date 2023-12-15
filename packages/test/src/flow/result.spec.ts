@@ -6,8 +6,8 @@ expectType<Promise<Result<number>>>(ok(1).wait())
 expectType<Result<number>>(ok(1).mapOr(() => 2, 2))
 expectType<number>(ok(1).unwrap())
 expectType<string | undefined>(ok(1).error())
-expectType<boolean>(ok(1).isError())
-expectType<boolean>(ok(1).isSuccess())
+expectType<boolean>(ok(1).isErr())
+expectType<boolean>(ok(1).isOk())
 expectType<Result<number>>(ok(1).mapErr(''))
 
 describe('result', () => {
@@ -50,29 +50,29 @@ describe('result', () => {
     expect(new Result({ data: 'data' }).error()).toEqual(undefined)
   })
 
-  it('should return true if fail when call "isError"', () => {
-    expect(new Result({ err: '' }).isError()).toEqual(true)
+  it('should return true if fail when call "isErr"', () => {
+    expect(new Result({ err: '' }).isErr()).toEqual(true)
   })
 
-  it('should return false if success when call "isError"', () => {
-    expect(new Result({ data: '' }).isError()).toEqual(false)
+  it('should return false if success when call "isErr"', () => {
+    expect(new Result({ data: '' }).isErr()).toEqual(false)
   })
 
-  it('should return false if fail when call "isSuccess"', () => {
-    expect(new Result({ err: '' }).isSuccess()).toEqual(false)
+  it('should return false if fail when call "isOk"', () => {
+    expect(new Result({ err: '' }).isOk()).toEqual(false)
   })
 
-  it('should return true if success when call "isSuccess"', () => {
-    expect(new Result({ data: '' }).isSuccess()).toEqual(true)
+  it('should return true if success when call "isOk"', () => {
+    expect(new Result({ data: '' }).isOk()).toEqual(true)
   })
 
   it('should return a result which is success when call ok', () => {
-    expect(ok(1).isSuccess()).toEqual(true)
+    expect(ok(1).isOk()).toEqual(true)
     expect(ok().unwrap()).toEqual(undefined)
   })
 
   it('should return a result which is fail when call err', () => {
-    expect(err('').isSuccess()).toEqual(false)
+    expect(err('').isOk()).toEqual(false)
   })
 
   it('should return a result whose data is the result of "fn" if success when call "map"', () => {

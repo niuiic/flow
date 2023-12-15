@@ -37,12 +37,12 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@farmfe/cli": "^0.5.9",
-    "@farmfe/core": "^0.14.2",
+    "@farmfe/cli": "^0.5.11",
+    "@farmfe/core": "^0.14.18",
     "@farmfe/js-plugin-dts": "^0.3.0",
     "cli": "workspace:*",
     "eslint-config-custom": "workspace:*",
-    "release-it": "^17.0.0",
+    "release-it": "^17.0.1",
     "tsconfig": "workspace:*"
   }
 }

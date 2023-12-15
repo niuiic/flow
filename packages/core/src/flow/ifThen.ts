@@ -44,7 +44,7 @@ function ifThen<A>(
     return (result) => ifThen(guard, fn, result)
   }
 
-  if (result.isError()) {
+  if (result.isErr()) {
     return err(result.error()!)
   }
 

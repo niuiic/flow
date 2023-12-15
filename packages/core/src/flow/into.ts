@@ -25,7 +25,7 @@ function into<A, R>(fn: (data: A) => R, result?: Result<A>): ReturnValue<R> | ((
     return (result) => into(fn, result)
   }
 
-  if (result.isSuccess()) {
+  if (result.isOk()) {
     const res = fn(result.unwrap())
     if (isPromise(res)) {
       return res.then((data) => ok(data)) as ReturnValue<R>
