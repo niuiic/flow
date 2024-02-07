@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["ESNext"]
+  },
+  "extends": "tsconfig/esm.json",
+  "include": ["./build/**/*.ts"]
+}

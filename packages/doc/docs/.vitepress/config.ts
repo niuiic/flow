@@ -1,26 +1,5 @@
-import { DefaultTheme, defineConfig } from 'vitepress'
-import apiSidebarItems from '../api/typedoc-sidebar.json'
-
-const fixedItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] =>
-  items
-    .filter((x) => {
-      if (!x.link && (!x.items || x.items.length === 0)) {
-        return false
-      }
-      if (x.link && ['/api/index.md', '/api/modules.md'].includes(x.link)) {
-        return false
-      }
-      return true
-    })
-    .map((x) => {
-      const childItems = x.items ? fixedItems(x.items) : []
-      return {
-        ...x,
-        text: x.text === '<internal>' ? '[internal]' : x.text,
-        items: childItems,
-        collapsed: childItems.length > 0 ? true : undefined
-      }
-    })
+import { defineConfig } from 'vitepress'
+import sidebarItems from '../api/typedoc-sidebar.json'
 
 export default defineConfig({
   title: 'Fx-Flow',
@@ -46,7 +25,7 @@ export default defineConfig({
       },
       {
         text: 'API',
-        items: fixedItems(apiSidebarItems as unknown as DefaultTheme.SidebarItem[])
+        items: sidebarItems
       }
     ],
     outline: 'deep',

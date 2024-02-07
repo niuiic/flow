@@ -3,11 +3,10 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "typedoc && cli cleanDoc && vitepress build docs",
+    "build": "tsx build",
     "preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "cli": "workspace:*",
     "tsconfig": "workspace:*",
     "typedoc": "0.25.4",
     "typedoc-plugin-markdown": "4.0.0-next.36",

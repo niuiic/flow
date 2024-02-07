@@ -7,5 +7,6 @@
     "lib": ["ESNext"]
   },
   "extends": "tsconfig/esm.json",
-  "include": ["../core/src/**/*.ts"]
+  "include": ["../core/src/**/*.ts"],
+  "reference": ["tsconfig.node.json"]
 }
