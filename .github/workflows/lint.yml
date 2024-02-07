@@ -17,4 +17,4 @@ jobs:
       - uses: actions/setup-node@v3
       - run: pnpm i
       - run: pnpm lint
-      - run: cd packages/core/src && pnpm lint:test $(find ./pipe ./flow -type f | xargs readlink -f)
+      - run: cd packages/core && pnpm lint:test $(cd ../.. && find ./packages/core/src/pipe ./packages/core/src/flow -type f)
