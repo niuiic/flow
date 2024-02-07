@@ -3,15 +3,14 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "test:coverage": "jest --coverage && cli fixCoverage",
+    "test:coverage": "tsx coverage",
     "lint": "eslint -f unix --ext .ts ."
   },
   "devDependencies": {
-    "@types/jest": "^29.5.11",
-    "cli": "workspace:*",
+    "@types/jest": "^29.5.12",
     "eslint-config-custom": "workspace:*",
     "jest": "^29.7.0",
-    "ts-jest": "^29.1.1",
+    "ts-jest": "^29.1.2",
     "tsconfig": "workspace:*"
   }
 }
