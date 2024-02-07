@@ -6,4 +6,4 @@ pre-commit:
       run: pnpm eslint -f unix {staged_files}
     lint-test:
       glob: 'packages/core/src/**/*.ts'
-      run: pnpm lint --filter fx-flow && cd packages/core && pnpm lint:test {staged_files}
+      run: cd packages/core && pnpm lint:test {staged_files}
