@@ -3,14 +3,9 @@
   "pipeline": {
     "fx-flow#build": {},
     "fx-flow#lint": {},
-    "cli#build": {},
-    "doc#build": {
-      "dependsOn": ["cli#build"]
-    },
+    "doc#build": {},
     "test#test": {},
-    "test#test:coverage": {
-      "dependsOn": ["cli#build"]
-    },
+    "test#test:coverage": {},
     "test#lint": {}
   }
 }
