@@ -33,8 +33,6 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  packages/cli: {}
-
   packages/core:
     devDependencies:
       '@farmfe/cli':
@@ -46,9 +44,6 @@ importers:
       '@farmfe/js-plugin-dts':
         specifier: ^0.4.0
         version: 0.4.0
-      cli:
-        specifier: workspace:*
-        version: link:../cli
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
