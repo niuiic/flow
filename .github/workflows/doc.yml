@@ -22,7 +22,7 @@ jobs:
       - uses: hecrj/setup-rust-action@v2
 
       - name: Init
-        run: pnpm initialize
+        run: pnpm i
 
       - name: Build Doc
         run: pnpm build --filter doc

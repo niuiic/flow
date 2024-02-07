@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: pnpm initialize
+      - run: pnpm i
       - run: pnpm add -D jest-coverage-badges-ng --filter test
       - run: pnpm test:coverage && cd packages/test && pnpm jest-coverage-badges-ng
       - uses: peaceiris/actions-gh-pages@v3
