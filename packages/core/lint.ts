@@ -11,6 +11,10 @@ const testDirMap = [
 ]
 
 const missingTests = inputFiles.filter((x) => {
+  if (x.includes('index.ts')) {
+    return false
+  }
+
   const targetMap = testDirMap.find((y) => x.includes(y[0]))
   if (!targetMap) {
     return false
@@ -21,7 +25,7 @@ const missingTests = inputFiles.filter((x) => {
     return false
   }
 
-  return [join(rootDir, targetMap[1], mod, '.spec.ts'), join(rootDir, targetMap[1], mod)].every((x) => !existsSync(x))
+  return [join(rootDir, targetMap[1], mod + '.spec.ts'), join(rootDir, targetMap[1], mod)].every((x) => !existsSync(x))
 })
 
 if (missingTests.length > 0) {
