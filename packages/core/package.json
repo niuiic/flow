@@ -4,15 +4,15 @@
   "description": "A functional library for TypeScript/JavaScript",
   "type": "module",
   "files": ["dist"],
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
-  "types": "./dist/esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/type/index.d.ts",
   "exports": {
-    "import": "./dist/esm/index.mjs",
-    "require": "./dist/cjs/index.cjs"
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
   },
   "scripts": {
-    "build": "farm build && farm build -c farm.config.cjs.ts",
+    "build": "rollup -c rollup.config.mjs",
     "lint": "tsc --noEmit && eslint -f unix --ext .ts .",
     "lint:test": "tsx lint",
     "release": "release-it"
@@ -30,11 +30,12 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@farmfe/cli": "^0.6.2",
-    "@farmfe/core": "^0.16.6",
-    "@farmfe/js-plugin-dts": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.1.6",
     "eslint-config-custom": "workspace:*",
     "release-it": "^17.0.3",
-    "tsconfig": "workspace:*"
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "tsconfig": "workspace:*",
+    "tslib": "^2.6.2"
   }
 }
