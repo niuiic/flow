@@ -22,7 +22,9 @@
 - Graceful error handling
 - Better asynchronous programming
 - Lazy evaluation
-- TypeScript support
+- Fully typeScript support
+- Zero runtime dependency
+- Well tested
 
 [Read the Docs to Learn More](https://fx-flow.niuiic.com).
 

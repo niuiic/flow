@@ -2,9 +2,11 @@
 
 ## Introduction
 
-This library is an exploration of the application of functional programming to practical.
+This library is an exploration of the application of **_functional programming_** to practical.
 
-It's aim to improve the readability and maintainability of the program and the experience of writing code.
+It innovates on the traditional **_currying_** and **_immutability_**.
+
+It aims to improve the scalability, maintainability and readability of the program by **_grasping the data flow and data structure_**.
 
 ## Installation
 
@@ -30,21 +32,21 @@ pnpm add fx-flow
 
 ### Import
 
+:::tip
+Only support ES6 or higher by default. You can build for yourself for other targets.
+:::
+
 - ESM
 
 ```typescript
 import { flow, pipe } from 'fx-flow'
 ```
 
-> Target: ES6
-
 - CJS
 
 ```typescript
 const { flow, pipe } = require('fx-flow')
 ```
-
-> Target: ES5
 
 ### flow
 
