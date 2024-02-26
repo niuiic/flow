@@ -6,7 +6,7 @@ This library is an exploration of the application of **_functional programming_*
 
 It innovates on the traditional **_currying_** and **_immutability_**.
 
-It aims to improve the scalability, maintainability and readability of the program by **_grasping the data flow and data structure_**.
+It aims to improve the scalability, maintainability and readability of the program by **_grasping data flow and data structure_**.
 
 ## Installation
 
@@ -99,10 +99,10 @@ type FileChunk = number
 
 const fileChunks: FileChunk[] = [1, 2, 3, 4, 5]
 
-const hasUploaded = (chunk: FileChunk) => chunk === 1
+const notUploaded = (chunk: FileChunk) => chunk > 1
 
 const uploadChunk = (chunk: FileChunk) => delay(1000, chunk).then(() => console.log(`${chunk} has been uploaded`))
 
 // Upload file chunks concurrently and skip uploaded chunks.
-pipe(fileChunks, toAsync, filter(hasUploaded), concurrent(3), each(uploadChunk))
+pipe(fileChunks, toAsync, filter(notUploaded), concurrent(3), each(uploadChunk))
 ```
