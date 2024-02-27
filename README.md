@@ -22,7 +22,7 @@
 - Graceful error handling
 - Better asynchronous programming
 - Lazy evaluation
-- Fully typeScript support
+- Fully typescript support
 - Zero runtime dependency
 - Well tested
 
