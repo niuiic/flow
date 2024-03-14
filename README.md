@@ -20,7 +20,7 @@
 
 - Streaming programming
 - Graceful error handling
-- Better asynchronous programming
+- Manage asynchronous data flow
 - Lazy evaluation
 - Fully typescript support
 - Zero runtime dependency

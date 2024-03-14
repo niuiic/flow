@@ -20,10 +20,10 @@ features:
     details: Process data in pipeline.
   - title: Graceful Error Handing
     details: Get rid of try catch.
-  - title: Better Asynchronous Programming
-    details: Automatically wait for the previous step.
+  - title: Manage Asynchronous Data Flow
+    details: Automatic dependency resolution and concurrency control.
   - title: Lazy Evaluation
-    details: Only consume "Iterable/asyncIterable" in need.
+    details: Only consume "iterable/asyncIterable" in need.
   - title: Typescript Support
     details: Complete typescript type definition.
   - title: Well Tested
