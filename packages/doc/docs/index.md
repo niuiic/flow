@@ -20,7 +20,7 @@ features:
     details: Process data in pipeline.
   - title: Graceful Error Handing
     details: Get rid of try catch.
-  - title: Manage Asynchronous Data Flow
+  - title: Asynchronous Data Flow Management
     details: Automatic dependency resolution and concurrency control.
   - title: Lazy Evaluation
     details: Only consume "iterable/asyncIterable" in need.
