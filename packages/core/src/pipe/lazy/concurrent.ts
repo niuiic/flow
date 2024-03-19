@@ -30,7 +30,7 @@ export function isConcurrent(concurrent: unknown): concurrent is Concurrent {
  *   concurrent(3),
  *   each(console.log), // log 1, 2, 3, 4, 5, 6
  * ); // takes 2 seconds
- * // Task 1,2,3 start together, and task 4,5,6 wait for all the three task finished, then start together.
+ * // Task 1, 2, 3 start together, and task 4, 5, 6 wait for all the three task finished, then start together.
  *
  * await pipe(
  *   [1, 2, 3, 4, 5, 6],
@@ -66,9 +66,13 @@ function concurrent<A>(
   const iterator = iterable[Symbol.asyncIterator]()
   const taskResults: PromiseSettledResult<IteratorResult<A>>[] = []
   let prevGroup = Promise.resolve()
+  // count of calling `next` method of the iterator
   let nextCallCount = 0
+  // count of fulfilled(exclude rejected) tasks
   let resolvedItemCount = 0
+  // all tasks are fulfilled or some task is rejected
   let iterFinished = false
+  // whether previous group of tasks finished
   let groupTasksFinished = true
   const settlementQueue: [IteratorResolve<A>, Reject][] = []
 
