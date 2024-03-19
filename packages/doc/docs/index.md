@@ -24,8 +24,8 @@ features:
     details: Automatic dependency resolution and concurrency control.
   - title: Lazy Evaluation
     details: Only consume "iterable/asyncIterable" in need.
-  - title: Typescript Support
-    details: Complete typescript type definition.
+  - title: TypeScript Support
+    details: Complete typeScript type definition.
   - title: Well Tested
     details: Test coverage over 90%.
 ---
