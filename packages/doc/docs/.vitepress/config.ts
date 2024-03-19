@@ -18,6 +18,7 @@ export default defineConfig({
         items: [
           { text: 'quickstart', link: '/guide/quickstart' },
           { text: 'lazy evaluation', link: '/guide/lazyEvaluation' },
+          { text: 'concurrency', link: '/guide/concurrency' },
           { text: 'pure function', link: '/guide/pureFunc' },
           { text: 'curry', link: '/guide/curry' },
           { text: 'debug', link: '/guide/debug' }
