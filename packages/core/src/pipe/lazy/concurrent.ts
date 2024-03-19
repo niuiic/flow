@@ -117,6 +117,9 @@ function concurrent<A>(
   }
 
   const recur = () => {
+    // `nextCallCount` represents the number of times `next` is called for subsequent steps
+    // normally `resolvedItemCount` should be less than `nextCallCount`
+    // they may be the same if the subsequent step exits the iteration
     if (iterFinished || nextCallCount === resolvedItemCount) {
       return
     }
