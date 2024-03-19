@@ -39,4 +39,4 @@ const result = pipe(
 )
 ```
 
-`concurrent` control the number of concurrency for all previous steps.
+`concurrent` controls the number of concurrency for all previous steps.
