@@ -19,7 +19,7 @@ export function isConcurrent(concurrent: unknown): concurrent is Concurrent {
 }
 
 /**
- * Concurrent is used to balance the load of multiple asynchronous requests.
+ * Concurrent is used to balance the load of multiple asynchronous requests. It controls the number of concurrency for `iterable`.
  *
  * @example
  * ```typescript
@@ -77,6 +77,7 @@ function concurrent<A>(
   const settlementQueue: [IteratorResolve<A>, Reject][] = []
 
   const resolveTaskResults = () => {
+    // nextCallCount > resolvedItemCount => settlementQueue.length > 0
     while (taskResults.length > 0 && nextCallCount > resolvedItemCount) {
       const taskResult = taskResults.shift()!
       const [resolve, reject] = settlementQueue.shift()!
@@ -97,6 +98,7 @@ function concurrent<A>(
   const performTasks = () => {
     if (groupTasksFinished) {
       const nextGroupTasks = Promise.allSettled(
+        // pass `Concurrent` instance => tell previous step to control concurrency
         Array.from({ length }, () => iterator.next(Concurrent.of(length) as any))
       )
       groupTasksFinished = false

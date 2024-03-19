@@ -45,6 +45,7 @@ function asyncConcurrent<A>(iterable: AsyncIterable<[unknown, A]>): AsyncIterabl
       .then(() => nextItem)
       .then(({ done, value }) => {
         if (done) {
+          // clean up `settlementQueue` then finish iterate
           while (settlementQueue.length > 0) {
             const [resolve] = settlementQueue.shift()!
             resolve({ done: true, value: undefined })
@@ -59,6 +60,7 @@ function asyncConcurrent<A>(iterable: AsyncIterable<[unknown, A]>): AsyncIterabl
         recur(concurrent)
       })
       .catch((reason: unknown) => {
+        // clean up `settlementQueue` then finish iterate
         iterFinished = true
         while (settlementQueue.length > 0) {
           const [, reject] = settlementQueue.shift()!
@@ -95,6 +97,7 @@ function asyncConcurrent<A>(iterable: AsyncIterable<[unknown, A]>): AsyncIterabl
   } as AsyncIterableIterator<A>
 }
 
+/** transform `iterable` to [Boolean, value] iterable */
 function toFilterIterator<A>(
   fn: (args: A) => unknown,
   iterable: AsyncIterable<A>
@@ -136,6 +139,8 @@ function async<A>(fn: (args: A) => MaybePromise<unknown>, iterable: AsyncIterabl
     async next(concurrent: any) {
       if (iterator === undefined) {
         if (isConcurrent(concurrent)) {
+          // filter need two values(result of `fn` and value of iteratorResult)
+          // this special handling is to implement type variation and lazy evaluation
           iterator = asyncConcurrent(concurrentFn(concurrent.length, toFilterIterator(fn, iterable)))
         } else {
           iterator = asyncSequential(fn, iterable)
