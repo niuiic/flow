@@ -93,7 +93,7 @@ Perform batch operations on a collection with `pipe`.
 :::
 
 ```typescript
-import { concurrent, delay, each, filter, pipe, toAsync } from 'fx-flow'
+import { concurrent, consume, delay, filter, map, pipe, toAsync } from 'fx-flow'
 
 type FileChunk = number
 
@@ -104,5 +104,5 @@ const notUploaded = (chunk: FileChunk) => chunk > 1
 const uploadChunk = (chunk: FileChunk) => delay(1000, chunk).then(() => console.log(`${chunk} has been uploaded`))
 
 // Upload file chunks concurrently and skip uploaded chunks.
-pipe(fileChunks, toAsync, filter(notUploaded), concurrent(3), each(uploadChunk))
+pipe(fileChunks, toAsync, filter(notUploaded), map(uploadChunk), concurrent(3), consume)
 ```
