@@ -10,14 +10,14 @@ type MD5 = number
 
 const fileChunks: FileChunk[] = Array.from(
   {
-    length: 10
+    length: 20
   },
   (_, i) => i
 )
 
 const calcMd5 = (chunk: FileChunk): Promise<[FileChunk, MD5]> => Promise.all([chunk, delay(100, Math.random())])
 
-const notUploaded = (chunk: [FileChunk, MD5]) => Promise.resolve(chunk[1] > 0.5)
+const notUploaded = (chunk: [FileChunk, MD5]) => chunk[1] > 0.5
 
 const uploadChunk = (chunk: FileChunk) => delay(1000, chunk).then(() => console.log(`${chunk} has been uploaded`))
 
