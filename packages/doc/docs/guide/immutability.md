@@ -1,4 +1,4 @@
-# Pure Function
+# Immutability
 
 Immutable restrictions on function input parameters usually greatly increase the runtime burden.
 
