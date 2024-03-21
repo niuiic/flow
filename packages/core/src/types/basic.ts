@@ -10,21 +10,27 @@ export type IsNever<T> = [T] extends [never] ? true : false
 
 export type IsUnion<T, A = T> = T extends T ? ([A] extends [T] ? false : true) : never
 
-export type IsTuple<T> = [T] extends [any[]] ? (number extends T['length'] ? false : true) : false
+export type IsTuple<T> = [T] extends [never]
+  ? false
+  : [T] extends [any[]]
+    ? number extends T['length']
+      ? false
+      : true
+    : false
 
 /** Expand nested type deeply */
 export type Expand<T, Ignore = never> = T extends T
   ? T extends Ignore
     ? T
     : T extends (...args: infer A) => Promise<infer R>
-    ? (...args: Expand<A, Ignore>) => Promise<Expand<R, Ignore>>
-    : T extends (...args: infer A) => infer R
-    ? (...args: Expand<A, Ignore>) => Expand<R, Ignore>
-    : T extends object
-    ? {
-        [K in keyof T]: Expand<T[K], Ignore>
-      }
-    : T
+      ? (...args: Expand<A, Ignore>) => Promise<Expand<R, Ignore>>
+      : T extends (...args: infer A) => infer R
+        ? (...args: Expand<A, Ignore>) => Expand<R, Ignore>
+        : T extends object
+          ? {
+              [K in keyof T]: Expand<T[K], Ignore>
+            }
+          : T
   : never
 
 export type Length<T extends unknown[]> = T['length']
