@@ -9,9 +9,8 @@ import type {
 import { IterableTypeException, call, isAsyncIterable, isIterable } from '@/utils'
 
 type FnReturenValue<A extends UniversalIterable, R = A> = A extends AsyncIterable<unknown> ? MaybePromise<R> : R
-type PrevRes<A extends UniversalIterable, R = UniversalIterableItem<A>> = A extends AsyncIterable<unknown>
-  ? Awaited<R>
-  : R
+type PrevRes<A extends UniversalIterable, R = UniversalIterableItem<A>> =
+  A extends AsyncIterable<unknown> ? Awaited<R> : R
 
 function sync<A, R>(fn: (prevRes: R, args: A) => R, initialRes: R, iterable: Iterable<A>): R {
   let res = initialRes

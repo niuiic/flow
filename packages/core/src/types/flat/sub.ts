@@ -12,9 +12,8 @@ type _SubPositive<N1 extends Iteration, N2 extends Iteration> = {
   2: number
 }[Pos<N2> extends 0 ? 1 : number extends Pos<N2> ? 2 : 0]
 
-type SubPositive<N1 extends Iteration, N2 extends Iteration> = _SubPositive<N1, N2> extends infer X
-  ? Cast<X, Iteration>
-  : never
+type SubPositive<N1 extends Iteration, N2 extends Iteration> =
+  _SubPositive<N1, N2> extends infer X ? Cast<X, Iteration> : never
 
 type _SubNegative<N1 extends Iteration, N2 extends Iteration> = {
   0: _SubNegative<Next<N1>, Next<N2>>
@@ -22,9 +21,8 @@ type _SubNegative<N1 extends Iteration, N2 extends Iteration> = {
   2: number
 }[Pos<N2> extends 0 ? 1 : number extends Pos<N2> ? 2 : 0]
 
-type SubNegative<N1 extends Iteration, N2 extends Iteration> = _SubNegative<N1, N2> extends infer X
-  ? Cast<X, Iteration>
-  : never
+type SubNegative<N1 extends Iteration, N2 extends Iteration> =
+  _SubNegative<N1, N2> extends infer X ? Cast<X, Iteration> : never
 
 export type _Sub<N1 extends Iteration, N2 extends Iteration> = {
   0: SubPositive<N1, N2>

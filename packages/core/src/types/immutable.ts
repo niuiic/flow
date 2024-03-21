@@ -16,12 +16,12 @@ export type Immutable<T, Ignore = never> = T extends T
   ? T extends Primitive | AnyFunction | Ignore
     ? T
     : T extends Array<infer U>
-    ? IsTuple<T> extends true
-      ? ImmutableTuple<T, Ignore>
-      : ImmutableArray<U, Ignore>
-    : T extends Map<infer K, infer V>
-    ? ImmutableMap<K, V, Ignore>
-    : T extends Set<infer M>
-    ? ImmutableSet<M, Ignore>
-    : ImmutableObject<T, Ignore>
+      ? IsTuple<T> extends true
+        ? ImmutableTuple<T, Ignore>
+        : ImmutableArray<U, Ignore>
+      : T extends Map<infer K, infer V>
+        ? ImmutableMap<K, V, Ignore>
+        : T extends Set<infer M>
+          ? ImmutableSet<M, Ignore>
+          : ImmutableObject<T, Ignore>
   : never

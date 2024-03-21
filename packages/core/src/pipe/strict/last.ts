@@ -7,12 +7,12 @@ import { reduce } from './reduce'
 type LastReturnValue<T> = T extends readonly [...rest: any, last: infer Last]
   ? Last
   : T extends readonly never[]
-  ? undefined
-  : T extends AsyncIterable<infer U>
-  ? FixedPromise<U | undefined>
-  : T extends Iterable<infer U>
-  ? U | undefined
-  : never
+    ? undefined
+    : T extends AsyncIterable<infer U>
+      ? FixedPromise<U | undefined>
+      : T extends Iterable<infer U>
+        ? U | undefined
+        : never
 
 /**
  * Return the last element of iterable/asyncIterable

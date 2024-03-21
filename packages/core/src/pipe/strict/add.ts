@@ -7,8 +7,8 @@ import { isString } from './isString'
 type AddReturnValue<T, A extends T, B extends T> = [A] extends [FixedPromise<T>]
   ? FixedPromise<T>
   : [B] extends [FixedPromise<T>]
-  ? FixedPromise<T>
-  : Awaited<T>
+    ? FixedPromise<T>
+    : Awaited<T>
 
 function sync(a: number | string, b: number | string): string | number {
   if (isNumber(a) && isNumber(b)) {
