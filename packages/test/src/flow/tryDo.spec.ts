@@ -1,4 +1,9 @@
+import { expectType } from '#/utils'
 import { Result, tryDo } from 'fx-flow'
+
+expectType<Promise<Result<number>>>(tryDo(() => Promise.resolve(1)))
+expectType<Promise<Result<number>>>(tryDo(() => Promise.reject<number>(new Error())))
+expectType<Result<number>>(tryDo(() => 1))
 
 describe('tryDo', () => {
   it('should convert the result of `fn` to `Result`', () => {
