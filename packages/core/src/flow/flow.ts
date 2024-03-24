@@ -1,9 +1,7 @@
 import type { AnyFunction, AnyObject, FlowReturnValue, FlowState, FnReturnValue, Modifier } from '@/types'
-import { isPromise } from '@/utils'
+import { isPromise, toStr } from '@/utils'
 import type { Result } from './result'
 import { err } from './result'
-
-const toStr = (err: unknown) => JSON.stringify(err, Object.getOwnPropertyNames(err), 1)
 
 /**
  * Compose steps from left to right.
