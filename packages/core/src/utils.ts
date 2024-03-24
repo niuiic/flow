@@ -50,4 +50,8 @@ export class FlowMissModifierException extends Error {
   }
 }
 
+export function toStr(x: unknown) {
+  return JSON.stringify(x, Object.getOwnPropertyNames(x), 1)
+}
+
 export function* empty() {}
