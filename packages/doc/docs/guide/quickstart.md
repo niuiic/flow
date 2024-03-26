@@ -6,7 +6,7 @@ This library is an exploration of the application of **_functional programming_*
 
 It innovates on the traditional **_currying_** and **_immutability_**.
 
-It aims to improve the scalability, maintainability and readability of the program by **_grasping data flow and data structure_**.
+It aims to improve the reliability and maintainability of the program by **_grasping data flow and data structure_**.
 
 ## Installation
 
