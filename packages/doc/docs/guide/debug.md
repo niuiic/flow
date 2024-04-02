@@ -11,7 +11,7 @@ Do not modify `data`, or subsequent steps will be affected.
 :::
 
 ```typescript
-const inspector = <T>(args: { success: true; data: T } | { success: false; err: string }) => {
+const inspector = <T>(args: { ok: true; data: T } | { ok: false; err: string }) => {
   console.log(args)
 }
 
