@@ -9,28 +9,28 @@ import { err, ok } from './result'
  * @example
  * ```typescript
  * // with flow
- * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(isQuerySuccess), errThen(notify))).unwrapOr(defaultUserInfo)
+ * const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(isQueryok), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
  * {@link https://github.com/niuiic/fx-flow/blob/main/packages/test/src/flow/inspect.spec.ts | More examples}
  */
 function inspect<A>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<unknown>,
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => Promise<unknown>,
   result: Result<A>
 ): MaybePromise<Result<A>>
 function inspect<A>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => Promise<unknown>
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => Promise<unknown>
 ): (result: Result<A>) => MaybePromise<Result<A>>
 function inspect<A>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => unknown,
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => unknown,
   result: Result<A>
 ): Result<A>
 function inspect<A>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => unknown
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => unknown
 ): (result: Result<A>) => Result<A>
 
 function inspect<A>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => unknown,
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => unknown,
   result?: Result<A>
 ): MaybePromise<Result<A>> | ((result: Result<A>) => MaybePromise<Result<A>>) {
   if (result === undefined) {
@@ -40,12 +40,12 @@ function inspect<A>(
   let res
   if (result.isOk()) {
     res = fn({
-      success: true,
+      ok: true,
       data: result.unwrap()
     })
   } else {
     res = fn({
-      success: false,
+      ok: false,
       err: result.error()!
     })
   }

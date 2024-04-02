@@ -15,15 +15,15 @@ import type { Result } from './result'
  * {@link https://github.com/niuiic/fx-flow/blob/main/packages/test/src/flow/anyway.spec.ts | More examples}
  */
 function anyway<A, R extends MaybePromise<Result<unknown>>>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => R,
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => R,
   result: Result<A>
 ): ResultReturnValue<R>
 function anyway<A, R extends MaybePromise<Result<unknown>>>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => R
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => R
 ): (result: Result<A>) => ResultReturnValue<R>
 
 function anyway<A, R extends MaybePromise<Result<unknown>>>(
-  fn: (args: { success: true; data: A } | { success: false; err: string }) => R,
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => R,
   result?: Result<A>
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 ): ((result: Result<A>) => ResultReturnValue<R>) | ResultReturnValue<R> {
@@ -33,7 +33,7 @@ function anyway<A, R extends MaybePromise<Result<unknown>>>(
 
   if (result.isOk()) {
     const res = fn({
-      success: true,
+      ok: true,
       data: result.unwrap()
     })
     if (isPromise(res)) {
@@ -52,7 +52,7 @@ function anyway<A, R extends MaybePromise<Result<unknown>>>(
   }
 
   return fn({
-    success: false,
+    ok: false,
     err: result.error()!
   }) as ResultReturnValue<R>
 }
