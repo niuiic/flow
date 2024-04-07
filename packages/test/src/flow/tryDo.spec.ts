@@ -1,9 +1,18 @@
 import { expectType } from '#/utils'
+import type { MaybePromise } from 'fx-flow'
 import { Result, tryDo } from 'fx-flow'
 
 expectType<Promise<Result<number>>>(tryDo(() => Promise.resolve(1)))
 expectType<Promise<Result<number>>>(tryDo(() => Promise.reject<number>(new Error())))
 expectType<Result<number>>(tryDo(() => 1))
+expectType<MaybePromise<Result<number>>>(
+  tryDo(() => {
+    if (new Date().getTime() > 10086) {
+      return Promise.resolve(1)
+    }
+    return 1
+  })
+)
 
 describe('tryDo', () => {
   it('should convert the result of `fn` to `Result`', () => {
