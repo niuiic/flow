@@ -346,8 +346,9 @@ DA:11,59
 DA:12,59
 DA:13,59
 DA:14,59
-LF:14
-LH:14
+DA:15,59
+LF:15
+LH:15
 BRF:0
 BRH:0
 end_of_record
@@ -616,9 +617,9 @@ FNH:3
 FNDA:8,toTry
 FNDA:3,(anonymous_1)
 FNDA:3,(anonymous_2)
-DA:2,1
+DA:2,60
 DA:16,8
-DA:19,1
+DA:19,60
 LF:3
 LH:3
 BRF:0
