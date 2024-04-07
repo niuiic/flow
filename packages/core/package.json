@@ -1,6 +1,6 @@
 {
   "name": "fx-flow",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A functional library for TypeScript/JavaScript",
   "type": "module",
   "files": [
