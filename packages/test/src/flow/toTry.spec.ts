@@ -1,6 +1,6 @@
 import { expectType } from '#/utils'
-import { toTry } from '@/flow/toTry'
 import type { MaybePromise, Result } from 'fx-flow'
+import { toTry } from 'fx-flow'
 
 expectType<() => Promise<Result<number>>>(toTry(() => Promise.resolve(1)))
 expectType<() => Promise<Result<number>>>(toTry(() => Promise.reject<number>(new Error())))
