@@ -1,7 +1,15 @@
+import type { IsAny, IsNever } from '../types'
 import { isPromise, toStr } from '../utils'
 import { err, ok, type Result } from './result'
 
-type TryDoResult<T> = T extends Promise<infer U> ? Promise<Result<Awaited<U>>> : Result<T>
+type TryDoResult<T> =
+  IsNever<T> extends true
+    ? never
+    : IsAny<T> extends true
+      ? unknown
+      : T extends Promise<infer U>
+        ? Promise<Result<Awaited<U>>>
+        : Result<T>
 
 /**
  * Convert the result of `fn` to `Result`. Automatically catch error.
