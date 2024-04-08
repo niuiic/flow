@@ -1,6 +1,6 @@
 import { expectType } from '#/utils'
 import type { MaybePromise, Result } from 'fx-flow'
-import { andThen, anyway, delay, errThen, errThenEnd, flow, ok } from 'fx-flow'
+import { andThen, anyway, delay, err, errThen, errThenEnd, flow, log, ok } from 'fx-flow'
 
 expectType<Result<number>>(
   flow(
@@ -81,6 +81,20 @@ describe('flow', () => {
         return ok(data + 'data')
       }),
       errThen(console.log)
+    )
+  })
+
+  it('log should work', () => {
+    flow(
+      ok(1),
+      log('INFO'),
+      andThen(() => err(''))
+    )
+
+    flow(
+      err(''),
+      log('ERROR'),
+      andThen((x) => ok(x))
     )
   })
 })
