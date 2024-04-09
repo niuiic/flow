@@ -1,6 +1,7 @@
 import type { MaybePromise } from '@/types'
 import { isPromise } from '@/utils'
 import type { Result } from './result'
+import { err, ok } from './result'
 
 /**
  * Inject a function to the progress without side effect.
@@ -13,13 +14,23 @@ import type { Result } from './result'
  *
  * {@link https://github.com/niuiic/fx-flow/blob/main/packages/test/src/flow/inject.spec.ts | More examples}
  */
-function inject<A>(fn: () => Promise<unknown>, result: Result<A>): Promise<Result<A>>
-function inject<A>(fn: () => Promise<unknown>): (result: Result<A>) => Promise<Result<A>>
-function inject<A>(fn: () => unknown, result: Result<A>): Result<A>
-function inject<A>(fn: () => unknown): (result: Result<A>) => Result<A>
+function inject<A>(
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => Promise<unknown>,
+  result: Result<A>
+): Promise<Result<A>>
+function inject<A>(
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => Promise<unknown>
+): (result: Result<A>) => Promise<Result<A>>
+function inject<A>(
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => unknown,
+  result: Result<A>
+): Result<A>
+function inject<A>(
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => unknown
+): (result: Result<A>) => Result<A>
 
 function inject<A>(
-  fn: () => unknown,
+  fn: (args: { ok: true; data: A } | { ok: false; err: string }) => unknown,
   result?: Result<A>
 ): MaybePromise<Result<A>> | ((result: Result<A>) => MaybePromise<Result<A>>) {
   if (result === undefined) {
@@ -27,16 +38,29 @@ function inject<A>(
   }
 
   let res
-  if (isPromise(result)) {
-    res = result.then(() => fn())
-  } else {
-    res = fn()
+  try {
+    if (result.isOk()) {
+      res = fn({
+        ok: true,
+        data: result.unwrap()
+      })
+    } else {
+      res = fn({
+        ok: false,
+        err: result.error()!
+      })
+    }
+  } catch {
+    return result.isOk() ? ok(result.unwrap()) : err(result.error()!)
   }
 
   if (isPromise(res)) {
-    return res.then(() => result)
+    return res
+      .then(() => (result.isOk() ? ok(result.unwrap()) : err(result.error()!)))
+      .catch(() => (result.isOk() ? ok(result.unwrap()) : err(result.error()!))) as MaybePromise<Result<A>>
   }
-  return result
+
+  return result.isOk() ? ok(result.unwrap()) : err(result.error()!)
 }
 
 export { inject }

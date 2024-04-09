@@ -1,6 +1,6 @@
 import { expectType } from '#/utils'
-import type { MaybePromise, Result } from 'fx-flow'
-import { err, flow, inject, ok } from 'fx-flow'
+import type { Result } from 'fx-flow'
+import { andThen, err, flow, inject, ok } from 'fx-flow'
 
 expectType<Result<number>>(
   flow(
@@ -8,7 +8,7 @@ expectType<Result<number>>(
     inject(() => {})
   )
 )
-expectType<MaybePromise<Result<number>>>(
+expectType<Promise<Result<number>>>(
   flow(
     ok(1),
     inject(async () => {})
@@ -22,11 +22,11 @@ describe('inject', () => {
   })
 
   it('should return "result"', () => {
-    const result = err('')
+    const result = err('error')
     expect(inject(() => {}, result)).toEqual(result)
   })
 
-  it('should call "fn"', () => {
+  it('should call "fn" whether the "result" is successful or not', () => {
     const fn1 = jest.fn()
     const fn2 = jest.fn()
     inject(fn1, ok(1))
@@ -35,13 +35,39 @@ describe('inject', () => {
     expect(fn2).toHaveBeenCalled()
   })
 
-  it('should work for async functions', async () => {
+  it('should be completely executed before the next step', async () => {
     const fn = jest.fn()
     flow(
       Promise.resolve(ok(1)),
-      inject(async () => fn())
-    ).then(() => {
-      expect(fn).toHaveBeenCalled()
-    })
+      inject(() => Promise.resolve(1).then(fn)),
+      andThen(() => {
+        expect(fn).toHaveBeenCalled()
+        return ok()
+      })
+    )
+  })
+
+  it('should catch error and do not affect the following steps', () => {
+    const fn = jest.fn()
+
+    flow(
+      ok(1),
+      inject(() => {
+        throw new Error()
+      }),
+      andThen(() => {
+        fn()
+        return ok()
+      }),
+      inject(() => {
+        return new Promise((_, reject) => {
+          reject(new Error())
+        })
+      }),
+      andThen(() => {
+        expect(fn).toHaveBeenCalled()
+        return ok()
+      })
+    )
   })
 })
