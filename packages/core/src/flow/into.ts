@@ -10,9 +10,10 @@ type ReturnValue<T> = T extends Promise<infer R> ? MaybePromise<Result<R>> : Res
  *
  * @example
  * ```typescript
- * const userInfo = (await ifThen((userId) => userId > 1, queryUserInfo, into(injectUserId, ok()))).unwrap()
+ * const injectUserId = () => 1
+ * const userInfo = (await andThen(queryUserInfo, into(injectUserId, ok()))).unwrap()
  * // with flow
- * const userInfo = (await flow(ok(userId), into(injectUserName), andThen(queryUserInfo), ifThen(isNotAdmin, printUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
+ * const userInfo = (await flow(ok(), into(injectUserId), andThen(queryUserInfo), errThen(notify))).unwrapOr(defaultUserInfo)
  * ```
  *
  * {@link https://github.com/niuiic/fx-flow/blob/main/packages/test/src/flow/into.spec.ts | More examples}
