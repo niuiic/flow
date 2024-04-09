@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://fx-flow.niuiic.com" target="_blank" rel="noopener noreferrer">
-    <img id="flow-logo" width="480" height="300" src="./packages/doc/docs/public/logo.jpeg" alt="Logo">
+    <img id="flow-logo" width="480" height="300" src="https://github.com/niuiic/fx-flow/blob/main/packages/doc/docs/public/logo.jpeg" alt="Logo">
   </a>
 </p>
 
@@ -14,7 +14,7 @@
   <a href="https://github.com/niuiic/fx-flow/tree/main/.github/workflows/coverage.yml"><img src="https://github.com/niuiic/fx-flow/blob/coverage/badge-statements.svg" alt="test coverage"></a>
 </p>
 
-# Fx-Flow <img width="32" src="./packages/doc/docs/public/flow.svg"/>
+# Fx-Flow <img width="32" src="https://github.com/niuiic/fx-flow/blob/main/packages/doc/docs/public/flow.svg"/>
 
 > Functional library for TypeScript/JavaScript
 
