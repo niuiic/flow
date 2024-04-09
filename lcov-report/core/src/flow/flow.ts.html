@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.11% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/17</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -727,7 +727,8 @@
 <a name='L662'></a><a href='#L662'>662</a>
 <a name='L663'></a><a href='#L663'>663</a>
 <a name='L664'></a><a href='#L664'>664</a>
-<a name='L665'></a><a href='#L665'>665</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L665'></a><a href='#L665'>665</a>
+<a name='L666'></a><a href='#L666'>666</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">58x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">58x</span>
@@ -1345,9 +1346,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">38x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1359,13 +1362,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1999,37 +2001,38 @@ function flow(...args: any[]) {
 &nbsp;
     if (isPromise(result)) {
       return result
-        .then((_result) =&gt; {
-          log(_result, step, flowState.log)
-          result = fn(_result, modifier)
+        .then((res) =&gt; {
+          log(res, step, flowState.log)
+          result = fn(res, modifier)
           return call(fns.slice(1))
         })
         .catch(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >          result = err(toStr(e))</span>
 <span class="cstat-no" title="statement not covered" >          return call(fns.slice(1))</span>
         })
-    } else {
-      log(result, step, flowState.log)
-      try {
-        const res = fn(result, modifier)
-        if (isPromise(res)) {
-          return res
-            .then((res) =&gt; {
-              result = res as any
-              return call(fns.slice(1))
-            })
-            .catch(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >              result = err(toStr(e))</span>
-<span class="cstat-no" title="statement not covered" >              return call(fns.slice(1))</span>
-            })
-        } else {
-          result = res
-          return call(fns.slice(1))
-        }
-      } catch (e) {
-        result = err(toStr(e))
-        return call(fns.slice(1))
+    }
+&nbsp;
+    log(result, step, flowState.log)
+    try {
+      const res = fn(result, modifier)
+&nbsp;
+      if (isPromise(res)) {
+        return res
+          .then((res) =&gt; {
+            result = res as any
+            return call(fns.slice(1))
+          })
+          .catch(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >            result = err(toStr(e))</span>
+<span class="cstat-no" title="statement not covered" >            return call(fns.slice(1))</span>
+          })
       }
+&nbsp;
+      result = res
+      return call(fns.slice(1))
+    } catch (e) {
+      result = err(toStr(e))
+      return call(fns.slice(1))
     }
   }
 &nbsp;
@@ -2041,14 +2044,14 @@ function log(result: Result&lt;unknown&gt;, step: number, method: FlowState['log
     return
   }
   if (method === 'ERROR' &amp;&amp; result.isErr()) {
-    console.error(`Step ${step} failed, the error is ${result.error()!}`)
+    console.error(`Step${step} has failed, the error is`, result.error())
     return
   }
   if (method === 'INFO') {
     if (result.isOk()) {
-      console.info(`Step ${step} success, the result is`, result.unwrap())
+      console.info(`Step${step} was successful, the result is`, result.unwrap())
     } else <span class="missing-if-branch" title="else path not taken" >E</span>{
-<span class="cstat-no" title="statement not covered" >      console.error(`Step ${step} failed, the error is`, result.error())</span>
+<span class="cstat-no" title="statement not covered" >      console.error(`Step${step} has failed, the error is`, result.error())</span>
     }
     return
   }
@@ -2062,7 +2065,7 @@ export { flow }
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-09T01:30:03.993Z
+                at 2024-04-09T06:27:06.803Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
