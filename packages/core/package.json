@@ -3,10 +3,7 @@
   "version": "0.6.1",
   "description": "A functional library for TypeScript/JavaScript",
   "type": "module",
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "files": ["dist", "../../README.md"],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/type/index.d.ts",
