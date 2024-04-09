@@ -606,37 +606,38 @@ function flow(...args: any[]) {
 
     if (isPromise(result)) {
       return result
-        .then((_result) => {
-          log(_result, step, flowState.log)
-          result = fn(_result, modifier)
+        .then((res) => {
+          log(res, step, flowState.log)
+          result = fn(res, modifier)
           return call(fns.slice(1))
         })
         .catch((e) => {
           result = err(toStr(e))
           return call(fns.slice(1))
         })
-    } else {
-      log(result, step, flowState.log)
-      try {
-        const res = fn(result, modifier)
-        if (isPromise(res)) {
-          return res
-            .then((res) => {
-              result = res as any
-              return call(fns.slice(1))
-            })
-            .catch((e) => {
-              result = err(toStr(e))
-              return call(fns.slice(1))
-            })
-        } else {
-          result = res
-          return call(fns.slice(1))
-        }
-      } catch (e) {
-        result = err(toStr(e))
-        return call(fns.slice(1))
+    }
+
+    log(result, step, flowState.log)
+    try {
+      const res = fn(result, modifier)
+
+      if (isPromise(res)) {
+        return res
+          .then((res) => {
+            result = res as any
+            return call(fns.slice(1))
+          })
+          .catch((e) => {
+            result = err(toStr(e))
+            return call(fns.slice(1))
+          })
       }
+
+      result = res
+      return call(fns.slice(1))
+    } catch (e) {
+      result = err(toStr(e))
+      return call(fns.slice(1))
     }
   }
 
@@ -648,14 +649,14 @@ function log(result: Result<unknown>, step: number, method: FlowState['log']) {
     return
   }
   if (method === 'ERROR' && result.isErr()) {
-    console.error(`Step ${step} failed, the error is ${result.error()!}`)
+    console.error(`Step${step} has failed, the error is`, result.error())
     return
   }
   if (method === 'INFO') {
     if (result.isOk()) {
-      console.info(`Step ${step} success, the result is`, result.unwrap())
+      console.info(`Step${step} was successful, the result is`, result.unwrap())
     } else {
-      console.error(`Step ${step} failed, the error is`, result.error())
+      console.error(`Step${step} has failed, the error is`, result.error())
     }
     return
   }
