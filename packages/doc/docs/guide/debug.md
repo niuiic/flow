@@ -4,7 +4,7 @@ Debugging in chain is difficult, thus some functions are provided to help.
 
 ## flow
 
-Inject an inspector with `inspect`.
+Inject an inspector with `inject`.
 
 ::: warning
 Do not modify `data`, or subsequent steps will be affected.
@@ -15,7 +15,7 @@ const inspector = <T>(args: { ok: true; data: T } | { ok: false; err: string }) 
   console.log(args)
 }
 
-const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inspect(inspector), errThen(notify))).unwrap()
+const userInfo = (await flow(ok(userId), andThen(queryUserInfo), inject(inspector), errThen(notify))).unwrap()
 ```
 
 Output result of each step with `log`.
