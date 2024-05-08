@@ -12,14 +12,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
-      - uses: actions/checkout@v3
-      - uses: hecrj/setup-rust-action@v2
-      - uses: actions/setup-node@v3
+          version: 9
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 21
       - run: pnpm i
       - run: pnpm add -D jest-coverage-badges-ng --filter test
       - run: pnpm test:coverage && cd packages/test && pnpm jest-coverage-badges-ng
