@@ -8,15 +8,14 @@
     "lint": "turbo lint",
     "release": "pnpm build --force && pnpm test && cd packages/core && pnpm release"
   },
-  "packageManager": "pnpm",
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "eslint": "^8.56.0",
-    "lefthook": "^1.6.1",
+    "@types/node": "^20.12.7",
+    "eslint": "^8.57.0",
+    "lefthook": "^1.6.10",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",
-    "tsx": "^4.7.0",
-    "turbo": "^1.12.3",
-    "typescript": "^5.3.3"
+    "tsx": "^4.7.3",
+    "turbo": "^1.13.3",
+    "typescript": "^5.4.5"
   }
 }
