@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
-import { DefaultTheme } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
 
 export const calcSidebarItems = () => {
   const file = join(process.cwd(), 'docs/api/typedoc-sidebar.json')
@@ -24,7 +24,7 @@ const fixedItems = (items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem
       const childItems = x.items ? fixedItems(x.items) : []
       return {
         ...x,
-        text: x.text === '<internal>' ? '[internal]' : x.text,
+        link: x.link?.replace(/^\/docs/g, ''),
         items: childItems,
         collapsed: childItems.length > 0 ? true : undefined
       }

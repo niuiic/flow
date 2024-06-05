@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": ["ESNext"]
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noErrorTruncation": true
   },
-  "extends": "tsconfig/esm.json",
   "include": ["./build/**/*.ts"]
 }

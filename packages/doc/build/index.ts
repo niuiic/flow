@@ -1,11 +1,15 @@
 import { execSync } from 'child_process'
-import { cleanLogo } from './clean'
+import { replaceText } from './replace'
 import { calcSidebarItems } from './sidebar'
 
-execSync('pnpm typedoc')
+execSync('pnpm typedoc', {
+  stdio: 'inherit'
+})
 
-cleanLogo()
+replaceText()
 
 calcSidebarItems()
 
-execSync('pnpm vitepress build docs')
+execSync('pnpm vitepress build docs', {
+  stdio: 'inherit'
+})

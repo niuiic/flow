@@ -6,8 +6,16 @@
       "#/*": ["./src/*"],
       "@/*": ["../core/src/*"],
       "fx-flow": ["../core/src"]
-    }
+    },
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext"],
+    "noErrorTruncation": true
   },
-  "extends": "tsconfig/esm.json",
   "include": ["src/**/*.ts", "declare/**/*.d.ts", "../core/src/**/*.ts"]
 }
