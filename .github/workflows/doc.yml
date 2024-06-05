@@ -26,7 +26,7 @@ jobs:
         run: pnpm i
 
       - name: Build Doc
-        run: pnpm build --filter doc
+        run: pnpm doc
 
       - name: Config
         run: echo 'fx-flow.niuiic.com' > packages/doc/docs/.vitepress/dist/CNAME
