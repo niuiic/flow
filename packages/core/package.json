@@ -1,9 +1,11 @@
 {
   "name": "fx-flow",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "description": "A functional library for TypeScript/JavaScript",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/type/index.d.ts",
@@ -24,7 +26,12 @@
     "type": "git",
     "url": "https://github.com/niuiic/fx-flow.git"
   },
-  "keywords": ["functional programming", "stream programming", "lazy evaluation", "concurrency"],
+  "keywords": [
+    "functional programming",
+    "stream programming",
+    "lazy evaluation",
+    "concurrency"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
