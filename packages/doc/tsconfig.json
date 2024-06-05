@@ -4,9 +4,16 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "lib": ["ESNext"]
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext"],
+    "noErrorTruncation": true
   },
-  "extends": "tsconfig/esm.json",
   "include": ["../core/src/**/*.ts"],
   "reference": ["tsconfig.node.json"]
 }

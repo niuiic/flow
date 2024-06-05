@@ -1,21 +1,23 @@
 {
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "test": "turbo test",
-    "test:coverage": "turbo test:coverage",
-    "doc": "turbo build --filter doc",
-    "lint": "turbo lint",
-    "release": "pnpm build --force && pnpm test && cd packages/core && pnpm release"
+    "build": "pnpm run --filter fx-flow build",
+    "test": "pnpm run --filter test test",
+    "test:coverage": "pnpm run --filter test test:coverage",
+    "doc": "pnpm run --filter doc build",
+    "lint": "pnpm run --filter '*' lint",
+    "release": "pnpm build && pnpm test && pnpm run --filter fx-flow release"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.14.1",
     "eslint": "^8.57.0",
-    "lefthook": "^1.6.10",
-    "prettier": "^3.2.5",
+    "lefthook": "^1.6.15",
+    "prettier": "^3.3.0",
     "prettier-plugin-organize-imports": "^3.2.4",
-    "tsx": "^4.7.3",
-    "turbo": "^1.13.3",
-    "typescript": "^5.4.5"
+    "tsx": "^4.11.2",
+    "typescript": "^5.4.5",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@typescript-eslint/parser": "^7.12.0",
+    "eslint-config-alloy": "^5.1.2"
   }
 }
