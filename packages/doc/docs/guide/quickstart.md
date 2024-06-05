@@ -33,7 +33,7 @@ pnpm add fx-flow
 ### Import
 
 :::tip
-Only support ES6 or higher by default. You can build for yourself for other targets.
+The default target is ESNext.
 :::
 
 - ESM
